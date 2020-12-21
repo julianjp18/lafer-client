@@ -1,0 +1,66 @@
+// Imports
+
+@import "../../../resources/styles/variables";
+@import "../../../resources/styles/colors";
+
+// =============================================================================
+// LAYOUT
+// =============================================================================
+
+.ant-layout {
+  background-color: $white;
+
+  &.logged {
+    .ant-layout-content {
+      margin-top: 58px; // Same height of the navbar
+      padding: 0;
+    }
+  }
+}
+
+.ant-layout-sider + .ant-layout {
+  @media only screen and (min-width: $lg) {
+    margin-left: 113px;
+
+    .ant-layout-content {
+      padding: 0 50px;
+    }
+
+    .to-back-bar {
+      margin: 0 -50px 50px;
+    }
+  }
+}
+
+.open + .ant-layout {
+  @media only screen and (min-width: $lg) {
+    margin-left: 266px;
+
+    .ant-layout-content {
+      padding: 0 70px;
+    }
+
+    .to-back-bar {
+      margin: 0 -70px 50px;
+    }
+  }
+}
+
+section.clear-spaces {
+  section.ant-layout {
+    main.ant-layout-content {
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+
+  header.ant-layout-header {
+    display: none;
+  }
+}
+
+.header-no-visible  {
+  .ant-layout-content {
+    margin-top: 0px !important;
+  }
+}

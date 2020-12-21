@@ -1,0 +1,27 @@
+@import "../../../resources/styles/variables";
+
+.login {
+  padding: 40px;
+  min-height: 450px;
+
+  @media screen and (max-width: $sm) {
+    padding: 20px;
+  }
+
+  .auth-form {
+    .ant-btn-primary {
+      height: 40px;
+    }
+  }
+}
+
+.help-links {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+
+  @media screen and (min-width: $sm) {
+    padding: 20px;
+  }
+}

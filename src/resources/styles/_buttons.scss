@@ -1,0 +1,100 @@
+// =============================================================================
+// BUTTONS
+// =============================================================================
+
+.ant-btn {
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  font-weight: bold;
+  @include flexbox;
+  padding: 0 30px;
+  height: 45px;
+
+  // Default
+  &:hover,
+  &:focus {
+    border-color: $primary-pink;
+    color: $primary-pink;
+  }
+
+  // Primary
+  &-primary,
+  &-primary:hover,
+  &-primary:focus,
+  &-primary:active {
+    background-color: $primary-pink;
+    border-color: $primary-pink;
+    color: $white;
+  }
+
+  // Secondary
+  &-secondary,
+  &-secondary:hover,
+  &-secondary:focus,
+  &-secondary:active {
+    background-color: $primary-blue;
+    border-color: $primary-blue;
+    color: $white;
+  }
+
+  // Ghost (Outline)
+  &-ghost,
+  &-ghost:hover,
+  &-ghost:focus,
+  &-ghost:active {
+    border-color: $primary-pink;
+    color: $primary-pink;
+  }
+
+  // Global Hover
+  &:hover {
+    opacity: 0.9;
+  }
+
+  // Small
+  &-sm {
+    font-weight: lighter;
+    font-size: 1rem;
+    padding: 0 11px;
+    height: 34px;
+  }
+
+  i + span {
+    margin: 0 20px 0 0;
+  }
+
+  // Link
+  &-link,
+  &-link:hover,
+  &-link:focus,
+  &-link:active {
+    font-weight: lighter;
+    border-radius: 0;
+    font-size: 1rem;
+    height: auto;
+    border: none;
+    padding: 0;
+  }
+
+  &.circle-button {
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    height: 43px;
+    width: 43px;
+    padding: 0;
+
+    i {
+      margin: 0 !important;
+      top: 0 !important;
+    }
+  }
+
+  &.circle-small {
+    height: 30px;
+    width: 30px;
+  }
+}

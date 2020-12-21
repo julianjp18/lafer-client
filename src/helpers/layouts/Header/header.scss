@@ -1,28 +1,28 @@
-.logo-header {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
-}
+// Imports
+@import "../../../resources/styles/mixins";
+@import "../../../resources/styles/colors";
+
+// =============================================================================
+// HEADER
+// =============================================================================
 
 .header {
+  background-color: $primary-blue;
+  @include flexbox;
+  height: 58px;
 
-  .horizontal-menu {
-    background-color: #BF56BB;
+  img {
+    margin: 0 auto;
+    width: 90px;
+  }
+}
 
-    .ant-menu-item {
-      color: #fff;
-
-      &:hover {
-        color: #f49a91;
-        border-bottom: 2px solid #f49a91;
-      }
-
-      &.ant-menu-item-selected {
-        color: #f49a91;
-        border-bottom: 2px solid #f49a91; 
-      }
-    }
+// Logged
+.logged {
+  .header {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    top: 0;
   }
 }

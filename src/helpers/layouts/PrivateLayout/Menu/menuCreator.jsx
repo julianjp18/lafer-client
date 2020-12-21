@@ -1,6 +1,6 @@
 import { Menu } from 'antd';
 import React from 'react';
-import { t } from '../../../../utils/helpers';
+import { t } from '../../../../utils/helperFunctions';
 
 export const MenuItem = (item, push, toggle) => (
   <Menu.Item

@@ -1,0 +1,18 @@
+// Imports
+
+@import "../../resources/styles/colors";
+
+// =============================================================================
+// TAGS
+// =============================================================================
+
+.ant-tag {
+  background-color: $primary-blue;
+  border-color: $primary-blue;
+  font-size: pxToRem(12);
+  word-wrap: break-word;
+  font-weight: normal;
+  white-space: normal;
+  text-align: center;
+  color: $white;
+}

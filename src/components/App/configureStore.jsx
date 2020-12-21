@@ -3,7 +3,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducers from '../../redux/reducers';
 import sagas from '../../redux/sagas';
-import history from '../../services/history';
+import history from '../../routing/history';
 
 export default () => {
   const sagaMiddleware = createSagaMiddleware();

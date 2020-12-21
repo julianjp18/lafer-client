@@ -1,0 +1,25 @@
+@import "../../../resources/styles/variables";
+
+.public-layout {
+  height: 100%;
+  min-height: 100vh;
+  background-image: url("../../../resources/images/background.jpg");
+  background-size: cover;
+
+  .content-wrapper {
+    background-color: #fff;
+
+    @media screen and (min-width: $sm) {
+      border-radius: 4px;
+    }
+
+    @media screen and (max-width: $sm) {
+      height: 100%;
+      min-height: 100vh;
+    }
+  }
+
+  header.header {
+    left: 0;
+  }
+}

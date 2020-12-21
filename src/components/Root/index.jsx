@@ -1,19 +1,20 @@
 import PropTypes, { string } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { authSelector } from '../../redux/reducers/authReducer/authSelectors';
 import { ADMIN_ROLE } from '../../utils/roles';
-import { authSelector } from '../../redux/reducers/auth/authSelectors';
-import Landing from './LandingRoot';
+import Login from '../Auth/LogIn';
 import AdminRoot from './AdminRoot';
+import UserRoot from './UserRoot';
 
 const Root = ({ auth: { token, role } }) => {
   if (token) {
-    //if ([ADMIN_ROLE].includes(role))
-    //  return <AdminRoot />;
+    if ([ADMIN_ROLE].includes(role))
+      return <AdminRoot />;
 
-    return <AdminRoot />;
+    return <UserRoot />;
   }
-  return <Landing />;
+  return <Login />;
 };
 
 Root.propTypes = {

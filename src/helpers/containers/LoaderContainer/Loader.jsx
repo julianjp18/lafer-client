@@ -1,17 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import logo from '../../../resources/images/logo-horizontal.svg';
 
 const Loader = ({ initial }) => (
   <div className={`loading-container ${initial && 'initial'}`}>
     {initial ? (
       <div className="image-loader">
-        <p>cargando...</p>
+        <img src={logo} alt="logo" />
+        <div className="lds-grid">
+          <div />
+          <div />
+          <div />
+        </div>
       </div>
     ) : (
-        <div className="lds-grid">
-          <p>cargando...</p>
-        </div>
-      )}
+      <div className="lds-grid">
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    )}
   </div>
 );
 

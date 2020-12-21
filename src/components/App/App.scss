@@ -1,0 +1,124 @@
+@import "../../resources/styles/ant.scss";
+
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+@import "../../resources/styles/helpers";
+@import "../../resources/styles/variables";
+@import "../../resources/styles/fluvip_icons";
+@import "../../resources/styles/grid";
+@import "../../resources/styles/filters";
+
+.ant-layout,
+.ant-modal-root,
+.ant-modal-content {
+  @import "../../resources/styles/fonts";
+  @import "../../resources/styles/titles";
+  @import "../../resources/styles/buttons";
+  @import "../../resources/styles/paragraphs";
+  @import "../../resources/styles/tags";
+  @import "../../resources/styles/tables";
+  @import "../../resources/styles/tabs";
+  @import "../../resources/styles/inputs";
+  @import "../../resources/styles/modal";
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  .ant-layout {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    color: $black;
+    margin: 0;
+  }
+}
+
+label {
+  display: block;
+}
+
+input:focus {
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+}
+
+img {
+  max-width: 100%;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 30px;
+  border: 1px solid $lighter-grey
+}
+
+code {
+  background-color: #f1f1f1;
+  margin: 15px 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+pre {
+  overflow: hidden;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.sna-avatar {
+  position: relative;
+  text-align: center;
+  margin-right: 30px;
+  width: 122px;
+  margin-bottom: 16px;
+
+  img {
+    border-radius: 50%;
+    width: 100%;
+  }
+}
+
+.avatar-decor {
+  &:after,
+  &:before {
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+    width: 122px;
+    height: 122px;
+  }
+
+  &:after {
+    border: solid transparent 8px;
+    border-right: solid $pink 8px;
+    transform: rotate(45deg);
+    bottom: -3px;
+    right: -3px;
+  }
+
+  &:before{
+    border: solid transparent 2px;
+    border-right: solid $primary-blue 2px;
+    transform: rotate(230deg);
+    left: -10px;
+    top: -10px;
+  }
+}

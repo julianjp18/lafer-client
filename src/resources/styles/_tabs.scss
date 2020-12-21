@@ -1,0 +1,52 @@
+// Imports
+
+@import "../../resources/styles/colors";
+@import "../../resources/styles/mixins";
+
+// =============================================================================
+// TABS
+// =============================================================================
+
+/* Tabs */
+.ant-tabs {
+  border-bottom: 2px solid #eeeeee;
+  margin-bottom: 53px;
+
+  .ant-tabs-nav  {
+    width: 100%;
+
+    & > div {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      display: grid;
+    }
+  }
+
+  .ant-tabs-bar {
+    text-align: center;
+    border: none;
+    margin: 0;
+
+    .ant-tabs-nav {
+      .ant-tabs-tab {
+        color: rgba(166, 165, 163, 0.5);
+        font-size: pxToRem(18);
+        padding: 0 0 15px 0;
+        font-weight: 300;
+        margin: 0;
+      }
+
+      .ant-tabs-tab-active  {
+        font-weight: bold;
+        color: $black;
+      }
+
+    }
+  }
+
+  .ant-tabs-ink-bar {
+    background-color: $primary-blue;
+    height: 4px;
+    bottom: 2px;
+  }
+}

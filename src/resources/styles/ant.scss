@@ -2,6 +2,7 @@
 @import "./variables";
 @import "./colors";
 
+// DROPDOWN
 .ant-dropdown {
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
@@ -48,6 +49,9 @@
   }
 }
 
+// ====================================
+// CALENDAR
+// ====================================
 .ant-calendar-range {
   .ant-calendar-selected-start-date {
     .ant-calendar-date {
@@ -108,7 +112,7 @@
   box-shadow: none !important;
 }
 
-
+/* INPUT */
 .ant-layout,
 .ant-modal-content,
 .ant-modal-root {
@@ -189,6 +193,8 @@
     }
   }
 }
+
+/* MODAL */
 
 body {
   .ant-select-dropdown {
@@ -341,6 +347,7 @@ body {
 
 }
 
+/* Slider */
 
 .ant-layout {
   .ant-slider,
@@ -406,6 +413,7 @@ body {
 }
 
 
+/* Tags Collapse, MISC */
 .ant-layout {
   .ant-collapse {
     background-color: transparent;

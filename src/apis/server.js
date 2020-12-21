@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import JWT from './jwt';
+import appendJWT from './helpers/appendJWT';
 
 const server = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -12,6 +12,6 @@ server.interceptors.response.use(
   (response) => response,
   (error) => error.response
 );
-server.interceptors.request.use(JWT);
+server.interceptors.request.use(appendJWT);
 
 export default server;

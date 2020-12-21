@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { hideModalMovement } from '../../../redux/movements/modalMovements';
 import { feedbackModalSelector } from '../../../redux/reducers/feedbackReducer/feedbackSelectors';
 import Modal from './Modal';
 
@@ -44,7 +45,9 @@ const mapStateToProps = (state) => ({
   modal: feedbackModalSelector(state),
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  hideModal: hideModalMovement,
+};
 
 export default connect(
   mapStateToProps,

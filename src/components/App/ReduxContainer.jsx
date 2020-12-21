@@ -6,7 +6,7 @@ import configureStore from './configureStore';
 const store = configureStore();
 
 export default () => (
-    <Provider store={store}>
-        <RouterContainer />
-    </Provider>
+  <Provider store={store}>
+    <RouterContainer />
+  </Provider>
 );

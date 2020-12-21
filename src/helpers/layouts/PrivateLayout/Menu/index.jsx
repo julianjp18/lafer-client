@@ -1,6 +1,6 @@
 import React from 'react';
 import PrivateSider from './Sider';
-import './layout.scss';
+import '../privateLayout.scss';
 
 const PrivateMenu = () => {
   const defineMenu = () => <PrivateSider />;

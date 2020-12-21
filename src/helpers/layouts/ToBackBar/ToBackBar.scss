@@ -1,0 +1,30 @@
+// Imports
+@import "../../../resources/styles/colors";
+@import "../../../resources/styles/mixins";
+
+// =============================================================================
+// TO BACK BAR
+// =============================================================================
+
+.to-back-bar {
+  border-bottom: 1px solid #dcdcdc;
+  background-color: $white;
+  margin-bottom: 40px;
+  align-items: center;
+  @include flexbox;
+  padding: 0 32px;
+  height: 73px;
+
+  i {
+    color: $primary-blue;
+  }
+
+  & > div {
+    cursor: pointer;
+  }
+
+  span {
+    font-size: pxToRem(12);
+    margin-left: 24px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Layout, Menu } from 'antd';
+import { Icon, Layout, Menu } from 'antd';
 import { push } from 'connected-react-router';
 import { bool, func, shape, string } from 'prop-types';
 import React from 'react';
@@ -10,12 +10,12 @@ import {
   toggleSiderMovement,
 } from '../../../../redux/movements/layoutMovements';
 import { showModalMovement } from '../../../../redux/movements/modalMovements';
-import { authSelector } from '../../../../redux/reducers/auth/authSelectors';
-import './layout.scss';
+import { authSelector } from '../../../../redux/reducers/authReducer/authSelectors';
+import '../privateLayout.scss';
 import './Sider.scss';
-import { t } from '../../../../utils/helpers';
 import menuCreator from './menuCreator';
 import rolePaths from './rolePaths';
+import { t } from '../../../../utils/helperFunctions';
 
 const PrivateSider = ({
   auth: { role },
@@ -23,6 +23,7 @@ const PrivateSider = ({
   goTo,
   logOut,
   openSettings,
+  toggleSider,
   hideSider,
   collapsed,
   visible,
@@ -49,6 +50,8 @@ const PrivateSider = ({
         {/* Menu Header */}
         <div className="menu-header">
           <h2>{t('menu.menu')}</h2>
+          <Icon type="close" onClick={toggleSider} />
+          <Icon type="menu" onClick={toggleSider} />
         </div>
 
         {/* Menu Items */}
@@ -61,11 +64,13 @@ const PrivateSider = ({
           {renderMenu()}
           <Menu.Item key="settings" className="config" onClick={openSettings}>
             <span className="menu-title">
+              <Icon type="tool" />
               <div className="menu-text">{t('menu.config')}</div>
             </span>
           </Menu.Item>
           <Menu.Item key="logout" className="logout" onClick={logOut}>
             <span className="menu-title">
+              <Icon type="logout" />
               <div className="menu-text">{t('menu.exit')}</div>
             </span>
           </Menu.Item>

@@ -1,0 +1,64 @@
+// =============================================================================
+// MIXINS - FUNCTIONS
+// =============================================================================
+
+$base-size: 16;
+@function pxToRem($target, $context: $base-size) {
+  @return ($target / $context) * 1rem;
+}
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin box-shadow($shadow-properties, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $shadow-properties;
+    -moz-box-shadow:inset $shadow-properties;
+    box-shadow:inset $shadow-properties;
+  } @else {
+    -webkit-box-shadow: $shadow-properties;
+    -moz-box-shadow: $shadow-properties;
+    box-shadow: $shadow-properties;
+  }
+}
+
+// TRANSFORM
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+  transform: $value;
+}
+
+// TRANSITION
+@mixin transition($values) {
+  -webkit-transition: $values;
+  -moz-transition: $values;
+  -ms-transition: $values;
+  -o-transition: $values;
+  transition: $values;
+}
+
+@mixin input-base-styles() {
+  border: none;
+  border-radius: 0;
+  border-bottom: solid 1px $light-grey;
+  background-color: transparent;
+  font-size: pxToRem(15);
+  box-shadow: none;
+  outline: none;
+  height: 36px;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    border-color: $primary-blue;
+    box-shadow: none;
+  }
+}
