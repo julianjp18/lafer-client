@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConnectedRouter } from 'connected-react-router';
 import { Router } from 'react-router-dom';
-import history from '../../routing/history';
+import history from '../../services/history';
 import AppContainer from './AppContainer';
 
 function hashLinkScroll() {

@@ -1,11 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App/App';
-import './translate';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-/*
-
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -13,14 +5,14 @@ import {
   Link
 } from "react-router-dom";
 import { Menu } from 'antd';
-import './App.scss';
-import Route from "./routing/Route";
-import history from './services/history';
-import Home from './components/landing';
-import SignIn from './components/Auth/SignIn';
-import SignUp from './components/Auth/SignUp';
+import './landing.scss';
+import Route from "../../../routing/Route";
+import history from '../../../services/history';
+import Home from '../../landing';
+import SignIn from '../../Auth/SignIn';
+import SignUp from '../../Auth/SignUp';
 
-const App = () => {
+const Landing = () => {
   const [menu, setmenu] = useState({ current: 'home' });
   const handleClick = (e) => setmenu({ current: e.key });
 
@@ -61,5 +53,4 @@ const App = () => {
   );
 }
 
-export default App;
-*/
+export default Landing;
