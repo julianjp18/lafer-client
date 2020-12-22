@@ -155,6 +155,40 @@ function SignUp({ signUp }) {
           <Input />
         </Form.Item>
         <Form.Item
+          name="fulllName"
+          label="fulllname"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your fulllName!',
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="phoneNumber"
+          label="Phone"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your phone!',
+            },
+            () => ({
+              validator(rule, value) {
+                const reg = /[0-9]{10}$/;
+                if(reg.exec(value)) return  Promise.resolve();
+                return  Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
+              },
+            }),
+            
+          ]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
           name="agreement"
           valuePropName="checked"
           rules={[

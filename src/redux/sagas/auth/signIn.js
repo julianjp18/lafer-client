@@ -4,10 +4,10 @@ import showNotification from '../../showNotification';
 
 function* signIn(formValues) {
   //123qweQ!
-  const { email, password } = formValues.payload;
+  const { username, password } = formValues.payload;
   const data = [];
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Account/login`, {
-      email,
+      usuario: username,
       password,
   }, {
     "accept": "*/*",
@@ -21,10 +21,10 @@ function* signIn(formValues) {
 
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: data[0].message });
-    yield put({ type: "SIGN_IN_SUCCESS", response: { ...data[0], email }, });  
+    yield put({ type: "SIGN_IN_SUCCESS", response: { ...data[0], username }, });  
   } else {
     yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "SIGN_IN_FAILURE", response: { ...data[0], email }, });
+    yield put({ type: "SIGN_IN_FAILURE", response: { ...data[0], username }, });
   }
   
 }

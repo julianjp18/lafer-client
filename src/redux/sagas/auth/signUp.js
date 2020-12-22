@@ -3,13 +3,15 @@ import axios from 'axios';
 import showNotification from '../../showNotification';
 
 function* signUp(formValues) {
-  const { nickname, email, password } = formValues.payload;
+  const { nickname, email, password, fullName, phoneNumber } = formValues.payload;
   const data = [];
 
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Account/register`, {
     username: nickname,
-    email: email,
-    password: password
+    fullName,
+    phoneNumber,
+    email,
+    password
   }, {
     "accept": "*/*",
     "Content-Type": "application/json",
@@ -27,8 +29,6 @@ function* signUp(formValues) {
     yield call(showNotification, { type: 'warning', message: data[0].message });
     yield put({ type: "SIGN_UP_FAILURE", response: { ...data[0], email }, });
   }
-
-
 }
 
 export function* signUpWatcher() {
