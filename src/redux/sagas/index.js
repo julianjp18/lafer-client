@@ -1,14 +1,10 @@
 import { all } from 'redux-saga/effects';
-import deviseWatchers from './devise';
-import helpersWatchers from './helpers';
-import listeners from './listeners';
-import postActions from './postActions';
+import { signInWatcher } from './auth/signIn';
+import { signUpWatcher } from './auth/signUp';
 
 export default function* rootSaga() {
   yield all([
-    ...deviseWatchers,
-    ...helpersWatchers,
-    ...listeners,
-    ...postActions,
+    signInWatcher(),
+    signUpWatcher(),
   ]);
-}
+};
