@@ -147,7 +147,7 @@ function SignUp({ signUp }) {
           <Input />
         </Form.Item>
         <Form.Item
-          name="fulllName"
+          name="fullName"
           label="Nombre completo"
           rules={[
             {

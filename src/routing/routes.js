@@ -16,7 +16,7 @@ const ROUTES = [
     key: "APP",
     component: props => {
       if (!localStorage.getItem("user")) {
-        alert("You need to log in to access app routes");
+        alert("Proceso realizado con éxito");
         return <Redirect to={"/"} />;
       }
       return <RenderRoutes {...props} />;

@@ -36,7 +36,7 @@ function LogIn({ signIn }) {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" />
       </Form.Item>
       <Form.Item
         name="password"
@@ -51,17 +51,17 @@ function LogIn({ signIn }) {
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder="Contraseña"
         />
       </Form.Item>
       <Form.Item>
-        <Link to={'forgot-password'}>Forgot password</Link>
+        <Link to={'forgot-password'}>Olvidó contraseña?</Link>
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
+          Iniciar sesión
         </Button>
-        <Link to={'sign-up'}>Register Now!</Link>
+        <Link to={'sign-up'}>Registrarse</Link>
       </Form.Item>
     </Form>
     </div>
