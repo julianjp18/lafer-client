@@ -8,7 +8,7 @@ function* signUp(formValues) {
 
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Account/register`, {
     username: nickname,
-    fullName,
+    FullName: fullName,
     phoneNumber,
     email,
     password

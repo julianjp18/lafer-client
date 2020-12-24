@@ -56,17 +56,9 @@ function SignUp({ signUp }) {
     history.push("/app");
   };
 
-  // if user already "authenticated", redirect them to the app
-  if (localStorage.getItem("user")) {
-    alert(
-      "You're already authenticated and being redirected into the app."
-    );
-    return <Redirect to={"/app"} />;
-  }
-
   return (
     <div style={{ padding: 50 }}>
-      <h1>Sign Up</h1>
+      <h1>Registrarse</h1>
       <Form
         {...formItemLayout}
         form={form}
@@ -76,7 +68,7 @@ function SignUp({ signUp }) {
       >
         <Form.Item
           name="email"
-          label="E-mail"
+          label="Correo electrónico"
           rules={[
             {
               type: 'email',
@@ -92,7 +84,7 @@ function SignUp({ signUp }) {
         </Form.Item>
         <Form.Item
           name="password"
-          label="Password"
+          label="Contraseña"
           rules={[
             {
               required: true,
@@ -101,11 +93,11 @@ function SignUp({ signUp }) {
             () => ({
               validator(rule, value) {
                 const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                if(reg.exec(value)) return  Promise.resolve();;
-                return  Promise.reject('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
+                if (reg.exec(value)) return Promise.resolve();;
+                return Promise.reject('Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character');
               },
             }),
-            
+
           ]}
           hasFeedback
         >
@@ -113,7 +105,7 @@ function SignUp({ signUp }) {
         </Form.Item>
         <Form.Item
           name="confirm"
-          label="Confirm Password"
+          label="Confirmar contraseña"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -138,8 +130,8 @@ function SignUp({ signUp }) {
           name="nickname"
           label={
             <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              Usuario&nbsp;
+              <Tooltip title="Cómo quieres que te llamen?">
                 <QuestionCircleOutlined />
               </Tooltip>
             </span>
@@ -156,7 +148,7 @@ function SignUp({ signUp }) {
         </Form.Item>
         <Form.Item
           name="fulllName"
-          label="fulllname"
+          label="Nombre completo"
           rules={[
             {
               required: true,
@@ -169,7 +161,7 @@ function SignUp({ signUp }) {
         </Form.Item>
         <Form.Item
           name="phoneNumber"
-          label="Phone"
+          label="Celular"
           rules={[
             {
               required: true,
@@ -178,11 +170,11 @@ function SignUp({ signUp }) {
             () => ({
               validator(rule, value) {
                 const reg = /[0-9]{10}$/;
-                if(reg.exec(value)) return  Promise.resolve();
-                return  Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
+                if (reg.exec(value)) return Promise.resolve();
+                return Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
               },
             }),
-            
+
           ]}
           hasFeedback
         >
@@ -201,12 +193,12 @@ function SignUp({ signUp }) {
           {...tailFormItemLayout}
         >
           <Checkbox>
-            I have read the <Link to={'agreement'}>agreement</Link>
+            He leido los <Link to={'agreement'}>términos y condiciones</Link>
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            Registrarse
           </Button>
         </Form.Item>
       </Form>
