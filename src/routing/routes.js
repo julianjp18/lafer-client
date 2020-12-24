@@ -4,11 +4,13 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from '../components/Auth/LogIn';
 import SignUp from '../components/Auth/SignUp';
 import Landing from '../components/Landing';
+import StepsForm from '../components/Landing/StepsForm';
 
 const ROUTES = [
   { path: "/", key: "ROOT", exact: true, component: Landing },
   { path: "/log-in", key: "log-in", exact: true, component: LogIn },
   { path: "/sign-up", key: "sign-up", exact: true, component: SignUp },
+  { path: "/steps-form", key: "steps-form", exact: true, component: StepsForm },
   {
     path: "/app",
     key: "APP",

@@ -16,17 +16,9 @@ function LogIn({ signIn }) {
     history.push("/app");
   };
 
-  // if user already "authenticated", redirect them to the app
-  if (localStorage.getItem("user")) {
-    alert(
-      "You're already authenticated in localStorage and being redirected into the app."
-    );
-    return <Redirect to={"/app"} />;
-  }
-
   return (
     <div style={{ padding: 50 }}>
-      <h1>Log In</h1>
+      <h1>Iniciar sesión</h1>
       <Form
       name="normal_login"
       className="login-form"
