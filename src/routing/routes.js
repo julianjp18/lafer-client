@@ -4,13 +4,17 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from '../components/Auth/LogIn';
 import SignUp from '../components/Auth/SignUp';
 import Landing from '../components/Landing';
-import StepsForm from '../components/Landing/StepsForm';
+import SecureCar from "../components/SecureCar";
+import CustomQuote from "../components/SecureCar/CustomQuote";
+import Quote from "../components/SecureCar/Quote";
 
 const ROUTES = [
-  { path: "/", key: "ROOT", exact: true, component: Landing },
-  { path: "/log-in", key: "log-in", exact: true, component: LogIn },
-  { path: "/sign-up", key: "sign-up", exact: true, component: SignUp },
-  { path: "/steps-form", key: "steps-form", exact: true, component: StepsForm },
+  { path: "/", key: "SOAT", exact: true, component: Landing },
+  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn },
+  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp },
+  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar },
+  { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote },
+  { path: "/quote-list", key: "Cotización", exact: true, component: Quote },
   {
     path: "/app",
     key: "APP",

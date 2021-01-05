@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Row, Col } from 'antd';
 import { Link } from "react-router-dom";
+import { MenuOutlined } from '@ant-design/icons';
 import ROUTES, { RenderRoutes } from "../routing/routes";
 import 'antd/dist/antd.css';
 import './app.scss';
@@ -9,14 +10,13 @@ function App() {
   const [current, setcurrent] = useState('root');
 
   const handleClick = e => {
-    console.log('click ', e);
     setcurrent(e.key);
   };
 
   return (
     <Row>
       <Col xs={24}>
-        <Menu onClick={handleClick} selectedKeys={[current]} theme="dark" mode="horizontal">
+        <Menu onClick={handleClick} selectedKeys={[current]} theme="dark" mode="horizontal" overflowedIcon={<MenuOutlined />}>
           {displayRouteMenu(ROUTES)}
         </Menu>
         <div>
