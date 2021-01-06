@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import {
   Form,

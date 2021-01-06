@@ -4,6 +4,7 @@ import { signUpWatcher } from './auth/signUp';
 import { vehicleWatcher } from './SOAT/vehicle';
 import { clientWatcher } from './SOAT/client';
 import { soatWatcher } from './SOAT/soat';
+import { secureCarWatcher } from './car';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     vehicleWatcher(),
     soatWatcher(),
     clientWatcher(),
+    secureCarWatcher(),
   ]);
 };

@@ -4,7 +4,6 @@ import { message } from 'antd';
 import showNotification from '../../showNotification';
 
 function* client(formValues) {
-  console.log(formValues);
   yield put({ type: "CLIENT_INFO_SUCCESS", client_info: formValues.payload, });
 }
 
@@ -32,7 +31,7 @@ function* mainInfo(formValues) {
     yield put({ type: "MAIN_INFO_SUCCESS", response: { ...data[0].data }, });
   } else {
     message.info('!Por favor completa los datos!');
-    //yield call(showNotification, { type: 'warning', message: 'Datos incorrectos, por favor intentalo nuevamente' });
+    yield call(showNotification, { type: 'warning', message: 'Datos incorrectos, por favor intentalo nuevamente' });
     yield put({ type: "MAIN_INFO_FAILURE", response: {}, });
   }
 }

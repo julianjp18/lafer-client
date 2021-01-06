@@ -30,7 +30,6 @@ function* buySoat(formValues) {
 }
 
 function* buySoatForm(formValues) {
-  
   const { vehicle_info, client_info, buy_soat } = formValues.payload;
   const {
     typeVehicle,

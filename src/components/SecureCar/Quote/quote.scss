@@ -112,15 +112,18 @@
     }
   }
 
-  .more-info {
-    color: #3464ff;
+  .more-info-container {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 0;
+    margin-bottom: 10px;
 
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
+    .more-info {
+      display: initial;
+      color: #3464ff;
+      
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -141,6 +144,11 @@
     .close-container {
       text-align: end;
       padding-right: 6px;
+      
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
 
     .img-compare {
@@ -153,4 +161,20 @@
       margin-bottom: 0;
     }
   }
+
+  &.show {
+    display: block;
+  }
+
+  &.hide {
+    display: none;
+  }
+
+  .btn-final-col {
+    text-align: center;
+
+    .btn-final-compare {
+      margin: 10px 0;
+    }
+  } 
 }
