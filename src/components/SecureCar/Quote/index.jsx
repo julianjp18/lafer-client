@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Row, Col, Select, Button } from 'antd';
+import { Row, Col, Select, Button, Modal, Checkbox } from 'antd';
 import { SlidersOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../../redux/actions';
@@ -10,6 +10,7 @@ import { currencyFormat } from "../../../helpers";
 function Quote({ secure_car }) {
   const [compareList, setCompareList] = useState([]);
   const [countCompareList, setCountCompareList] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const history = useHistory();
   const location = useLocation();
   
@@ -23,11 +24,31 @@ function Quote({ secure_car }) {
 
   const { Option } = Select;
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const addtoFinalCompare = () => {
     history.push("/steps-form");
   };
 
   const handleFilterByChange = (value) => {
+
+  };
+
+  const onChangeFirstCheckbox = (value) => {
+
+  };
+
+  const onChangeSecondCheckbox = (value) => {
 
   };
 
@@ -86,10 +107,51 @@ function Quote({ secure_car }) {
             </Select>
           </Col>
           <Col className="filter-col" xs={12}>
-            <div className="filter-container">
+            <div className="filter-container" onClick={showModal}>
               <SlidersOutlined />
               <p>Filtrar</p>
             </div>
+            {isModalVisible && (
+                <Modal title="Filtrar por" visible={isModalVisible} onOk={handleOk} okText="Filtrar" cancelText="Cancelar" onCancel={handleCancel}>
+                  <Row>
+                    <Col xs={24} md={8}>
+                      <p>Selecciona la frecuencia con la que usas tu automóvil</p>
+                      <Checkbox.Group style={{ width: '100%' }} onChange={onChangeFirstCheckbox}>
+                        <Row>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="weekend">Solo fines de semana</Checkbox>
+                          </Col>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="week">A diario de lunes a viernes</Checkbox>
+                          </Col>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="everyday">Todos los dias</Checkbox>
+                          </Col>
+                        </Row>
+                      </Checkbox.Group>
+                    </Col>
+                    <Col xs={24} md={8}>
+                      <p className="second-description">¿Cuántas veces usas el conductor elegido al año?</p>
+                      <Checkbox.Group style={{ width: '100%' }} onChange={onChangeSecondCheckbox}>
+                        <Row>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="oneToSix">1 a 6 veces</Checkbox>
+                          </Col>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="oneToTwelve">1 a 12 veces</Checkbox>
+                          </Col>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="moreTwelve">Más de 12</Checkbox>
+                          </Col>
+                          <Col xs={24} span={8}>
+                            <Checkbox value="almostNever">Casi nunca</Checkbox>
+                          </Col>
+                        </Row>
+                      </Checkbox.Group>
+                    </Col>
+                  </Row>
+                </Modal>
+              )}
           </Col>
         </Row>
         <Row>
