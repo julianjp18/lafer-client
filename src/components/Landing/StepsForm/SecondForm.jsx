@@ -6,7 +6,6 @@ const { Option } = Select;
 
 function SecondForm({ next, prev, clientInfo, response }) {
   const clientData = localStorage.getItem('client-data-soat') ? JSON.parse(localStorage.getItem('client-data-soat')) : {};
-  console.log('id', clientData.tipoIdentificacion);
   const [typeIdentification, settypeIdentification] = useState(clientData.tipoIdentificacion);
   const [name, setName] = useState(clientData.nombre);
   const [lastName, setLastName] = useState(clientData.apellidos);

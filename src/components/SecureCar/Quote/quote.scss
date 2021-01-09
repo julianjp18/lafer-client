@@ -141,6 +141,7 @@
     border-radius: 5px;
     text-align: center;
     padding-bottom: 10px;
+    margin: 0 10px 0 10px;
 
     .close-container {
       text-align: end;
@@ -152,10 +153,15 @@
       }
     }
 
-    .img-compare {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
+    .img-compare-container {
+      text-align: center;
+
+      .img-compare {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: auto;
+      }
     }
 
     p {
@@ -178,4 +184,25 @@
       margin: 10px 0;
     }
   } 
+}
+
+.spin-container {
+  text-align: center;
+  width: 100%;
+}
+
+.more-info-modal-container {
+  p {
+    .anticon {
+      margin-right: 3px;
+
+      &.anticon-check {
+        color: #00aa17;
+      }
+
+      &.anticon-close {
+        color: #c90000;
+      }
+    }
+  }
 }

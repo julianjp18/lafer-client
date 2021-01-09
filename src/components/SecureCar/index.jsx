@@ -22,8 +22,6 @@ function SecureCar({ secureCar, getCities, cities }) {
   const onChangeGenre = (value) => setgenre(value);
   const onChangeZeroKm = (value) => setZeroKm(value);
 
-  console.log(cities);
-
   useEffect(() => {
     if (!cities) getCities();
   }, []);
@@ -138,18 +136,24 @@ function SecureCar({ secureCar, getCities, cities }) {
               }}
               rules={[
                 {
-                  //required: true,
+                  required: true,
+                  message: 'Por favor ingresa la ciudad de movilización!',
+                  whitespace: true,
                 },
               ]}
             >
               <Select
+                showSearch
                 placeholder="Selecciona por favor tu ciudad de movilización"
                 onChange={(value) => setCity(value)}
                 allowClear
                 defaultValue={city}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
               >
                 {cities && cities.map((city) => (
-                  <Option value={city.codigo}>{city.valor}</Option>
+                  <Option key={city.codigo} value={city.codigo}>{city.valor}</Option>
                 ))}
               </Select>
             </Form.Item>  
@@ -313,11 +317,11 @@ function SecureCar({ secureCar, getCities, cities }) {
               rules={[
                 {
                   type: 'email',
-                  message: 'The input is not valid E-mail!',
+                  message: 'El correo electrónico no es válido!',
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: 'Por favor ingresa un correo electrónico!',
                 },
               ]}
             >

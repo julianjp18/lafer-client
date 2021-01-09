@@ -2,6 +2,16 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
 
+const PASSWORD_ASESOR = "29528";
+const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
+const QUOTATION_ENDPOINT = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
+const HEADERS = {
+  "accept": "*/*",
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "x-api-key": API_KEY,
+};
+
 function* secureCar(formValues) {
   const {
     vehicle,
@@ -20,85 +30,106 @@ function* secureCar(formValues) {
     phone,
   } = formValues.payload;
   
-  const dataSale = [];
-  yield axios.post(`https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion`, {
-    "placaVehiculo": vehicle,
-    "tipoDocumentoTomador": typeIdentification,
-    "numeroDocumentoTomador": identification,
-    "nombresTomador": name,
-    "apellidosTomador": lastName,
-    "fechaNacimientoTomador": birthDate,
-    "generoConductor": genre,
-    "marcaVehiculo": brand,
-    "modeloVehiculo": Number.parseInt(model),
-    "claveAsesor": 80125,
-    "sumaAccesorios": 0,
-    "ciudadMovilizacion": cityCode,
-    "ceroKm": `${zeroKm}`,
-    "periodoFact": 12,
-  }, {
-    "accept": "*/*",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "x-api-key": "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp",
-  }).then(response => {
-    dataSale.push(response);
-  }).catch(e => {
-    console.log(e);
-  });
+  
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Accept", "application/json");
+  myHeaders.append("x-api-key", API_KEY);
 
-  if (dataSale.dataHeader.codRespuesta === 0) {
-    const data = [];
-    yield axios.post(`https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion`, {
-      "mailTomador": email,
-      "celTomador": phone,
-      "dirTomador": address,
-      "ciuTomador": cityCode,
-      "nomConductor": `${name} ${lastName}`,
-      "sexoConductor": genre,
-      "fecNacConductor": birthDate,
-      "placaVeh": vehicle,
-      "numLiquidacion": dataSale.data.responseData.numerodeliquidacion,
-    }, {
-      "accept": "*/*",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "x-api-key": "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp",
-    }).then(response => {
-      data.push(response);
-    }).catch(e => {
-        console.log(e);
-    });
-
-    if (data.dataHeader.codRespuesta === 0) {
-      yield put({ type: "SECURE_CAR_SUCCESS", response: { ...data.data, username: name + lastName }, });  
-    } else {
-      yield call(showNotification, { type: 'warning', message: 'Error en la cotización' });
-      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data }, });  
+  var raw = JSON.stringify(
+    {
+      "placaVehiculo": vehicle,
+      "tipoDocumentoTomador": typeIdentification,
+      "numeroDocumentoTomador": Number.parseInt(identification),
+      "nombresTomador": "Gustavo Emilio",
+      "apellidosTomador": "Gomez Rodriguez",
+      "fechaNacimientoTomador": "1968-11-26",
+      "generoConductor": "M",
+      "marcaVehiculo": "8006052",
+      "modeloVehiculo": Number.parseInt(model),
+      "claveAsesor": Number.parseInt(PASSWORD_ASESOR),
+      "sumaAccesorios": 0,
+      "ciudadMovilizacion": 14000,
+      "ceroKm": "false",
+      "periodoFact": 12
     }
+  );
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion", requestOptions);
+  const dataSale = yield response.json();
+  console.log('dataSale', dataSale);
+  if (dataSale.dataHeader.codRespuesta === 200) {
+    yield put({ type: "SECURE_CAR_SUCCESS", response: { ...dataSale.data }, });
   } else {
     yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
     yield put({ type: "SECURE_CAR_FAILURE", response: { ...dataSale }, });
   }
 }
 
-function* getCities() {
-  const data = [];
-  yield axios.get(`https://stg-api-conecta.segurosbolivar.com/stage/entidad/ciudades`, {
-    "x-api-key": "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp",
-    "claveAsesor": "123456",  
-    "accept": "application/json",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  }).then(response => {
-      data.push(response);
-  }).catch(e => {
-      console.log(e);
-  });
+function* getQuotation(formValues) {
+  const {
+    vehicle,
+    brand,
+    model,
+    name,
+    lastName,
+    typeIdentification,
+    identification,
+    email,
+    address,
+    birthDate,
+    genre,
+    zeroKm = false,
+    cityCode = 14000,
+    phone,
+    settlementNumber,
+  } = formValues.payload;
 
-  if (data.dataHeader.codRespuesta === 0) {
-    //yield call(showNotification, { type: 'success', message: '' });
-    yield put({ type: "GET_CITIES_SUCCESS", response: { ...data.data.catalogoDato }, });  
+  const quotationDataOne = {
+    "mailTomador": email,
+    "celTomador": phone,
+    "dirTomador": address,
+    "ciuTomador": cityCode,
+    "nomConductor": `${name} ${lastName}`,
+    "sexoConductor": genre,
+    "fecNacConductor": birthDate,
+    "placaVeh": vehicle,
+    "numLiquidacion": settlementNumber,
+  };
+  const dataOne = yield axios.post(QUOTATION_ENDPOINT, quotationDataOne, HEADERS);
+  
+  const resOne = yield dataOne.json();
+
+  yield put({ type: "SECURE_CAR_SUCCESS", response: { ...resOne.data } });
+}
+
+function* getCities() {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Accept", "application/json");
+  myHeaders.append("x-api-key", API_KEY);
+
+  var raw = JSON.stringify({"claveAsesor": PASSWORD_ASESOR});
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json", requestOptions);
+  const data = yield response.json();
+
+  if (data.dataHeader.codRespuesta === 200) {
+    yield put({ type: "GET_CITIES_SUCCESS", response: [...data.data.catalogoDato] , });  
   } else {
     yield call(showNotification, { type: 'warning', message: 'Error en la obtención de ciudades' });
     yield put({ type: "GET_CITIES_FAILURE", response: { ...data }, });

@@ -39,7 +39,7 @@ const reducer = (state = {}, action) => {
     case 'SECURE_CAR_SUCCESS':
       return {
         ...state,
-        secure_car: action.secure_car,
+        secure_car: action.response,
       };
     case 'SIGN_IN_SUCCESS':
     case 'SIGN_UP_SUCCESS':
