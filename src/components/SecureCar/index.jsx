@@ -7,7 +7,7 @@ import './secureCar.scss';
 
 const { Option } = Select;
 
-function SecureCar({ secureCar, getCities, cities }) {
+const SecureCar = ({ secureCar, getCities, cities }) => {
   const history = useHistory();
   const [brand, setBrand] = useState();
   const [model, setModel] = useState();
@@ -22,16 +22,28 @@ function SecureCar({ secureCar, getCities, cities }) {
   const onChangeGenre = (value) => setgenre(value);
   const onChangeZeroKm = (value) => setZeroKm(value);
 
-  console.log(cities);
-
   useEffect(() => {
     if (!cities) getCities();
   }, []);
 
   const onFinish = (values) => {
     secureCar({ ...values, zeroKm: zeroKm.target.checked });
+    const userData = {
+      name: values.name,
+      lastName: values.lastName,
+      typeIdentification: values.typeIdentification,
+      identification: values.identification,
+      city: values.city,
+      genre: values.genre,
+      email: values.email,
+      address: values.address,
+      birthDate: values.birthDate,
+      vehicle: values.vehicle,
+    };
+
     history.push("/quote-list", {
       state: {
+        userData,
         vehicle: values.vehicle,
         model: values.model,
         brand: values.brand,
@@ -74,6 +86,7 @@ function SecureCar({ secureCar, getCities, cities }) {
                   },
                 }),
               ]}
+              normalize={(value) => (value || '').toUpperCase()}
             >
               <Input />
             </Form.Item>
@@ -117,7 +130,7 @@ function SecureCar({ secureCar, getCities, cities }) {
               <Input onChange={(value) => setModel(value.target.value)} />
             </Form.Item>
           </Col>
-          <Col xs={12} md={8}>
+          <Col className="zeroKm-col" xs={12} md={8}>
             <Form.Item
               name="zeroKm"
               label="¿Es cero KM?"
@@ -125,34 +138,6 @@ function SecureCar({ secureCar, getCities, cities }) {
             >
               <Checkbox onChange={onChangeZeroKm}>Si</Checkbox>
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
-            <Form.Item
-              name="city"
-              label="Ciudad de movilización"
-              labelCol={{
-                span: 10,
-              }}
-              wrapperCol={{
-                span: 14,
-              }}
-              rules={[
-                {
-                  //required: true,
-                },
-              ]}
-            >
-              <Select
-                placeholder="Selecciona por favor tu ciudad de movilización"
-                onChange={(value) => setCity(value)}
-                allowClear
-                defaultValue={city}
-              >
-                {cities && cities.map((city) => (
-                  <Option value={city.codigo}>{city.valor}</Option>
-                ))}
-              </Select>
-            </Form.Item>  
           </Col>
           <Col xs={24} md={8}>
             <Form.Item
@@ -244,46 +229,39 @@ function SecureCar({ secureCar, getCities, cities }) {
           </Col>
           <Col xs={24} md={8}>
             <Form.Item
-              name="birthDate"
-              label="Fecha de nacimiento"
-              placeholder="Ej: 1968-11-26 (YYYY-MM-DD)"
+              name="city"
+              label="Ciudad de movilización"
+              labelCol={{
+                span: 10,
+              }}
+              wrapperCol={{
+                span: 14,
+              }}
               rules={[
                 {
                   required: true,
-                  message: 'Por favor inserta tu fecha de nacimiento!',
-                  whitespace: true,
-                },
-                () => ({
-                  validator(rule, value) {
-                    const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
-                    if (reg.exec(value.toLowerCase())) return Promise.resolve();
-                    return Promise.reject('Estructura fecha: YYYY-MM-DD');
-                  },
-                }),
-              ]}
-            >
-              <Input placeholder="YYYY-MM-DD" />
-            </Form.Item>
-          </Col>
-          <Col xs={12} md={8}>
-            <Form.Item
-              name="genre"
-              label="Género"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor selecciona tu género!',
+                  message: 'Por favor ingresa la ciudad de movilización!',
                   whitespace: true,
                 },
               ]}
             >
-              <Radio.Group onChange={onChangeGenre} value={genre}>
-                <Radio value='M'>Masculino</Radio>
-                <Radio value='F'>Femenino</Radio>
-              </Radio.Group>
-            </Form.Item>
+              <Select
+                showSearch
+                placeholder="Selecciona por favor tu ciudad de movilización"
+                onChange={(value) => setCity(value)}
+                allowClear
+                defaultValue={city}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {cities && cities.map((city) => (
+                  <Option key={city.codigo} value={city.codigo}>{city.valor}</Option>
+                ))}
+              </Select>
+            </Form.Item>  
           </Col>
-          <Col xs={12} md={8}>
+          <Col xs={24} md={8}>
             <Form.Item
               name="phone"
               label="Celular"
@@ -306,6 +284,47 @@ function SecureCar({ secureCar, getCities, cities }) {
               <Input />
             </Form.Item>
           </Col>
+          <Col xs={12} md={8}>
+            <Form.Item
+              name="genre"
+              label="Género"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor selecciona tu género!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Radio.Group onChange={onChangeGenre} value={genre}>
+                <Radio value='M'>Masculino</Radio>
+                <Radio value='F'>Femenino</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col xs={12} md={8}>
+          <Form.Item
+              name="birthDate"
+              label="Fecha de nacimiento"
+              placeholder="Ej: 1968-11-26 (YYYY-MM-DD)"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor inserta tu fecha de nacimiento!',
+                  whitespace: true,
+                },
+                () => ({
+                  validator(rule, value) {
+                    const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+                    if (reg.exec(value.toLowerCase())) return Promise.resolve();
+                    return Promise.reject('Estructura fecha: YYYY-MM-DD');
+                  },
+                }),
+              ]}
+            >
+              <Input placeholder="YYYY-MM-DD" />
+            </Form.Item>
+          </Col>
           <Col xs={24} md={8}>
             <Form.Item
               name="email"
@@ -313,11 +332,11 @@ function SecureCar({ secureCar, getCities, cities }) {
               rules={[
                 {
                   type: 'email',
-                  message: 'The input is not valid E-mail!',
+                  message: 'El correo electrónico no es válido!',
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: 'Por favor ingresa un correo electrónico!',
                 },
               ]}
             >

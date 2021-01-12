@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Row, Col, Select, Button, Modal, Checkbox } from 'antd';
+import { Row, Col, Select, Button, Modal, Checkbox, Spin } from 'antd';
 import { SlidersOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../../redux/actions';
 import './quote.scss';
-import { currencyFormat } from "../../../helpers";
+import { currencyFormat, divideValue } from "../../../helpers";
+import CarQuoteDescription from "../CarQuoteDescription";
+import QuoteCoverage from "../QuoteCoverage";
 
-function Quote({ secure_car }) {
+const Quote = ({ secure_car }) => {
   const [compareList, setCompareList] = useState([]);
   const [countCompareList, setCountCompareList] = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+  const [isMoreInfoModalVisible, setIsMoreInfoModalVisible] = useState(false);
+  
   const history = useHistory();
   const location = useLocation();
   
@@ -18,26 +22,56 @@ function Quote({ secure_car }) {
     vehicle,
     model,
     brand,
-    city,
     zeroKm,
+    userData,
   } = location.state.state;
 
   const { Option } = Select;
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  const showMoreInfoModal = (numerodeliquidacion) => {
+    setIsMoreInfoModalVisible({
+      ...isMoreInfoModalVisible,
+      [numerodeliquidacion]: true,
+    });
   };
 
-  const handleOk = () => {
-    setIsModalVisible(!isModalVisible);
+  const handleMoreInfoOk = (numerodeliquidacion) => {
+    setIsMoreInfoModalVisible({
+      ...isMoreInfoModalVisible,
+      [numerodeliquidacion]: false,
+    });
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const handleMoreInfoCancel = (numerodeliquidacion) => {
+    setIsMoreInfoModalVisible({
+      ...isMoreInfoModalVisible,
+      [numerodeliquidacion]: false,
+    });
+  };
+
+  const showFilterModal = () => {
+    setIsFilterModalVisible(true);
+  };
+
+  const handleFilterOk = () => {
+    setIsFilterModalVisible(!isFilterModalVisible);
+  };
+
+  const handleFilterCancel = () => {
+    setIsFilterModalVisible(false);
   };
 
   const addtoFinalCompare = () => {
-    history.push("/steps-form");
+    history.push("/compare-quote", {
+      state: {
+        compareList,
+        vehicle,
+        brand,
+        model,
+        zeroKm, 
+        userData,
+      }
+    });
   };
 
   const handleFilterByChange = (value) => {
@@ -55,49 +89,69 @@ function Quote({ secure_car }) {
   const addtoCompare = (value) => {
     setCountCompareList(countCompareList + 1);
     const newCompareList = [];
-    newCompareList.push(compareList);
+    if(compareList.length > 0) newCompareList.push(...compareList);
     newCompareList.push(value);
     setCompareList(newCompareList);
+    if(countCompareList === 1) {
+      
+    }
   };
 
-  const deletefromCompare = (value) => {
-    if(countCompareList > 0) setCountCompareList(countCompareList - 1);
+  const deletefromCompare = (index) => {
+    if(countCompareList > 0) {
+      setCountCompareList(countCompareList - 1);
+      const newCompareList = compareList;
+      newCompareList.splice(index, 1);
+      setCompareList(newCompareList);
+    }
     else setCountCompareList(0);
   };
 
-  const divideValue = (value) => 
-    currencyFormat(Number.parseInt(value / 12));
+  const moreInfoModal = (responseData) => (
+    <Modal
+      title={`${responseData.opcionAutosDescripcion} - ${currencyFormat(responseData.totalPrima)}`}
+      visible={isMoreInfoModalVisible[responseData.numerodeliquidacion]}
+      onOk={() => handleMoreInfoOk(responseData.numerodeliquidacion)}
+      okText="Aceptar"
+      cancelText="Cancelar"
+      onCancel={() => handleMoreInfoCancel(responseData.numerodeliquidacion)}
+      z-index={responseData.numerodeliquidacion}
+      >
+      <div className="more-info-modal-container">
+        <p>
+          <CheckOutlined />
+          {`Deducible en hurto: ${responseData.deducibleEnHurto}`}
+        </p>
+        <p>
+          <CheckOutlined />
+          {`Deducible en RCE: ${responseData.deducibleEnRCE}`}
+        </p>
+        <p>
+          <CheckOutlined />
+          {`Deducible perdida total: ${responseData.deduciblePeridaTotal}`}
+        </p>
+        <p>
+          <CheckOutlined />
+          {`Deducible perdida parcial: ${currencyFormat(responseData.deduciblePeridaParcial)}`}
+        </p>
+        <p>
+          <CheckOutlined />
+          {`Requiere inspección: ${responseData.reqInspeccion === 'S' ? 'Si' : 'No'}`}
+        </p>
+      </div>
+    </Modal>
+  );
 
   return (
     <div className="main-quote-container">
       <div style={{ padding: 50 }}>
         <h1>Cotizaciones</h1>
-        <Row className="descrip-container">
-          <h2 className="descrip-title">Información automóvil</h2>
-          <Col xs={10}>
-            <img className="img-auto" src="https://via.placeholder.com/120" alt="logo auto" />
-          </Col>
-          <Col xs={14}>
-            <Row className="descrip-auto-container">
-              <Col xs={12}>
-                <p className="title-info">Placa</p>
-                <p className="result-info">{vehicle}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">Marca</p>
-                <p className="result-info">{brand}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">Modelo</p>
-                <p className="result-info">{model}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">¿Es cero Km?</p>
-                <p className="result-info">{zeroKm ? 'Si' : 'No'}</p>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <CarQuoteDescription
+          vehicle={vehicle}
+          brand={brand}
+          model={model}
+          zeroKm={zeroKm}
+        />
         <Row>
           <Col className="select-col" xs={12}>
             <Select placeholder="Ordenar por" style={{ width: 150 }} onChange={handleFilterByChange}>
@@ -107,12 +161,12 @@ function Quote({ secure_car }) {
             </Select>
           </Col>
           <Col className="filter-col" xs={12}>
-            <div className="filter-container" onClick={showModal}>
+            <div className="filter-container" onClick={showFilterModal}>
               <SlidersOutlined />
               <p>Filtrar</p>
             </div>
-            {isModalVisible && (
-                <Modal title="Filtrar por" visible={isModalVisible} onOk={handleOk} okText="Filtrar" cancelText="Cancelar" onCancel={handleCancel}>
+            {isFilterModalVisible && (
+                <Modal title="Filtrar por" visible={isFilterModalVisible} onOk={handleFilterOk} okText="Filtrar" cancelText="Cancelar" onCancel={handleFilterCancel}>
                   <Row>
                     <Col xs={24} md={8}>
                       <p>Selecciona la frecuencia con la que usas tu automóvil</p>
@@ -155,99 +209,48 @@ function Quote({ secure_car }) {
           </Col>
         </Row>
         <Row>
-          <Col xs={24}>
-            <div className="company-items-container">
-              <Row className="company-descrip">
-                <Col className="" xs={16}>
-                  <p className="title-type-plan">Premium</p>
-                  <p className="methods-price">12 cuotas <span className="price"> $ 166.000</span></p>
-                  <p className="methods-price">Pago contado <span className="pay-price"> $ 1.000.000</span></p>
-                </Col>
-                <Col xs={8}>
-                  <img className="img-company" src="https://via.placeholder.com/100" alt="logo auto"/>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={24}>
-                  <div className="company-item-descrip">
-                    <p>
-                      <CheckOutlined />
-                      Daños a terceros (RCE): $ 7.000 millones 
-                    </p>
-                    <p>
-                      <CheckOutlined />
-                      Pérdida total: $ sin deducible 
-                    </p>
-                    <p>
-                      <CloseOutlined />
-                      Pérdida parcial: no cubre
-                    </p>
-                    <p>
-                      <CheckOutlined />
-                      Grúa: Avería o accidente 
-                    </p>
-                    <p>
-                      <CloseOutlined />
-                      Conductor elegido: no cubre
-                    </p>
-                    <p>
-                      <CloseOutlined />
-                      Vehiculo reemplazo: no cubre
-                    </p>
-                    <div className="more-info-container">
-                      <p className="more-info">
-                        Más Información
-                      </p>
-                    </div>
-                    <div>
-                      <Button type="primary" onClick={() => addtoCompare(1)} className="btn-submit">
-                        Comparar
-                      </Button>
-                    </div>
+          {secure_car ? (
+            Object.values(secure_car).map((secure) => {
+              const { responseData } = secure;
+              return (
+                <Col key={responseData.opcionAutosDescripcion} xs={24}>
+                  <div className="company-items-container">
+                    <Row className="company-descrip">
+                      <Col className="" xs={16}>
+                        <p className="title-type-plan">{responseData.opcionAutosDescripcion}</p>
+                        <p className="methods-price">12 cuotas <span className="price">{divideValue(responseData.totalPrima)}</span></p>
+                        <p className="methods-price">Pago contado <span className="pay-price">{currencyFormat(responseData.totalPrima)}</span></p>
+                      </Col>
+                      <Col xs={8}>
+                        <img className="img-company" src="https://via.placeholder.com/100" alt="logo auto"/>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs={24}>
+                        <div className="company-item-descrip">
+                          <QuoteCoverage coberturasCotizacion={responseData.coberturasCotizacion} />
+                          <div className="more-info-container">
+                            <p className="more-info" onClick={() => showMoreInfoModal(responseData.numerodeliquidacion)}>
+                              Más Información
+                            </p>
+                            {isMoreInfoModalVisible[responseData.numerodeliquidacion] && moreInfoModal(responseData)}
+                          </div>
+                          <div>
+                            <Button type="primary" onClick={() => addtoCompare(secure)} className="btn-submit">
+                              Comparar
+                            </Button>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
                 </Col>
-              </Row>
+              );
+            })
+          ): (
+            <div className="spin-container">
+              <Spin tip="Cargando..." size="large"/>
             </div>
-          </Col>
-          {secure_car && (
-            secure_car.map((secure) => (
-              <Col xs={24}>
-                <div className="company-items-container">
-                  <Row className="company-descrip">
-                    <Col className="" xs={16}>
-                      <p className="title-type-plan">{secure.responseData.opcionAutosDescripcion}</p>
-                      <p className="methods-price">12 cuotas <span className="price">{divideValue(secure.responseData.totalPrima)}</span></p>
-                      <p className="methods-price">Pago contado <span className="pay-price">{currencyFormat(secure.responseData.totalPrima)}</span></p>
-                    </Col>
-                    <Col xs={8}>
-                      <img className="img-company" src="https://via.placeholder.com/100" alt="logo auto"/>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={24}>
-                      <div className="company-item-descrip">
-                        {secure.responseData.coberturasCotizacion.map((coberturaCotizacion) => (
-                          <p>
-                            <CheckOutlined />
-                            {`${coberturaCotizacion.descripcion}: ${currencyFormat(coberturaCotizacion.valorPrima)}`} 
-                          </p>
-                        )) }
-                        <div className="more-info-container">
-                          <p className="more-info">
-                            Más Información
-                          </p>
-                        </div>
-                        <div>
-                          <Button type="primary" onClick={() => addtoCompare(secure)} className="btn-submit">
-                            Comparar
-                          </Button>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            ))
           )}
         </Row>
       </div>
@@ -255,13 +258,15 @@ function Quote({ secure_car }) {
         <Col xs={24}>
           <Row>
             {compareList.map((secure, index) => (
-              <Col xs={8}>
+              <Col key={index} xs={8}>
                 <div className="compare-item-container">
                   <div className="close-container" onClick={() => deletefromCompare(index)}>
                     <CloseOutlined />
                   </div>
-                  <img className="img-compare" src="https://via.placeholder.com/80" alt="logo auto" />
-                  <p>{currencyFormat(secure.responseData.valorPrima)}</p>
+                  <div className="img-compare-container">
+                    <img className="img-compare" src="https://via.placeholder.com/80" alt="logo auto" />
+                  </div>
+                  <p>{currencyFormat(secure.responseData.totalPrima)}</p>
                 </div>
               </Col>
             ))}
