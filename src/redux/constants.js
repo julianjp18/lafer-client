@@ -1,10 +1,35 @@
 export const SIGN_UP = 'SIGN_UP';
+export const SIGN_UP_SUCCESS = `${SIGN_UP}_SUCCESS`;
+export const SIGN_UP_FAILURE = `${SIGN_UP}_FAILURE`;
+
 export const SIGN_IN = 'SIGN_IN';
+export const SIGN_IN_SUCCESS = `${SIGN_IN}_SUCCESS`;
+export const SIGN_IN_FAILURE = `${SIGN_IN}_FAILURE`;
+
 export const BUY_SOAT = 'BUY_SOAT';
+export const BUY_SOAT_SUCCESS = `${BUY_SOAT}_SUCCESS`;
+export const BUY_SOAT_FAILURE = `${BUY_SOAT}_FAILURE`;
+
 export const SECURE_CAR = 'SECURE_CAR';
+export const SECURE_CAR_SUCCESS = `${SECURE_CAR}_SUCCESS`;
+export const SECURE_CAR_FAILURE = `${SECURE_CAR}_FAILURE`;
+
 export const CLIENT_INFO = 'CLIENT_INFO';
+export const CLIENT_INFO_SUCCESS = `${CLIENT_INFO}_SUCCESS`;
+export const CLIENT_INFO_FAILURE = `${CLIENT_INFO}_FAILURE`;
+
 export const VEHICLE_INFO = 'VEHICLE_INFO';
+export const VEHICLE_INFO_SUCCESS = `${VEHICLE_INFO}_SUCCESS`;
+export const VEHICLE_INFO_FAILURE = `${VEHICLE_INFO}_FAILURE`;
+
 export const BUY_SOAT_FORM = 'BUY_SOAT_FORM';
+export const BUY_SOAT_FORM_SUCCESS = `${BUY_SOAT_FORM}_SUCCESS`;
+export const BUY_SOAT_FORM_FAILURE = `${BUY_SOAT_FORM}_FAILURE`;
+
 export const MAIN_INFO = 'MAIN_INFO';
+export const MAIN_INFO_SUCCESS = `${MAIN_INFO}_SUCCESS`;
+export const MAIN_INFO_FAILURE = `${MAIN_INFO}_FAILURE`;
 
 export const GET_CITIES = 'GET_CITIES';
+export const GET_CITIES_SUCCESS = `${GET_CITIES}_SUCCESS`;
+export const GET_CITIES_FAILURE = `${GET_CITIES}_FAILURE`;

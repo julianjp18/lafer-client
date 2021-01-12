@@ -6,6 +6,10 @@ const currencyFormat = (value, iso, fixed = 0) =>
     iso || ''
   }`;
 
+const divideValue = (value, divideNumber) => 
+  currencyFormat(Number.parseInt(value / divideNumber));
+
 export {
-  currencyFormat
+  currencyFormat,
+  divideValue,
 };

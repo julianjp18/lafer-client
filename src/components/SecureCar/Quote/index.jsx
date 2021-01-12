@@ -5,9 +5,11 @@ import { SlidersOutlined, CloseOutlined, CheckOutlined } from '@ant-design/icons
 import { connect } from 'react-redux';
 import { mainInfo } from '../../../redux/actions';
 import './quote.scss';
-import { currencyFormat } from "../../../helpers";
+import { currencyFormat, divideValue } from "../../../helpers";
+import CarQuoteDescription from "../CarQuoteDescription";
+import QuoteCoverage from "../QuoteCoverage";
 
-function Quote({ secure_car }) {
+const Quote = ({ secure_car }) => {
   const [compareList, setCompareList] = useState([]);
   const [countCompareList, setCountCompareList] = useState(0);
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
@@ -20,8 +22,8 @@ function Quote({ secure_car }) {
     vehicle,
     model,
     brand,
-    city,
     zeroKm,
+    userData,
   } = location.state.state;
 
   const { Option } = Select;
@@ -60,7 +62,16 @@ function Quote({ secure_car }) {
   };
 
   const addtoFinalCompare = () => {
-    history.push("/steps-form");
+    history.push("/compare-quote", {
+      state: {
+        compareList,
+        vehicle,
+        brand,
+        model,
+        zeroKm, 
+        userData,
+      }
+    });
   };
 
   const handleFilterByChange = (value) => {
@@ -131,39 +142,16 @@ function Quote({ secure_car }) {
     </Modal>
   );
 
-  const divideValue = (value) => 
-    currencyFormat(Number.parseInt(value / 12));
-
   return (
     <div className="main-quote-container">
       <div style={{ padding: 50 }}>
         <h1>Cotizaciones</h1>
-        <Row className="descrip-container">
-          <h2 className="descrip-title">Información automóvil</h2>
-          <Col xs={10}>
-            <img className="img-auto" src="https://via.placeholder.com/120" alt="logo auto" />
-          </Col>
-          <Col xs={14}>
-            <Row className="descrip-auto-container">
-              <Col xs={12}>
-                <p className="title-info">Placa</p>
-                <p className="result-info">{vehicle}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">Marca</p>
-                <p className="result-info">{brand}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">Modelo</p>
-                <p className="result-info">{model}</p>
-              </Col>
-              <Col xs={12}>
-                <p className="title-info">¿Es cero Km?</p>
-                <p className="result-info">{zeroKm ? 'Si' : 'No'}</p>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <CarQuoteDescription
+          vehicle={vehicle}
+          brand={brand}
+          model={model}
+          zeroKm={zeroKm}
+        />
         <Row>
           <Col className="select-col" xs={12}>
             <Select placeholder="Ordenar por" style={{ width: 150 }} onChange={handleFilterByChange}>
@@ -240,12 +228,7 @@ function Quote({ secure_car }) {
                     <Row>
                       <Col xs={24}>
                         <div className="company-item-descrip">
-                          {responseData.coberturasCotizacion.map((coberturaCotizacion) => (
-                            <p>
-                              <CheckOutlined />
-                              {`${coberturaCotizacion.descripcion}: ${currencyFormat(coberturaCotizacion.valorPrima)}`} 
-                            </p>
-                          )) }
+                          <QuoteCoverage coberturasCotizacion={responseData.coberturasCotizacion} />
                           <div className="more-info-container">
                             <p className="more-info" onClick={() => showMoreInfoModal(responseData.numerodeliquidacion)}>
                               Más Información
@@ -275,7 +258,7 @@ function Quote({ secure_car }) {
         <Col xs={24}>
           <Row>
             {compareList.map((secure, index) => (
-              <Col xs={8}>
+              <Col key={index} xs={8}>
                 <div className="compare-item-container">
                   <div className="close-container" onClick={() => deletefromCompare(index)}>
                     <CloseOutlined />

@@ -57,7 +57,7 @@ const displayRouteMenu = (routes) => {
    * Render a single route as a list item link to the config's pathname
    */
   const singleRoute = (route) => {
-    return (
+    return route.show && (
       <li key={route.path} className="menu-item">
         <Link to={route.path} className="menu-link">{route.key}</Link>
       </li>

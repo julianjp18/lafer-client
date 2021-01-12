@@ -21,13 +21,10 @@ function* secureCar(formValues) {
     lastName,
     typeIdentification,
     identification,
-    email,
-    address,
     birthDate,
     genre,
     zeroKm = false,
     cityCode = 14000,
-    phone,
   } = formValues.payload;
   
   
@@ -39,18 +36,18 @@ function* secureCar(formValues) {
   var raw = JSON.stringify(
     {
       "placaVehiculo": vehicle,
-      "tipoDocumentoTomador": typeIdentification,
-      "numeroDocumentoTomador": Number.parseInt(identification),
-      "nombresTomador": "Gustavo Emilio",
-      "apellidosTomador": "Gomez Rodriguez",
-      "fechaNacimientoTomador": "1968-11-26",
+      "tipoDocumentoTomador": "CC",
+      "numeroDocumentoTomador": 1020821897,
+      "nombresTomador": "Julian",
+      "apellidosTomador": "Perez",
+      "fechaNacimientoTomador": "1996-12-31",
       "generoConductor": "M",
-      "marcaVehiculo": "8006052",
+      "marcaVehiculo": "Mazda",
       "modeloVehiculo": Number.parseInt(model),
       "claveAsesor": Number.parseInt(PASSWORD_ASESOR),
       "sumaAccesorios": 0,
-      "ciudadMovilizacion": 14000,
-      "ceroKm": "false",
+      "ciudadMovilizacion": Number.parseInt(cityCode),
+      "ceroKm": zeroKm,
       "periodoFact": 12
     }
   );
