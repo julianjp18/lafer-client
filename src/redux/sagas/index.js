@@ -5,6 +5,7 @@ import { vehicleWatcher } from './SOAT/vehicle';
 import { clientWatcher } from './SOAT/client';
 import { soatWatcher } from './SOAT/soat';
 import { secureCarWatcher } from './car';
+import { exampleWatcher } from '../../examples/redux/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     soatWatcher(),
     clientWatcher(),
     secureCarWatcher(),
+    exampleWatcher(),
   ]);
 };
