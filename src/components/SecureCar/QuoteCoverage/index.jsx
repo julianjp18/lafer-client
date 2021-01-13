@@ -4,7 +4,7 @@ import { currencyFormat } from "../../../helpers";
 
 const QuoteCoverage = ({ coberturasCotizacion }) => (
   coberturasCotizacion.map((coberturaCotizacion) => (
-    <p>
+    <p key={coberturaCotizacion.valorPrima}>
       <CheckOutlined />
       {`${coberturaCotizacion.descripcion}: ${currencyFormat(coberturaCotizacion.valorPrima)}`} 
     </p>

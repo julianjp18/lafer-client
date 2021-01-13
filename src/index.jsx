@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
-import reducer from './redux/reducers';
+import reducer from './examples/redux/reducers';
 import App from './components/App';
 import rootSaga from './redux/sagas';
 //import * as serviceWorker from "./serviceWorker";

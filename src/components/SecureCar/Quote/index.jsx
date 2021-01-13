@@ -213,12 +213,12 @@ const Quote = ({ secure_car }) => {
             Object.values(secure_car).map((secure) => {
               const { responseData } = secure;
               return (
-                <Col key={responseData.opcionAutosDescripcion} xs={24}>
+                <Col key={responseData.totalPrima} xs={24}>
                   <div className="company-items-container">
                     <Row className="company-descrip">
                       <Col className="" xs={16}>
                         <p className="title-type-plan">{responseData.opcionAutosDescripcion}</p>
-                        <p className="methods-price">12 cuotas <span className="price">{divideValue(responseData.totalPrima)}</span></p>
+                        <p className="methods-price">12 cuotas <span className="price">{divideValue(responseData.totalPrima, 12)}</span></p>
                         <p className="methods-price">Pago contado <span className="pay-price">{currencyFormat(responseData.totalPrima)}</span></p>
                       </Col>
                       <Col xs={8}>
