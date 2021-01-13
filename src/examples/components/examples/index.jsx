@@ -1,36 +1,74 @@
 import React, { useEffect } from "react";
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import { getCountries } from '../../redux/actions';
+import {
+  getCountries,
+  createCountry,
+  deleteCountry,
+  updateCountry,
+  getCountryById,
+} from '../../redux/actions';
+
 import CountryForm from "./CountryForm";
 import CountriesList from "./CountriesList";
 
-function Examples({ getCountries, get_countries_list }) {
-  
+import './examples.scss';
+
+function Examples({
+  getCountries,
+  createCountry,
+  deleteCountry,
+  updateCountry, 
+  get_countries_list,
+  getCountryById,
+  get_country,
+}) {
   useEffect(() => {
     getCountries();
   }, []);
-  console.log(get_countries_list);
 
   return (
     <div style={{ padding: 50 }}>
       <h1>Example crud</h1>
       <Row>
-        <Col xs={12}>
+        <Col className="main-col" xs={12}>
+          <h2>Agregar</h2>
+          <CountryForm
+            createForm
+            createCountry={createCountry}
+          />
+        </Col>
+        <Col className="main-col" xs={12}>
+          <h2>Modificar</h2>
+          <CountryForm
+            updateForm
+            getCountries={getCountries}
+            updateCountry={updateCountry}
+          />
+        </Col>
+        <Col className="main-col second-col" xs={12}>
+          <h2>Eliminar</h2>
+          <CountryForm
+            deleteForm
+            deleteCountry={deleteCountry}
+          />
+          <div className="search-container">
+            <h2>Búsqueda por código</h2>
+            <CountryForm
+              countryByIdForm
+              getCountryById={getCountryById}
+            />
+            {get_country && (
+              <div>
+                <h3>Resultado:</h3>
+                <p>{`code: ${get_country.countryId}, name: ${get_country.countryName}`}</p>
+              </div>
+            )}
+          </div>
+        </Col>
+        <Col className="main-col second-col" xs={12}>
           <h2>Listar</h2>
           <CountriesList countries={get_countries_list} />
-        </Col>
-        <Col xs={12}>
-          <h2>Agregar</h2>
-          <CountryForm />
-        </Col>
-        <Col xs={12}>
-          <h2>Modificar</h2>
-          <CountryForm updateForm />
-        </Col>
-        <Col xs={12}>
-          <h2>Eliminar</h2>
-          <CountryForm deleteForm />
         </Col>
       </Row>
     </div>
@@ -39,10 +77,15 @@ function Examples({ getCountries, get_countries_list }) {
 
 const mapStateToProps = (state) => ({
   get_countries_list: state.get_countries_list,
+  get_country: state.get_country,
 });
 
 const mapDispatchToProps = { 
   getCountries,
+  createCountry,
+  deleteCountry,
+  updateCountry,
+  getCountryById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Examples);
