@@ -27,7 +27,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
   }, []);
 
   const onFinish = (values) => {
-    secureCar({ ...values, zeroKm: zeroKm.target.checked });
+    secureCar({ ...values, zeroKm: zeroKm ? zeroKm.target.checked : false });
     const userData = {
       name: values.name,
       lastName: values.lastName,
@@ -229,7 +229,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
           </Col>
           <Col xs={24} md={8}>
             <Form.Item
-              name="city"
+              name="cityCode"
               label="Ciudad de movilización"
               labelCol={{
                 span: 10,

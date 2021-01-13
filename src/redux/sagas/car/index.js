@@ -27,31 +27,39 @@ function* secureCar(formValues) {
     cityCode = 14000,
   } = formValues.payload;
   
-  
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Accept", "application/json");
   myHeaders.append("x-api-key", API_KEY);
+  
+  let data = {
+    "placaVehiculo": vehicle.toUpperCase(),
+    "tipoDocumentoTomador": typeIdentification,
+    "numeroDocumentoTomador": Number.parseInt(identification),
+    "nombresTomador": name,
+    "apellidosTomador": lastName,
+    "fechaNacimientoTomador": birthDate,
+    "generoConductor": genre,
+    "claveAsesor": Number.parseInt(PASSWORD_ASESOR),
+    "sumaAccesorios": 0,
+    "ciudadMovilizacion": Number.parseInt(cityCode),
+    "ceroKm": `${zeroKm}`,
+    "periodoFact": 12,
+  };
 
-  var raw = JSON.stringify(
-    {
-      "placaVehiculo": vehicle,
-      "tipoDocumentoTomador": "CC",
-      "numeroDocumentoTomador": 1020821897,
-      "nombresTomador": "Julian",
-      "apellidosTomador": "Perez",
-      "fechaNacimientoTomador": "1996-12-31",
-      "generoConductor": "M",
-      "marcaVehiculo": "Mazda",
-      "modeloVehiculo": Number.parseInt(model),
-      "claveAsesor": Number.parseInt(PASSWORD_ASESOR),
-      "sumaAccesorios": 0,
-      "ciudadMovilizacion": Number.parseInt(cityCode),
-      "ceroKm": zeroKm,
-      "periodoFact": 12
-    }
-  );
+  if (zeroKm) {
+    const newData = {
+      ...data,
+      "marcaVehiculo": "8006052",
+      "modeloVehiculo": Number.parseInt(model),  
+    };
 
+    data = newData;
+  }
+
+  var raw = JSON.stringify(data);
+
+  console.log(raw);
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -61,9 +69,13 @@ function* secureCar(formValues) {
 
   const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion", requestOptions);
   const dataSale = yield response.json();
-  console.log('dataSale', dataSale);
+
+  console.log(dataSale);
   if (dataSale.dataHeader.codRespuesta === 200) {
     yield put({ type: "SECURE_CAR_SUCCESS", response: { ...dataSale.data }, });
+  } else if (dataSale.dataHeader.codRespuesta === 400) {
+    yield call(showNotification, { type: 'warning', message: dataSale.dataHeader.errores[0].descError });
+    yield put({ type: "SECURE_CAR_FAILURE", response: { ...dataSale.dataHeader.errores[0].descError }, });
   } else {
     yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
     yield put({ type: "SECURE_CAR_FAILURE", response: { ...dataSale }, });
