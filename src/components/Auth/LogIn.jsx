@@ -5,15 +5,15 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { signIn } from '../../redux/actions';
 import { connect } from 'react-redux';
 
-function LogIn({ signIn }) {
-  const [user, updateUser] = useState("");
+function LogIn({ signIn, auth }) {
   const history = useHistory();
 
   const onFinish = (values) => {
-    updateUser(user.username);
     signIn(values);
-    localStorage.setItem("user", user);
-    history.push("/app");
+    if (auth) {
+      localStorage.setItem("user", auth);
+      history.push("/app");
+    }
   };
 
   return (
@@ -36,7 +36,10 @@ function LogIn({ signIn }) {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" />
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Usuario"
+        />
       </Form.Item>
       <Form.Item
         name="password"
@@ -68,8 +71,12 @@ function LogIn({ signIn }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
 const mapDispatchToProps = {
-    signIn: signIn,
-  };
+  signIn: signIn,
+};
   
-  export default connect(null, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

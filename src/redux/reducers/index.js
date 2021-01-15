@@ -54,15 +54,25 @@ const reducer = (state = {}, action) => {
         response: action.response,
         loading: false,
       };
+    case SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        auth: action.response,
+        loading: false,
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        auth: action.response,
+        loading: false,
+      };
+    case MAIN_INFO_SUCCESS:
     case SECURE_CAR_SUCCESS:
       return {
         ...state,
         secure_car: action.response,
       };
-    case SIGN_IN_SUCCESS:
-    case SIGN_UP_SUCCESS:
     case GET_CITIES_SUCCESS:
-    case MAIN_INFO_SUCCESS:
       return { ...state, cities_secure_car: action.response, loading: false }
     case CLIENT_INFO_SUCCESS:
       return {
