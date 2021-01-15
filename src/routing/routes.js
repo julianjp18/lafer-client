@@ -8,6 +8,7 @@ import SecureCar from "../components/SecureCar";
 import CustomQuote from "../components/SecureCar/CustomQuote";
 import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
+import Countries from "../components/Admin/Countries";
 
 const ROUTES = [
   { path: "/", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
@@ -18,7 +19,7 @@ const ROUTES = [
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
   { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
-  { path: "/countries", key: "Países", exact: true, component: () => <h1>Países</h1>, show: false, auth: true },
+  { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
 ];
 
 export default ROUTES;
