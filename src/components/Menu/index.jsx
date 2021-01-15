@@ -37,7 +37,7 @@ function Menu({ }) {
         </div>
       </div>
       <ul className={`menu ${isToggle ? 'active' : ''}`} id="menu">
-        {displayRouteMenu(ROUTES)}
+        {!localStorage.getItem("user") ? displayRouteMenu(ROUTES) : displayAuthRouteMenu(ROUTES)}
       </ul>
       <div className="social">
         <a href="#" className="social-item"><i className="fab fa-facebook"></i></a>
@@ -57,7 +57,32 @@ const displayRouteMenu = (routes) => {
    * Render a single route as a list item link to the config's pathname
    */
   const singleRoute = (route) => {
-    return route.show && (
+    return route.show && !route.auth && (
+      <li key={route.path} className="menu-item">
+        <Link to={route.path} className="menu-link">{route.key}</Link>
+      </li>
+    );
+  }
+
+  // loop through the array of routes and generate an unordered list
+  return (routes.map(route => {
+        // if this route has sub-routes, then show the ROOT as a list item and recursively render a nested list of route links
+        if (route.routes) {
+          return (singleRoute(route));
+        }
+
+        // no nested routes, so just render a single route
+        return singleRoute(route);
+      })
+  );
+};
+
+const displayAuthRouteMenu = (routes) => {
+  /**
+   * Render a single route as a list item link to the config's pathname
+   */
+  const singleRoute = (route) => {
+    return route.auth && (
       <li key={route.path} className="menu-item">
         <Link to={route.path} className="menu-link">{route.key}</Link>
       </li>

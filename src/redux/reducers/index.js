@@ -26,6 +26,21 @@ import {
   MAIN_INFO_FAILURE,
   MAIN_INFO_SUCCESS,
   SIGN_UP_SUCCESS,
+  CREATE_COUNTRY,
+  CREATE_COUNTRY_FAILURE,
+  CREATE_COUNTRY_SUCCESS,
+  DELETE_COUNTRY,
+  DELETE_COUNTRY_FAILURE,
+  DELETE_COUNTRY_SUCCESS,
+  GET_COUNTRIES,
+  GET_COUNTRIES_FAILURE,
+  GET_COUNTRIES_SUCCESS,
+  UPDATE_COUNTRY,
+  UPDATE_COUNTRY_FAILURE,
+  UPDATE_COUNTRY_SUCCESS,
+  GET_COUNTRY_BY_ID,
+  GET_COUNTRY_BY_ID_SUCCESS,
+  GET_COUNTRY_BY_ID_FAILURE,
 } from '../constants';
 
 const reducer = (state = {}, action) => {
@@ -39,6 +54,13 @@ const reducer = (state = {}, action) => {
     case SECURE_CAR:
     case GET_CITIES:
     case MAIN_INFO:
+    /* COUNTRIES */
+    case GET_COUNTRIES:
+    case DELETE_COUNTRY:
+    case GET_COUNTRY_BY_ID:
+    case UPDATE_COUNTRY:
+    case CREATE_COUNTRY:
+    /* END COUNTRIES */
       return { ...state, loading: true };
     case SECURE_CAR_FAILURE:
     case SIGN_IN_FAILURE:
@@ -49,20 +71,40 @@ const reducer = (state = {}, action) => {
     case BUY_SOAT_FORM_FAILURE:
     case GET_CITIES_FAILURE:
     case MAIN_INFO_FAILURE:
+    /* COUNTRIES */
+    case CREATE_COUNTRY_FAILURE:
+    case UPDATE_COUNTRY_FAILURE:
+    case DELETE_COUNTRY_FAILURE:
+    case GET_COUNTRIES_FAILURE:
+    case CREATE_COUNTRY_SUCCESS:
+    case UPDATE_COUNTRY_SUCCESS:
+    case DELETE_COUNTRY_SUCCESS:
+    case GET_COUNTRY_BY_ID_FAILURE:
+    /* END COUNTRIES */
       return {
         ...state,
         response: action.response,
         loading: false,
       };
+    case SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        auth: action.response,
+        loading: false,
+      };
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        auth: action.response,
+        loading: false,
+      };
+    case MAIN_INFO_SUCCESS:
     case SECURE_CAR_SUCCESS:
       return {
         ...state,
         secure_car: action.response,
       };
-    case SIGN_IN_SUCCESS:
-    case SIGN_UP_SUCCESS:
     case GET_CITIES_SUCCESS:
-    case MAIN_INFO_SUCCESS:
       return { ...state, cities_secure_car: action.response, loading: false }
     case CLIENT_INFO_SUCCESS:
       return {
@@ -82,6 +124,20 @@ const reducer = (state = {}, action) => {
         buy_soat: action.buy_soat,
         loading: false
       };
+    /* COUNTRIES */
+    case GET_COUNTRY_BY_ID_SUCCESS:
+        return {
+          ...state,
+          get_country: action.response,
+          loading: false,
+        };
+    case GET_COUNTRIES_SUCCESS:
+      return {
+        ...state,
+        get_countries_list: action.response,
+        loading: false,
+      };
+    /* END COUNTRIES */
     case BUY_SOAT_FORM_SUCCESS:
     default:
       return state;

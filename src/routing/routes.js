@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import LogIn from '../components/Auth/LogIn';
 import SignUp from '../components/Auth/SignUp';
@@ -8,41 +8,18 @@ import SecureCar from "../components/SecureCar";
 import CustomQuote from "../components/SecureCar/CustomQuote";
 import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
+import Countries from "../components/Admin/Countries";
 
 const ROUTES = [
-  { path: "/", key: "SOAT", exact: true, component: Landing, show: true },
-  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true },
-  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true },
-  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true },
+  { path: "/", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
+  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
+  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
+  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: true },
   { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
-  {
-    path: "/app",
-    key: "APP",
-    component: props => {
-      if (!localStorage.getItem("user")) {
-        alert("Proceso realizado con éxito");
-        return <Redirect to={"/"} />;
-      }
-      return <RenderRoutes {...props} />;
-    },
-    routes: [
-      {
-        path: "/app",
-        key: "APP_ROOT",
-        exact: true,
-        component: () => <h1>App Index</h1>,
-      },
-      {
-        path: "/app/page",
-        key: "APP_PAGE",
-        exact: true,
-        component: () => <h1>App Page</h1>,
-      },
-    ],
-    show: false,
-  },
+  { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
+  { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
 ];
 
 export default ROUTES;
@@ -70,7 +47,7 @@ export function RenderRoutes({ routes }) {
       {routes.map((route, i) => {
         return <RouteWithSubRoutes key={route.key} {...route} />;
       })}
-      <Route component={() => <h1>Not Found!</h1>} />
+      <Route component={() => <h1>¡UPS! Sitio web no encontrado.</h1>} />
     </Switch>
   );
 }
