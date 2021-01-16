@@ -1,14 +1,34 @@
 import React from "react";
-import { Spin } from 'antd';
+import { Spin, Table, Space } from 'antd';
 
-function CountriesList({ countries }) {
+
+const CountriesList = ({ countries, deleteCountry }) => {
+
+  const columns = [
+    {
+      title: 'Código',
+      dataIndex: 'countryId',
+      key: 'code',
+    },
+    {
+      title: 'Nombre país',
+      dataIndex: 'countryName',
+      key: 'name',
+    },
+    {
+      title: 'Acción',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a onClick={() => deleteCountry({ countryId: record.countryId })}>Eliminar</a>
+        </Space>
+      ),
+    },
+  ];
+
   return countries ? (
     <div>
-      {countries.map((country) => (
-        <p key={country.countryId}>
-          {`code: ${country.countryId}, name: ${country.countryName}`}
-        </p>
-      ))}    
+      <Table columns={columns} dataSource={countries} />
     </div>
   ): (
     <div className="spin-container">
