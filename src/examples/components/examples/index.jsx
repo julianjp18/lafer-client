@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Row, Col } from 'antd';
+import React, { useEffect, useState } from "react";
+import { Row, Col, Tabs, Divider, Modal, } from 'antd';
 import { connect } from 'react-redux';
 import {
   getCountries,
@@ -14,7 +14,9 @@ import CountriesList from "./CountriesList";
 
 import './examples.scss';
 
-function Examples({
+const { TabPane } = Tabs;
+
+const Examples = ({
   getCountries,
   createCountry,
   deleteCountry,
@@ -22,36 +24,16 @@ function Examples({
   get_countries_list,
   getCountryById,
   get_country,
-}) {
+}) => {
   useEffect(() => {
     getCountries();
   }, []);
 
   return (
     <div style={{ padding: 50 }}>
-      <h1>Example crud</h1>
-      <Row>
-        <Col className="main-col" xs={12}>
-          <h2>Agregar</h2>
-          <CountryForm
-            createForm
-            createCountry={createCountry}
-          />
-        </Col>
-        <Col className="main-col" xs={12}>
-          <h2>Modificar</h2>
-          <CountryForm
-            updateForm
-            getCountries={getCountries}
-            updateCountry={updateCountry}
-          />
-        </Col>
-        <Col className="main-col second-col" xs={12}>
-          <h2>Eliminar</h2>
-          <CountryForm
-            deleteForm
-            deleteCountry={deleteCountry}
-          />
+      <h1>Example CRUD</h1>
+      <Tabs defaultActiveKey="search">
+        <TabPane tab="Buscar" key="search">
           <div className="search-container">
             <h2>Búsqueda por código</h2>
             <CountryForm
@@ -65,10 +47,37 @@ function Examples({
               </div>
             )}
           </div>
-        </Col>
-        <Col className="main-col second-col" xs={12}>
-          <h2>Listar</h2>
-          <CountriesList countries={get_countries_list} />
+        </TabPane>
+        <TabPane tab="Agregar" key="add">
+          <h2>Agregar</h2>
+          <CountryForm
+            createForm
+            createCountry={createCountry}
+          />
+        </TabPane>
+        <TabPane tab="Modificar" key="update">
+          <h2>Modificar</h2>
+          <CountryForm
+            updateForm
+            getCountries={getCountries}
+            updateCountry={updateCountry}
+          />
+        </TabPane>
+        <TabPane tab="Eliminar" key="delete">
+          <h2>Eliminar</h2>
+          <CountryForm
+            deleteForm
+            deleteCountry={deleteCountry}
+          />
+        </TabPane>
+      </Tabs>
+      <Row>
+        <Col className="main-col" xs={24}>
+          <Divider orientation="left">Lista países</Divider>
+          <CountriesList
+            countries={get_countries_list}
+            deleteCountry={deleteCountry}
+          />
         </Col>
       </Row>
     </div>
