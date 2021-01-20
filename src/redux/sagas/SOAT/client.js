@@ -11,11 +11,8 @@ function* mainInfo(formValues) {
   const { identification } = formValues.payload;
   const error = [];
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Clientes/identificacion${identification}`, {
-    id: identification,
-  }, {
+  yield axios.get(`https://lafersegurosapi.azurewebsites.net/api/Customers/${identification}`, {
     "accept": "*/*",
-    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   }).then(response => {
     data.push(response);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Form, Input, Row, Col, Button, Card, Modal } from 'antd';
 import { connect } from 'react-redux';
 
@@ -7,6 +6,7 @@ function ThirdForm({ prev, success }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
+    document.getElementById('tu-compra-form').submit();
     setIsModalVisible(true);
   };
 
@@ -52,9 +52,13 @@ function ThirdForm({ prev, success }) {
             </>
           )}
           <Modal title="SECCIÓN DE PASARELA DE PAGO" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <p>Los siguientes pasos corresponden a la pasarela de pagos.</p>
-            <p>Hasta AQUÍ llega el demo.</p>
-            <p>Gracias.</p>
+            <form id="tu-compra-form" method="POST" action="https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp">
+              <input name="factura" id="factura" type="number" value="111" /><br/>
+              <input name="valor" id="valor" type="number" value="222" /><br/>
+              <input name="descripcionFactura" id="descripcionFactura" type="text" value="ejemplo01" /><br/>
+              <input name="usuario" type="hidden" value="i96td5084822950k"/>
+              <input type="submit" id="tu-compra-btn" value="Enviar"/>
+            </form>
           </Modal>
         </Col>
       </Row>

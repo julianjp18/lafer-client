@@ -7,7 +7,7 @@ import {
   deleteCountry,
   updateCountry,
   getCountryById,
-} from '../../redux/actions';
+} from '../../../redux/actions';
 
 import CountryForm from "./CountryForm";
 import CountriesList from "./CountriesList";

@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Input, Button, Row, Col, Select, Radio, Checkbox } from 'antd';
+import { Form, Input, Button, Row, Col, Select, Radio, Checkbox, DatePicker } from 'antd';
 import { connect } from 'react-redux';
 import { secureCar, getCities } from '../../redux/actions';
 import './secureCar.scss';
+
+import moment from 'moment';
+import 'moment/locale/es';
+import locale from 'antd/es/date-picker/locale/es_ES';
+
 
 const { Option } = Select;
 
 const SecureCar = ({ secureCar, getCities, cities }) => {
   const history = useHistory();
+  const [isZeroKm, setIsZeroKm] = useState(false);
   const [brand, setBrand] = useState();
   const [model, setModel] = useState();
   const [name, setName] = useState();
@@ -20,14 +26,22 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
   const [city, setCity] = useState();
 
   const onChangeGenre = (value) => setgenre(value);
-  const onChangeZeroKm = (value) => setZeroKm(value);
+  const onChangeZeroKm = (value) => {
+    console.log(value.target.checked); 
+    setIsZeroKm(value.target.checked);
+    setZeroKm(value);
+  };
 
   useEffect(() => {
     if (!cities) getCities();
   }, []);
 
   const onFinish = (values) => {
-    secureCar({ ...values, zeroKm: zeroKm ? zeroKm.target.checked : false });
+    secureCar({
+      ...values,
+      zeroKm: zeroKm ? zeroKm.target.checked : false,
+      birthDate: moment(values.birthDate).format('YYYY-MM-DD'),
+    });
     const userData = {
       name: values.name,
       lastName: values.lastName,
@@ -37,7 +51,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
       genre: values.genre,
       email: values.email,
       address: values.address,
-      birthDate: values.birthDate,
+      birthDate: moment(values.birthDate).format('YYYY-MM-DD'),
       vehicle: values.vehicle,
     };
 
@@ -45,8 +59,8 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
       state: {
         userData,
         vehicle: values.vehicle,
-        model: values.model,
-        brand: values.brand,
+        model: values.model ? values.model : '',
+        brand: values.brand ? values.brand : '',
         city: values.city,
         zeroKm: values.zeroKm,
       },
@@ -67,7 +81,16 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
         onFinish={onFinish}
       >
         <Row>
-          <Col xs={24} md={8}>
+        <Col className="zeroKm-col" xs={12} md={8}>
+            <Form.Item
+              name="zeroKm"
+              label="¿Es cero KM?"
+              valuePropName="checked"
+            >
+              <Checkbox onChange={onChangeZeroKm}>Si</Checkbox>
+            </Form.Item>
+          </Col>
+          <Col xs={12} md={8}>
             <Form.Item
               name="vehicle"
               label="Placas del vehiculo"
@@ -91,54 +114,49 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
               <Input />
             </Form.Item>
           </Col>
-          <Col xs={24} md={8}>
-            <Form.Item
-              name="brand"
-              label="Marca"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor inserta la marca de tu vehiculo!',
-                  whitespace: true,
-                },
-              ]}
-              initialValue={brand}
-            >
-              <Input onChange={(value) => setBrand(value.target.value)} />
-            </Form.Item>
-          </Col>
-          <Col xs={12} md={8}>
-            <Form.Item
-              name="model"
-              label="Modelo"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor ingresa el modelo del vehiculo!',
-                  whitespace: true,
-                },
-                () => ({
-                  validator(rule, value) {
-                    const reg = /[0-9]{4}$/;
-                    if (reg.exec(value)) return Promise.resolve();
-                    return Promise.reject('Ingresa un año Ej: 2014.');
+          {isZeroKm && (
+            <Col xs={24} md={8}>
+              <Form.Item
+                name="brand"
+                label="Marca"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Por favor inserta la marca de tu vehiculo!',
+                    whitespace: true,
                   },
-                }),
-              ]}
-              initialValue={model}
-            >
-              <Input onChange={(value) => setModel(value.target.value)} />
-            </Form.Item>
-          </Col>
-          <Col className="zeroKm-col" xs={12} md={8}>
-            <Form.Item
-              name="zeroKm"
-              label="¿Es cero KM?"
-              valuePropName="checked"
-            >
-              <Checkbox onChange={onChangeZeroKm}>Si</Checkbox>
-            </Form.Item>
-          </Col>
+                ]}
+                initialValue={brand}
+              >
+                <Input onChange={(value) => setBrand(value.target.value)} />
+              </Form.Item>
+            </Col>
+          )}
+          {isZeroKm && (
+            <Col xs={24} md={8}>
+              <Form.Item
+                name="model"
+                label="Modelo"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Por favor ingresa el modelo del vehiculo!',
+                    whitespace: true,
+                  },
+                  () => ({
+                    validator(rule, value) {
+                      const reg = /[0-9]{4}$/;
+                      if (reg.exec(value)) return Promise.resolve();
+                      return Promise.reject('Ingresa un año Ej: 2014.');
+                    },
+                  }),
+                ]}
+                initialValue={model}
+              >
+                <Input onChange={(value) => setModel(value.target.value)} />
+              </Form.Item>
+            </Col>
+          )}
           <Col xs={24} md={8}>
             <Form.Item
               name="name"
@@ -166,7 +184,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
                 },
               ]}
             >
-              <Input defaultValue={lastName} onChange={(value) => setLastName(value.target.value)} />
+              <Input onChange={(value) => setLastName(value.target.value)} />
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
@@ -189,7 +207,6 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
                 placeholder="Selecciona por favor un tipo de identificación"
                 onChange={(value) => settypeIdentification(value)}
                 allowClear
-                defaultValue={typeIdentification}
               >
                 <Option value="CC">Cédula de ciudadanía</Option>
                 <Option value="TI">Tarjeta Identidad</Option>
@@ -307,22 +324,8 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
               name="birthDate"
               label="Fecha de nacimiento"
               placeholder="Ej: 1968-11-26 (YYYY-MM-DD)"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor inserta tu fecha de nacimiento!',
-                  whitespace: true,
-                },
-                () => ({
-                  validator(rule, value) {
-                    const reg = /[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
-                    if (reg.exec(value.toLowerCase())) return Promise.resolve();
-                    return Promise.reject('Estructura fecha: YYYY-MM-DD');
-                  },
-                }),
-              ]}
             >
-              <Input placeholder="YYYY-MM-DD" />
+              <DatePicker locale={locale} format="YYYY-MM-DD"  />
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>

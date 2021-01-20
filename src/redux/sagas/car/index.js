@@ -1,14 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
+import http from "../../../axios/sura";
 import showNotification from '../../showNotification';
 
 const PASSWORD_ASESOR = "29528";
 const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
 const QUOTATION_ENDPOINT = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
 const HEADERS = {
-  "accept": "*/*",
+  "Accept": "application/json",
   "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "*",
   "x-api-key": API_KEY,
 };
 
@@ -32,8 +32,8 @@ function* secureCar(formValues) {
   myHeaders.append("Accept", "application/json");
   myHeaders.append("x-api-key", API_KEY);
   
-  let data = {
-    "placaVehiculo": vehicle.toUpperCase(),
+  let dataFormValues = {
+    "placaVehiculo": vehicle ? vehicle : 'QWQ654',
     "tipoDocumentoTomador": typeIdentification,
     "numeroDocumentoTomador": Number.parseInt(identification),
     "nombresTomador": name,
@@ -45,21 +45,17 @@ function* secureCar(formValues) {
     "ciudadMovilizacion": Number.parseInt(cityCode),
     "ceroKm": `${zeroKm}`,
     "periodoFact": 12,
+    "marcaVehiculo": "4601258",
+    "modeloVehiculo": Number.parseInt(model),  
   };
 
-  if (zeroKm) {
-    const newData = {
-      ...data,
-      "marcaVehiculo": "8006052",
-      "modeloVehiculo": Number.parseInt(model),  
-    };
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Accept", "application/json");
+  myHeaders.append("x-api-key", API_KEY);
 
-    data = newData;
-  }
+  var raw = JSON.stringify(dataFormValues);
 
-  var raw = JSON.stringify(data);
-
-  console.log(raw);
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -67,18 +63,31 @@ function* secureCar(formValues) {
     redirect: 'follow'
   };
 
+  /*
   const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion", requestOptions);
-  const dataSale = yield response.json();
+  const data = yield response.json();
+  console.log(data);
+  
+  */
+  const response = yield http.post("/seguro-autos/liquidacion", dataFormValues );
+  
+  console.log(response);
+  const data = response.data;
 
-  console.log(dataSale);
-  if (dataSale.dataHeader.codRespuesta === 200) {
-    yield put({ type: "SECURE_CAR_SUCCESS", response: { ...dataSale.data }, });
-  } else if (dataSale.dataHeader.codRespuesta === 400) {
-    yield call(showNotification, { type: 'warning', message: dataSale.dataHeader.errores[0].descError });
-    yield put({ type: "SECURE_CAR_FAILURE", response: { ...dataSale.dataHeader.errores[0].descError }, });
+  if (data.dataHeader.codRespuesta === 200) {
+    yield call(showNotification, { type: 'success', message: 'Visualiza la lista de productos' });
+    yield put({ type: "SECURE_CAR_SUCCESS", response: { ...data.data }, });
+  } else if (data.dataHeader.codRespuesta === 400) {
+    console.log(data.dataHeader.errores[0], data.dataHeader.errores[0].idError);
+    if (data.dataHeader.errores[0].idError === 1000) {
+      yield call(showNotification, { type: 'warning', message: 'La placa y el modelo no concuerdan' });
+    } else {
+      yield call(showNotification, { type: 'warning', message: response.dataHeader.errores[0].descError });
+    }
+    yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader.errores[0] }, });
   } else {
     yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
-    yield put({ type: "SECURE_CAR_FAILURE", response: { ...dataSale }, });
+    yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
   }
 }
 
