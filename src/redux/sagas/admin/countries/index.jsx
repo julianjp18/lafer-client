@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import http from "../../../../axios";
+import http from "../../../../axios/index";
 import showNotification from "../../../../redux/showNotification";
 import {
   CREATE_COUNTRY,
