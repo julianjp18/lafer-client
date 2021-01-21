@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { Form, Input, Row, Col, Button, Card, Modal } from 'antd';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-function ThirdForm({ prev, success }) {
+function ThirdForm({
+  prev,
+  success,
+  currentQuote,
+  endDate,
+  billNumber,
+  billValue,
+}) {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
-    document.getElementById('tu-compra-form').submit();
     setIsModalVisible(true);
+    //document.getElementById('tu-compra-form').submit();
+  };
+
+  const onClickForm = () => {
+    document.getElementById('tu-compra-form').submit();
   };
 
   const handleOk = () => {
@@ -44,7 +56,9 @@ function ThirdForm({ prev, success }) {
             <>
               <Card title="¡Adquiere el SOAT para tu vehiculo!" style={{ margin: '20px 20px' }}>
                 <p>Vigencia de tu SOAT:</p>
-                <h3>A partir del 24/12/2018 hasta el 25/12/2021</h3>
+                <h3>
+                  {`A partir del ${moment(currentQuote, 'yyyy-mm-dd').format('YYYY/MM/DD')} hasta el ${moment(endDate, 'yyyy-mm-dd').format('YYYY/MM/DD')}`}
+                </h3>
                 <Button type="primary" onClick={showModal}>
                   Proceder al pago
                 </Button>
@@ -53,11 +67,11 @@ function ThirdForm({ prev, success }) {
           )}
           <Modal title="SECCIÓN DE PASARELA DE PAGO" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
             <form id="tu-compra-form" method="POST" action="https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp">
-              <input name="factura" id="factura" type="number" value="111" /><br/>
-              <input name="valor" id="valor" type="number" value="222" /><br/>
-              <input name="descripcionFactura" id="descripcionFactura" type="text" value="ejemplo01" /><br/>
+              <input name="factura" id="factura" type="number" value={billNumber} /><br/>
+              <input name="valor" id="valor" type="number" value={billValue} /><br/>
+              <input name="descripcionFactura" id="descripcionFactura" type="text" value={`Compra seguro para auto`} /><br/>
               <input name="usuario" type="hidden" value="i96td5084822950k"/>
-              <input type="submit" id="tu-compra-btn" value="Enviar"/>
+              <input type="button" id="tu-compra-btn" onClick={onClickForm} value="Enviar"/>
             </form>
           </Modal>
         </Col>

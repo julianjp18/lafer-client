@@ -9,12 +9,14 @@ import CustomQuote from "../components/SecureCar/CustomQuote";
 import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
 import Countries from "../components/Admin/Countries";
+import StepsForm from "../components/Landing/StepsForm";
 
 const ROUTES = [
   { path: "/", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
   { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
   { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
   { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: false },
+  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
   { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },

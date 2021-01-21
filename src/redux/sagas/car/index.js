@@ -19,7 +19,7 @@ function* secureCar(formValues) {
     model,
     name,
     lastName,
-    typeIdentification,
+    identificationType,
     identification,
     birthDate,
     genre,
@@ -34,7 +34,7 @@ function* secureCar(formValues) {
   
   let dataFormValues = {
     "placaVehiculo": vehicle ? vehicle : 'QWQ654',
-    "tipoDocumentoTomador": typeIdentification,
+    "tipoDocumentoTomador": identificationType,
     "numeroDocumentoTomador": Number.parseInt(identification),
     "nombresTomador": name,
     "apellidosTomador": lastName,
@@ -98,7 +98,7 @@ function* getQuotation(formValues) {
     model,
     name,
     lastName,
-    typeIdentification,
+    identificationType,
     identification,
     email,
     address,

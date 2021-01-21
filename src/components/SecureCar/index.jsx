@@ -19,7 +19,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
   const [model, setModel] = useState();
   const [name, setName] = useState();
   const [lastName, setLastName] = useState();
-  const [typeIdentification, settypeIdentification] = useState();
+  const [identificationType, setidentificationType] = useState();
   const [genre, setgenre] = useState();
   const [address, setAddress] = useState();
   const [zeroKm, setZeroKm] = useState();
@@ -45,7 +45,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
     const userData = {
       name: values.name,
       lastName: values.lastName,
-      typeIdentification: values.typeIdentification,
+      identificationType: values.identificationType,
       identification: values.identification,
       city: values.city,
       genre: values.genre,
@@ -189,7 +189,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
           </Col>
           <Col xs={24} md={8}>
             <Form.Item
-              name="typeIdentification"
+              name="identificationType"
               label="Tipo de identificación"
               labelCol={{
                 span: 10,
@@ -205,7 +205,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
             >
               <Select
                 placeholder="Selecciona por favor un tipo de identificación"
-                onChange={(value) => settypeIdentification(value)}
+                onChange={(value) => setidentificationType(value)}
                 allowClear
               >
                 <Option value="CC">Cédula de ciudadanía</Option>

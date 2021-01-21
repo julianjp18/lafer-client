@@ -6,18 +6,18 @@ const { Option } = Select;
 
 function SecondForm({ next, prev, clientInfo, response }) {
   const clientData = localStorage.getItem('client-data-soat') ? JSON.parse(localStorage.getItem('client-data-soat')) : {};
-  const [typeIdentification, settypeIdentification] = useState(clientData.tipoIdentificacion);
-  const [name, setName] = useState(clientData.nombre);
-  const [lastName, setLastName] = useState(clientData.apellidos);
+  const [identificationType, setIdentificationType] = useState(clientData.identificationType);
+  const [name, setName] = useState(clientData.name);
+  const [lastName, setLastName] = useState(clientData.lastName);
   const [email, setEmail] = useState(clientData.email);
-  const [address, setAddress] = useState(clientData.direccion);
-  const [city, setCity] = useState(clientData.ciudad);
-  const [identification, setIdentification] = useState(clientData.identificacion);
+  const [address, setAddress] = useState(clientData.address);
+  const [city, setCity] = useState(clientData.city);
+  const [identification, setIdentification] = useState(clientData.identification);
   const [phoneNumber, setPhoneNumber] = useState(clientData.movil);
 
   const nextSubmit = () => {
     const clientData = {
-      typeIdentification,
+      identificationType,
       phoneNumber,
       name,
       lastName,
@@ -37,7 +37,7 @@ function SecondForm({ next, prev, clientInfo, response }) {
       <Row>
         <Col xs={8}>
           <Form.Item
-            name="typeIdentification"
+            name="identificationType"
             label="Tipo de identificación"
             labelCol={{
               span: 10,
@@ -53,9 +53,9 @@ function SecondForm({ next, prev, clientInfo, response }) {
           >
             <Select
               placeholder="Selecciona por favor un tipo de identificación"
-              onChange={(value) => settypeIdentification(value)}
+              onChange={(value) => setIdentificationType(value)}
               allowClear
-              defaultValue={typeIdentification}
+              defaultValue={identificationType}
             >
               <Option value="cc">Cédula de ciudadanía</Option>
               <Option value="passport">Pasaporte</Option>

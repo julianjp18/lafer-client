@@ -53,7 +53,7 @@ const CompareQuote = ({}) => {
         <Row>
           <Col xs={12}><p>{`Nombre completo: ${userData.name} ${userData.lastName}`}</p></Col>
           <Col xs={12}><p>{`Correo electrónico: ${userData.email}`}</p></Col>
-          <Col xs={6}><p>{`Tipo de dentificación: ${userData.typeIdentification}`}</p></Col>
+          <Col xs={6}><p>{`Tipo de dentificación: ${userData.identificationType}`}</p></Col>
           <Col xs={6}><p>{`Identificación: ${userData.identification}`}</p></Col>
           <Col xs={12}><p>{`Género: ${userData.genre}`}</p></Col>
           <Col xs={12}><p>{`Ciudad: ${userData.city}`}</p></Col>
