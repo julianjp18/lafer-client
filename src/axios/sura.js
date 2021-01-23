@@ -8,15 +8,17 @@ const HEADERS = {
   "x-api-key": API_KEY,
 };
 
-axios.interceptors.request.use(config => {
+axios.interceptors.response.use(config => {
   return config;
 }, error => {
   // handle the error
-  console.log(error);
+  console.log('del interceptor', error);
   return Promise.reject(error);
 });
 
-export default axios.create({
+const axiosSura = axios.create({
   baseURL: MAIN_ENDPOINT,
   headers: HEADERS,
 });
+
+export default axiosSura;

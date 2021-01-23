@@ -27,7 +27,6 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
 
   const onChangeGenre = (value) => setgenre(value);
   const onChangeZeroKm = (value) => {
-    console.log(value.target.checked); 
     setIsZeroKm(value.target.checked);
     setZeroKm(value);
   };
@@ -42,6 +41,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
       zeroKm: zeroKm ? zeroKm.target.checked : false,
       birthDate: moment(values.birthDate).format('YYYY-MM-DD'),
     });
+
     const userData = {
       name: values.name,
       lastName: values.lastName,
@@ -324,6 +324,19 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
               name="birthDate"
               label="Fecha de nacimiento"
               placeholder="Ej: 1968-11-26 (YYYY-MM-DD)"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor ingresa tu celular!',
+                },
+                () => ({
+                  validator(rule, value) {
+                    if (value <= moment(value).subtract(18, 'years').calendar()) return Promise.resolve();
+                    return Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
+                  },
+                }),
+
+              ]}
             >
               <DatePicker locale={locale} format="YYYY-MM-DD"  />
             </Form.Item>
