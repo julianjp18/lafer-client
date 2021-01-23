@@ -12,7 +12,54 @@ const HEADERS = {
   "x-api-key": API_KEY,
 };
 
-function* secureCar(formValues) {
+const createLead = async (dataFormValues) => {
+  const { 
+    name,
+    lastName,
+    identification,
+    email,
+    city,
+    address,
+  } = dataFormValues;
+  
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
+
+  var raw = JSON.stringify(
+    {
+      "method": "createLeads",
+      "params":
+      {
+        "objects":[
+          {
+            firstName: name,
+            lastName,
+            id: identification,
+            emailAddress: email,
+            city,
+            street: address
+          }
+        ]
+      },
+      "id": `123${identification}`
+    }
+  );
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+  };
+
+  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
+  fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+    .then(response => response.text())
+    .then(result => result)
+    .catch(error => console.log('error', error));
+}
+
+function* secureCar (formValues) {
   const {
     vehicle,
     brand,
@@ -23,14 +70,12 @@ function* secureCar(formValues) {
     identification,
     birthDate,
     genre,
+    email,
+    city,
+    address,
     zeroKm = false,
     cityCode = 14000,
   } = formValues.payload;
-  
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Accept", "application/json");
-  myHeaders.append("x-api-key", API_KEY);
   
   let dataFormValues = {
     "placaVehiculo": vehicle ? vehicle : 'QWQ654',
@@ -49,45 +94,54 @@ function* secureCar(formValues) {
     "modeloVehiculo": Number.parseInt(model),  
   };
 
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Accept", "application/json");
-  myHeaders.append("x-api-key", API_KEY);
+  createLead({
+    name,
+    lastName,
+    identificationType,
+    identification,
+    birthDate,
+    genre,
+    email,
+    city,
+    address,
+  });
 
-  var raw = JSON.stringify(dataFormValues);
+  try {
+    const url = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion";
+    const response =  yield http.post(
+      "https://cors-anywhere.herokuapp.com/" + url,
+      dataFormValues,
+    );
 
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
+    const data = response.data;
 
-  /*
-  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion", requestOptions);
-  const data = yield response.json();
-  console.log(data);
-  
-  */
-  const response = yield http.post("/seguro-autos/liquidacion", dataFormValues );
-  
-  console.log(response);
-  const data = response.data;
-
-  if (data.dataHeader.codRespuesta === 200) {
-    yield call(showNotification, { type: 'success', message: 'Visualiza la lista de productos' });
-    yield put({ type: "SECURE_CAR_SUCCESS", response: { ...data.data }, });
-  } else if (data.dataHeader.codRespuesta === 400) {
-    console.log(data.dataHeader.errores[0], data.dataHeader.errores[0].idError);
-    if (data.dataHeader.errores[0].idError === 1000) {
-      yield call(showNotification, { type: 'warning', message: 'La placa y el modelo no concuerdan' });
+    if (response.status === 200) {
+      yield call(showNotification, { type: 'success', message: 'Visualiza la lista de productos' });
+      yield put({ type: "SECURE_CAR_SUCCESS", response: { ...data.data }, });
+    
+    } else if (response.status === 400) {
+      if (data.dataHeader.errores[0].idError === 1000) {
+        yield call(showNotification, { type: 'warning', message: 'La placa y el modelo no concuerdan' });
+      
+      } else {
+        yield call(showNotification, { type: 'warning', message: data.dataHeader.errores[0].descError });
+      
+      }
+      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader.errores[0] }, });
+    
+    } else if (response.status === 500 || response.status === 504) {
+      yield call(showNotification, { type: 'warning', message: 'Error en la liquidación, por favor inténtelo nuevamente.' });
+      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
+    
     } else {
-      yield call(showNotification, { type: 'warning', message: response.dataHeader.errores[0].descError });
+      yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
+      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
+    
     }
-    yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader.errores[0] }, });
-  } else {
-    yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
-    yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
+    
+  } catch(err) {
+    console.log(err);
+    console.log(err.status);
   }
 }
 
