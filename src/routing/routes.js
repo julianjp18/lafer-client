@@ -9,6 +9,11 @@ import CustomQuote from "../components/SecureCar/CustomQuote";
 import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
 import Countries from "../components/Admin/Countries";
+import MainActivities from "../components/Admin/MainActivities"
+import MediumResponses from "../components/Admin/MediumResponses"
+import LinkClasses from "../components/Admin/LinkClasses";
+import PQRContacts from "../components/Admin/PQRContacts";
+import TypeActivities from "../components/Admin/TypeActivities";
 
 const ROUTES = [
   { path: "/", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
@@ -20,6 +25,11 @@ const ROUTES = [
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
   { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
+  { path: "/main-activities", key: "Main Activities", exact: true, component: MainActivities, show: false, auth: true },
+  { path: "/medium-responses", key: "Medium Responses", exact: true, component: MediumResponses, show: false, auth: true },
+  { path: "/link-classes", key: "Link Classes", exact: true, component: LinkClasses, show: false, auth: true },
+  { path: "/PQR-contacts", key: "PQR Contacts", exact: true, component: PQRContacts, show: false, auth: true },
+  { path: "/type-activities", key: "Type Activities", exact: true, component: TypeActivities, show: false, auth: true },
 ];
 
 export default ROUTES;

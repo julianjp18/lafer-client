@@ -13,6 +13,31 @@ import {
   GET_COUNTRIES,
   GET_COUNTRY_BY_ID,
   UPDATE_COUNTRY,
+  CREATE_MAINACTIVITY,
+  DELETE_MAINACTIVITY,
+  GET_MAINACTIVITIES,
+  GET_MAINACTIVITY_BY_ID,
+  UPDATE_MAINACTIVITY,
+  CREATE_MEDIUMRESPONSES,
+  DELETE_MEDIUMRESPONSES,
+  GET_MEDIUMRESPONSES,
+  GET_MEDIUMRESPONSES_BY_ID,
+  UPDATE_MEDIUMRESPONSES,
+  CREATE_LINKCLASSES,
+  DELETE_LINKCLASSES,
+  GET_LINKCLASSES,
+  GET_LINKCLASSES_BY_ID,
+  UPDATE_LINKCLASSES,
+  CREATE_PQRCONTACTS,
+  DELETE_PQRCONTACTS,
+  GET_PQRCONTACTS,
+  GET_PQRCONTACTS_BY_ID,
+  UPDATE_PQRCONTACTS,
+  CREATE_TYPEACTIVITY,
+  DELETE_TYPEACTIVITY,
+  GET_TYPEACTIVITIES,
+  GET_TYPEACTIVITY_BY_ID,
+  UPDATE_TYPEACTIVITY,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -78,5 +103,130 @@ export const createCountry = (payload) => ({
 
 export const getCountryById = (payload) => ({
   type: GET_COUNTRY_BY_ID,
+  payload,
+});
+
+/**
+ * MAINACTIVITIES
+ */
+export const getMainActivities = () => ({ type: GET_MAINACTIVITIES });
+
+export const deleteMainActivity = (payload) => ({
+  type: DELETE_MAINACTIVITY,
+  payload,
+});
+
+export const updateMainActivity = (payload) => ({
+  type: UPDATE_MAINACTIVITY,
+  payload,
+});
+
+export const createMainActivity = (payload) => ({
+  type: CREATE_MAINACTIVITY,
+  payload,
+});
+
+export const getMainActivityById = (payload) => ({
+  type: GET_MAINACTIVITY_BY_ID,
+  payload,
+});
+
+/**
+ * MEDIUMRESPONSES
+ */
+export const getMediumResponses = () => ({ type: GET_MEDIUMRESPONSES });
+
+export const deleteMediumResponses = (payload) => ({
+  type: DELETE_MEDIUMRESPONSES,
+  payload,
+});
+
+export const updateMediumResponses = (payload) => ({
+  type: UPDATE_MEDIUMRESPONSES,
+  payload,
+});
+
+export const createMediumResponses = (payload) => ({
+  type: CREATE_MEDIUMRESPONSES,
+  payload,
+});
+
+export const getMediumResponsesById = (payload) => ({
+  type: GET_MEDIUMRESPONSES_BY_ID,
+  payload,
+});
+
+/**
+ * LINKCLASSES
+ */
+export const getLinkClasses = () => ({ type: GET_LINKCLASSES });
+
+export const deleteLinkClasses = (payload) => ({
+  type: DELETE_LINKCLASSES,
+  payload,
+});
+
+export const updateLinkClasses = (payload) => ({
+  type: UPDATE_LINKCLASSES,
+  payload,
+});
+
+export const createLinkClasses = (payload) => ({
+  type: CREATE_LINKCLASSES,
+  payload,
+});
+
+export const getLinkClassesById = (payload) => ({
+  type: GET_LINKCLASSES_BY_ID,
+  payload,
+});
+
+/**
+ * PQRCONTACTS
+ */
+export const getPQRContacts = () => ({ type: GET_PQRCONTACTS });
+
+export const deletePQRContacts = (payload) => ({
+  type: DELETE_PQRCONTACTS,
+  payload,
+});
+
+export const updatePQRContacts = (payload) => ({
+  type: UPDATE_PQRCONTACTS,
+  payload,
+});
+
+export const createPQRContacts = (payload) => ({
+  type: CREATE_PQRCONTACTS,
+  payload,
+});
+
+export const getPQRContactsById = (payload) => ({
+  type: GET_PQRCONTACTS_BY_ID,
+  payload,
+});
+
+/**
+ * TYPEACTIVITIES
+ */
+export const getTypeActivities = () => ({ type: GET_TYPEACTIVITIES });
+
+export const deleteTypeActivity = (payload) => ({
+  type: DELETE_TYPEACTIVITY,
+  payload,
+});
+
+export const updateTypeActivity = (payload) => ({
+  type: UPDATE_TYPEACTIVITY,
+  payload,
+});
+
+export const createTypeActivity = (payload) => ({
+  type: CREATE_TYPEACTIVITY,
+  payload,
+});
+
+export const getTypeActivityById = (payload) => ({
+  type: GET_TYPEACTIVITY_BY_ID,
   payload,
 });
