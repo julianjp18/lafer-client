@@ -69,6 +69,11 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
 
   const customQuote = () => history.push("/custom-quote");
 
+  const disabledDate = (current) => {
+    const customDate = "2004-01-01";
+    return current && current > moment(customDate, "YYYY-MM-DD");
+  };
+
   return (
     <div style={{ padding: 50 }}>
       <h1>¡Cotiza tu seguro!</h1>
@@ -327,18 +332,16 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
               rules={[
                 {
                   required: true,
-                  message: 'Por favor ingresa tu celular!',
+                  message: 'Por favor ingresa tu fecha de nacimiento!',
                 },
-                () => ({
-                  validator(rule, value) {
-                    if (value <= moment(value).subtract(18, 'years').calendar()) return Promise.resolve();
-                    return Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
-                  },
-                }),
-
               ]}
             >
-              <DatePicker locale={locale} format="YYYY-MM-DD"  />
+              <DatePicker
+                locale={locale}
+                format="YYYY-MM-DD"
+                defaultPickerValue={moment("1990-01-01","YYYY-MM-DD")}
+                disabledDate={disabledDate}
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
