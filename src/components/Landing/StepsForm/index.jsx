@@ -44,15 +44,43 @@ const StepsForm = ({
   const steps = [
     {
       title: 'Tu vehiculo',
-      content: (<FirstForm next={next} current={current} vehicleInfo={vehicleInfo} response={response} key={Math.random()} />),
+      content: (
+        <FirstForm
+          next={next}
+          current={current}
+          vehicleInfo={vehicleInfo}
+          response={response}
+          key={Math.random()}
+        />
+      ),
     },
     {
       title: 'Tus datos',
-      content: (<SecondForm next={next} prev={prev} current={current} clientInfo={clientInfo} response={response} key={Math.random()} />),
+      content: (
+        <SecondForm
+          next={next}
+          prev={prev}
+          current={current}
+          clientInfo={clientInfo}
+          response={response}
+          key={Math.random()}
+        />
+      ),
     },
     {
       title: 'Compra tu SOAT',
-      content: <ThirdForm prev={prev} current={current} butSoat={buySoat} success={success} key={Math.random()} />,
+      content: (
+        <ThirdForm
+          prev={prev}
+          current={current}
+          butSoat={buySoat}
+          success={success}
+          currentQuote={response && response.currentQuote}
+          endDate={response && response.endDate}
+          billNumber={response && `${response.identification}${response.placa}${response.valorPrima}`}
+          key={Math.random()}
+        />
+      ),
     },
   ];
 

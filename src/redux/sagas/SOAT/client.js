@@ -11,13 +11,10 @@ function* mainInfo(formValues) {
   const { identification } = formValues.payload;
   const error = [];
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Clientes/identificacion${identification}`, {
-    id: identification,
-  }, {
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers/${identification}`, {
     "accept": "*/*",
-    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-  }).then(response => {
+  }).then((response) => {
     data.push(response);
   }).catch(e => {
     localStorage.setItem('client-data-soat', '');

@@ -93,6 +93,7 @@ function Landing({ mainInfo, response }) {
                   },
                 }),
               ]}
+              normalize={(value) => (value || '').toUpperCase()}
             >
               <Input />
             </Form.Item>

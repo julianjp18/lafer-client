@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Row, Col, Select, Radio, Card, Button, message } from 'antd';
-import { Redirect } from "react-router-dom";
+import { Form, Input, Row, Col, Select, Radio, Card, Button, message, Spin } from 'antd';
 import { connect } from 'react-redux';
 
 const { Option } = Select;
 
 function FirstForm({ next, vehicleInfo, response }) {
   const [typeVehicle, setTypeVehicle] = useState();
-  const [line, setLine] = useState(response.linea);
-  const [classVehicle, setClassVehicle] = useState(response.clase);
-  const [model, setModel] = useState(response.modelo);
-  const [plate, setPlate] = useState(response.placa);
-  const [brand, setBrand] = useState(response.marca);
+  const [line, setLine] = useState(response && response.line);
+  const [classVehicle, setClassVehicle] = useState(response && response.class);
+  const [model, setModel] = useState(response && response.model);
+  const [plate, setPlate] = useState(response && response.placa);
+  const [brand, setBrand] = useState(response && response.brand);
 
-  if (!response) return (<Redirect to={"/"} />);
+  useEffect(() => {
+    if (response) {
+      setLine(response.line);
+      setClassVehicle(response.class);
+      setModel(response.model);
+      setPlate(response.placa);
+      setBrand(response.brand);
+    }
+  }, [response]);
 
   const nextSubmit = () => {
     const vehicleData = {
@@ -29,7 +36,7 @@ function FirstForm({ next, vehicleInfo, response }) {
     next();
   };
 
-  return response && (
+  return response ? (
     <div style={{ padding: 50 }}>
       <h1>Información de tu vehiculo</h1>
       <p>Revisa que este sea la información de tu vehiculo, recuerda que el SOAT no se puede anular</p>
@@ -48,7 +55,7 @@ function FirstForm({ next, vehicleInfo, response }) {
               ]}
               initialValue={brand}
             >
-              <Input onChange={(value) => setBrand(value.target.value)} />
+              <Input value={brand} onChange={(value) => setBrand(value.target.value)} />
             </Form.Item>
           </Col>
           <Col xs={8}>
@@ -192,6 +199,10 @@ function FirstForm({ next, vehicleInfo, response }) {
           </Col>
         </Row>
       </>
+    </div>
+  ): (
+    <div className="spin-container">
+      <Spin tip="Cargando..." size="large"/>
     </div>
   );
 }

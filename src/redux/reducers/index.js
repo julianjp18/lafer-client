@@ -259,6 +259,11 @@ const reducer = (state = {}, action) => {
         loading: false,
       };
     case MAIN_INFO_SUCCESS:
+      return {
+        ...state,
+        response: action.response,
+        loading: false,
+      };
     case SECURE_CAR_SUCCESS:
       return {
         ...state,

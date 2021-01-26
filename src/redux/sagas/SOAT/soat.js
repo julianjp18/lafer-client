@@ -40,7 +40,7 @@ function* buySoatForm(formValues) {
     brand,
   } = vehicle_info;
   const {
-    typeIdentification,
+    identificationType,
     phoneNumber,
     name,
     lastName,
@@ -52,28 +52,28 @@ function* buySoatForm(formValues) {
   const { cupon } = buy_soat;
 
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Clientes`, {
-    id: Number.parseInt(identification),
-    nombre: name,
-    apellidos: lastName,
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers`, {
+    id:identification,
+    name,
+    lastName,
     email,
     movil: phoneNumber,
     placa: plate,
-    isAutorizadoTerminos: true,
-    marca: brand,
-    clase: classVehicle,
-    linea: line,
-    modelo: model,
+    isAuthorizedTerm: true,
+    brand,
+    class: classVehicle,
+    line,
+    model,
     valorPrima: Number.parseInt(typeVehicle),
-    tipoIdentificacion: typeIdentification,
-    identificacion: identification,
-    ciudad: city,
-    direccion: address,
+    identificationType,
+    identification,
+    city,
+    address,
     codigoCupon: cupon,
-    isCompra: true,
-    fechaInicio: "2020-12-25T08:44:53.510Z",
-    fechaVencimiento:"2021-12-24T08:44:53.510Z",
-    fechaCotizacion: "2020-12-24T08:44:53.510Z"
+    isBuy: true,
+    startDate: "2020-12-25T08:44:53.510Z",
+    endDate:"2021-12-24T08:44:53.510Z",
+    currentQuote: "2020-12-24T08:44:53.510Z"
   }, {
     "accept": "*/*",
     "Content-Type": "application/json",

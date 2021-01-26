@@ -20,11 +20,11 @@ const CarQuoteDescription = ({
         </Col>
         <Col xs={12}>
           <p className="title-info">Marca</p>
-          <p className="result-info">{brand}</p>
+          <p className="result-info">{brand ? brand : '-'}</p>
         </Col>
         <Col xs={12}>
           <p className="title-info">Modelo</p>
-          <p className="result-info">{model}</p>
+          <p className="result-info">{model ? model : '-'}</p>
         </Col>
         <Col xs={12}>
           <p className="title-info">¿Es cero Km?</p>
