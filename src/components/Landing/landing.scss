@@ -1,0 +1,39 @@
+.landing-container {
+  background: url('/images/landing-small.png');
+  background-repeat: no-repeat;
+  background-position: 0% -40%;
+  margin-bottom: 70px;
+
+  .title-container {
+  padding: 50px 0 50px 34px;
+
+    p {
+      font-size: 22px;
+      text-align: left;
+    }
+  }
+
+  .soat-container {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 7px 13px #D7D6E7;
+    border-radius: 13px;
+    margin: 0 20px;
+    padding: 10px;
+
+
+    .button-col {
+      text-align: center;
+
+      .btn-submit {
+        width: 254px;
+        height: 40px;
+        background: #F67411 0% 0% no-repeat padding-box;
+        box-shadow: 0px 7px 13px #D7D6E7;
+        border: 0;
+        letter-spacing: 0.42px;
+        color: #FFFFFF;
+        font-weight: 600;
+      }
+    }
+  }
+}

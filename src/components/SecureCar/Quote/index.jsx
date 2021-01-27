@@ -8,13 +8,17 @@ import './quote.scss';
 import { currencyFormat, divideValue } from "../../../helpers";
 import CarQuoteDescription from "../CarQuoteDescription";
 import QuoteCoverage from "../QuoteCoverage";
+import { getQuote } from '../../../apis/segurosBolivar';
 
 const Quote = ({ secure_car }) => {
   const [compareList, setCompareList] = useState([]);
   const [countCompareList, setCountCompareList] = useState(0);
+  const [quoteData, setQuoteData] = useState();
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const [isMoreInfoModalVisible, setIsMoreInfoModalVisible] = useState(false);
+  const [isVisibleAddToCartModal, setIsVisibleAddToCartModal] = useState(false);
   
+
   const history = useHistory();
   const location = useLocation();
   
@@ -60,6 +64,76 @@ const Quote = ({ secure_car }) => {
   const handleFilterCancel = () => {
     setIsFilterModalVisible(false);
   };
+
+  const buySecureOk = () => {
+    //setIsVisibleBuySecureModal(true);
+  };
+
+  const addToCart = async (secure) => {
+    setIsVisibleAddToCartModal(true);
+    const { numerodeliquidacion } = secure.responseData;
+    const resData = await getQuote(userData, numerodeliquidacion);
+    setQuoteData(resData);
+  };
+
+  const addToCartModal = ({ responseData }) => (
+    <Modal
+      title={`${responseData.opcionAutosDescripcion} - ${currencyFormat(responseData.totalPrima)}`}
+      visible={isVisibleAddToCartModal}
+      onOk={buySecureOk}
+      okText="Comprar"
+      cancelText="Cancelar"
+      onCancel={() => setIsVisibleAddToCartModal(false)}
+      okButtonProps={{ disabled: quoteData ? true : false }}
+      cancelButtonProps={{ disabled: quoteData ? true : false }}
+      z-index={responseData.numerodeliquidacion}
+    >
+      {quoteData ? (
+        <div className="more-info-modal-container">
+        <Row>
+          <Col xs={12}><p>{`Nombre completo: ${userData.name} ${userData.lastName}`}</p></Col>
+          <Col xs={12}><p>{`Correo electrónico: ${userData.email}`}</p></Col>
+          <Col xs={6}><p>{`Tipo de dentificación: ${userData.identificationType}`}</p></Col>
+          <Col xs={6}><p>{`Identificación: ${userData.identification}`}</p></Col>
+          <Col xs={12}><p>{`Género: ${userData.genre}`}</p></Col>
+          <Col xs={12}><p>{`Ciudad: ${userData.city}`}</p></Col>
+          <Col xs={12}><p>{`Dirección: ${userData.address}`}</p></Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <QuoteCoverage coberturasCotizacion={responseData.coberturasCotizacion} />
+          </Col>
+          <Col xs={12}>
+            <p>
+              <CheckOutlined />
+              {`Deducible en hurto: ${responseData.deducibleEnHurto}`}
+            </p>
+            <p>
+              <CheckOutlined />
+              {`Deducible en RCE: ${responseData.deducibleEnRCE}`}
+            </p>
+            <p>
+              <CheckOutlined />
+              {`Deducible perdida total: ${responseData.deduciblePeridaTotal}`}
+            </p>
+            <p>
+              <CheckOutlined />
+              {`Deducible perdida parcial: ${currencyFormat(responseData.deduciblePeridaParcial)}`}
+            </p>
+            <p>
+              <CheckOutlined />
+              {`Requiere inspección: ${responseData.reqInspeccion === 'S' ? 'Si' : 'No'}`}
+            </p>
+          </Col>
+        </Row>
+      </div>
+      ) : (
+        <div className="spin-container">
+          <Spin tip="Cargando..." size="large"/>
+        </div>
+      )}
+    </Modal>
+  );
 
   const addtoFinalCompare = () => {
     history.push("/compare-quote", {
@@ -153,14 +227,14 @@ const Quote = ({ secure_car }) => {
           zeroKm={zeroKm}
         />
         <Row>
-          <Col className="select-col" xs={12}>
-            <Select placeholder="Ordenar por" style={{ width: 150 }} onChange={handleFilterByChange}>
+          <Col className="select-col" xs={14}>
+            <Select placeholder="Ordenar por" style={{ width: 185 }} onChange={handleFilterByChange}>
               <Option value="more-price">Mayor precio</Option>
               <Option value="less-price">Menor precio</Option>
               <Option value="companies">Compañia</Option>
             </Select>
           </Col>
-          <Col className="filter-col" xs={12}>
+          <Col className="filter-col" xs={10}>
             <div className="filter-container" onClick={showFilterModal}>
               <SlidersOutlined />
               <p>Filtrar</p>
@@ -222,7 +296,7 @@ const Quote = ({ secure_car }) => {
                         <p className="methods-price">Pago contado <span className="pay-price">{currencyFormat(responseData.totalPrima)}</span></p>
                       </Col>
                       <Col xs={8}>
-                        <img className="img-company" src="https://via.placeholder.com/100" alt="logo auto"/>
+                        <img className="img-company" src={`/images/secures_logos/seguros-bolivar.jpg`} alt="logo auto"/>
                       </Col>
                     </Row>
                     <Row>
@@ -235,11 +309,19 @@ const Quote = ({ secure_car }) => {
                             </p>
                             {isMoreInfoModalVisible[responseData.numerodeliquidacion] && moreInfoModal(responseData)}
                           </div>
-                          <div>
-                            <Button type="primary" onClick={() => addtoCompare(secure)} className="btn-submit">
-                              Comparar
-                            </Button>
-                          </div>
+                          <Row>
+                            <Col xs={12}>
+                              <Button type="primary" onClick={() => addtoCompare(secure)} className="btn-compare">
+                                Comparar
+                              </Button>
+                            </Col>
+                            <Col className="add-to-cart-col" xs={12}>
+                              <Button type="primary" onClick={() => addToCart(secure)} className="btn-add-to-cart">
+                                Solicitar
+                              </Button>
+                              {isVisibleAddToCartModal && addToCartModal(secure)}
+                            </Col>
+                          </Row>
                         </div>
                       </Col>
                     </Row>
@@ -264,7 +346,7 @@ const Quote = ({ secure_car }) => {
                     <CloseOutlined />
                   </div>
                   <div className="img-compare-container">
-                    <img className="img-compare" src="https://via.placeholder.com/80" alt="logo auto" />
+                    <img className="img-compare" src={`/images/secures_logos/seguros-bolivar.jpg`} alt="logo auto" />
                   </div>
                   <p>{currencyFormat(secure.responseData.totalPrima)}</p>
                 </div>

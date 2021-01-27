@@ -15,7 +15,37 @@ function ThirdForm({
 
   const showModal = () => {
     setIsModalVisible(true);
-    //document.getElementById('tu-compra-form').submit();
+    var form = document.getElementById('tu-compra-form');
+    document.body.appendChild(form);
+    form.method = 'post';
+    form.action = "https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp";
+    var inputBillNumber = document.createElement('input');
+    var inputBillValue = document.createElement('input');
+    var inputBillDescription = document.createElement('input');
+    var inputBillIdUser = document.createElement('input');
+    
+    inputBillNumber.type = 'hidden';
+    inputBillNumber.name = "factura";
+    inputBillNumber.id = "factura";
+    inputBillNumber.value = billNumber;
+    
+    inputBillValue.type = 'hidden';
+    inputBillValue.name = "valor";
+    inputBillValue.id = "valor";
+    inputBillValue.value = billValue;
+    
+    inputBillDescription.type = 'hidden';
+    inputBillDescription.name = "descripcionFactura";
+    inputBillDescription.id = "descripcionFactura";
+    inputBillDescription.value = `Compra seguro para auto ${billNumber}, ${billValue}`;
+
+    inputBillValue.type = 'hidden';
+    inputBillValue.name = "usuario";
+    inputBillValue.id = "usuario";
+    inputBillValue.value = 'i96td5084822950k';
+    
+    form.appendChild(inputBillNumber);
+    form.submit();
   };
 
   const onClickForm = () => {
@@ -67,11 +97,6 @@ function ThirdForm({
           )}
           <Modal title="SECCIÓN DE PASARELA DE PAGO" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
             <form id="tu-compra-form" method="POST" action="https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp">
-              <input name="factura" id="factura" type="number" value={billNumber} /><br/>
-              <input name="valor" id="valor" type="number" value={billValue} /><br/>
-              <input name="descripcionFactura" id="descripcionFactura" type="text" value={`Compra seguro para auto`} /><br/>
-              <input name="usuario" type="hidden" value="i96td5084822950k"/>
-              <input type="button" id="tu-compra-btn" onClick={onClickForm} value="Enviar"/>
             </form>
           </Modal>
         </Col>

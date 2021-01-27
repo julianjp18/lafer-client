@@ -67,7 +67,6 @@ function RouteWithSubRoutes(route) {
 * Use this component for any new section of routes (any config object that has a "routes" property
 */
 export function RenderRoutes({ routes }) {
-  console.log(routes);
   return (
     <Switch>
       {routes.map((route, i) => {
