@@ -77,7 +77,8 @@ const StepsForm = ({
           success={success}
           currentQuote={response && response.currentQuote}
           endDate={response && response.endDate}
-          billNumber={response && `${response.identification}${response.placa}${response.valorPrima}`}
+          billValue={response && response.valorPrima}
+          billNumber={response && `${response.identification}-${response.placa}-${response.valorPrima}`}
           key={Math.random()}
         />
       ),

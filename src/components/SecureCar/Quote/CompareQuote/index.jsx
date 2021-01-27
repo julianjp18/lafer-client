@@ -32,7 +32,6 @@ const CompareQuote = ({}) => {
     setIsVisibleAddToCartModal(true);
     const { numerodeliquidacion } = secure.responseData;
     const resData = await getQuote(userData, numerodeliquidacion);
-    console.log(resData, secure);
     setQuoteData(resData);
   };
 
@@ -133,7 +132,7 @@ const CompareQuote = ({}) => {
                         <p className="methods-price">Pago contado <span className="pay-price">{currencyFormat(responseData.totalPrima)}</span></p>
                       </Col>
                       <Col xs={8}>
-                        <img className="img-company" src="https://via.placeholder.com/100" alt="logo auto"/>
+                        <img className="img-company" src={`/images/secures_logos/seguros-bolivar.jpg`} alt="logo auto"/>
                       </Col>
                     </Row>
                     <Row>

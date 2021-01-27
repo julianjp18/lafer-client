@@ -46,12 +46,11 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-  const response = await fetch("https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion", requestOptions)
+  const url = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
+  const response = await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
   
-  const data = await response.json();
-
-  console.log(data);
-  if(data.data) return data.data;
+  console.log(response);
+  if(response.data) return response.data;
 
   return '';
 };

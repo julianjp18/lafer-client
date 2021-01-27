@@ -211,5 +211,9 @@ h1 {
 		@include largescreen {
 			display: flex;
 		}
-	}
+  }
+  
+  .menu-open {
+    width: 40px;
+  }
 }

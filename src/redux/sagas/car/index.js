@@ -62,7 +62,6 @@ const createLead = async (dataFormValues) => {
 function* secureCar (formValues) {
   const {
     vehicle,
-    brand,
     model,
     name,
     lastName,
@@ -112,7 +111,6 @@ function* secureCar (formValues) {
       "https://cors-anywhere.herokuapp.com/" + url,
       dataFormValues,
     );
-
     const data = response.data;
 
     if (response.status === 200) {
@@ -138,10 +136,9 @@ function* secureCar (formValues) {
       yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
     
     }
-    
   } catch(err) {
-    console.log(err);
-    console.log(err.status);
+    yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
+    yield put({ type: "SECURE_CAR_FAILURE", response: { }, });
   }
 }
 
