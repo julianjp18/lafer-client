@@ -11,11 +11,8 @@ function ThirdForm({
   billNumber,
   billValue,
 }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => {
-    setIsModalVisible(true);
-    var form = document.getElementById('tu-compra-form');
+    var form = document.createElement('form');
     document.body.appendChild(form);
     form.method = 'post';
     form.action = "https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp";
@@ -39,26 +36,18 @@ function ThirdForm({
     inputBillDescription.id = "descripcionFactura";
     inputBillDescription.value = `Compra seguro para auto ${billNumber}, ${billValue}`;
 
-    inputBillValue.type = 'hidden';
-    inputBillValue.name = "usuario";
-    inputBillValue.id = "usuario";
-    inputBillValue.value = 'i96td5084822950k';
+    inputBillIdUser.type = 'hidden';
+    inputBillIdUser.name = "usuario";
+    inputBillIdUser.id = "usuario";
+    inputBillIdUser.value = 'i96td5084822950k';
     
     form.appendChild(inputBillNumber);
+    form.appendChild(inputBillValue);
+    form.appendChild(inputBillDescription);
+    form.appendChild(inputBillIdUser);
     form.submit();
   };
 
-  const onClickForm = () => {
-    document.getElementById('tu-compra-form').submit();
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   return (
     <div style={{ padding: 50 }}>
@@ -95,10 +84,6 @@ function ThirdForm({
               </Card>
             </>
           )}
-          <Modal title="SECCIÓN DE PASARELA DE PAGO" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-            <form id="tu-compra-form" method="POST" action="https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp">
-            </form>
-          </Modal>
         </Col>
       </Row>
       <Row>
