@@ -38,6 +38,11 @@ import {
   GET_TYPEACTIVITIES,
   GET_TYPEACTIVITY_BY_ID,
   UPDATE_TYPEACTIVITY,
+  CREATE_ACCOUNT,
+  //DELETE_ACCOUNT,
+  //GET_ACCOUNT,
+  //GET_ACCOUNT_BY_ID,
+  //UPDATE_ACCOUNT,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -230,3 +235,4 @@ export const getTypeActivityById = (payload) => ({
   type: GET_TYPEACTIVITY_BY_ID,
   payload,
 });
+

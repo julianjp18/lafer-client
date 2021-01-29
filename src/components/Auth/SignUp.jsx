@@ -176,8 +176,7 @@ function SignUp({ signUp }) {
             }),
 
           ]}
-          hasFeedback
-        >
+          hasFeedback>
           <Input />
         </Form.Item>
         <Form.Item

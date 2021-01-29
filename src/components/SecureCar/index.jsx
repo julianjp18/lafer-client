@@ -9,7 +9,6 @@ import moment from 'moment';
 import 'moment/locale/es';
 import locale from 'antd/es/date-picker/locale/es_ES';
 
-
 const { Option } = Select;
 
 const SecureCar = ({ secureCar, getCities, cities }) => {
@@ -36,10 +35,14 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
   }, []);
 
   const onFinish = (values) => {
+
+    const cityName = cities.find(element => element.codigo == values.cityCode).valor;
+
     secureCar({
       ...values,
       zeroKm: zeroKm ? zeroKm.target.checked : false,
       birthDate: moment(values.birthDate).format('YYYY-MM-DD'),
+      cityName: cityName,
     });
 
     const userData = {
@@ -86,7 +89,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
         onFinish={onFinish}
       >
         <Row>
-        <Col className="zeroKm-col" xs={12} md={8}>
+          <Col className="zeroKm-col" xs={12} md={8}>
             <Form.Item
               name="zeroKm"
               label="¿Es cero KM?"
@@ -281,7 +284,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
                   <Option key={city.codigo} value={city.codigo}>{city.valor}</Option>
                 ))}
               </Select>
-            </Form.Item>  
+            </Form.Item>
           </Col>
           <Col xs={24} md={8}>
             <Form.Item
@@ -325,7 +328,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
             </Form.Item>
           </Col>
           <Col xs={12} md={8}>
-          <Form.Item
+            <Form.Item
               name="birthDate"
               label="Fecha de nacimiento"
               placeholder="Ej: 1968-11-26 (YYYY-MM-DD)"
@@ -339,7 +342,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
               <DatePicker
                 locale={locale}
                 format="YYYY-MM-DD"
-                defaultPickerValue={moment("1990-01-01","YYYY-MM-DD")}
+                defaultPickerValue={moment("1990-01-01", "YYYY-MM-DD")}
                 disabledDate={disabledDate}
               />
             </Form.Item>
