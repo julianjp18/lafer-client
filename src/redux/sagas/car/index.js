@@ -29,7 +29,7 @@ const createLead = async (dataFormValues) => {
     lastName,
     phone,
     cityName,
-  } = dataFormValues; 
+  } = dataFormValues;
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -69,17 +69,16 @@ const createLead = async (dataFormValues) => {
     body: raw,
   };
 
-  // const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
-  // fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => result)
-  //   .catch(error => console.log('error', error));
+  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
+  fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+    .then(response => response.text())
+    .then(result => result)
+    .catch(error => console.log('error', error));
 }
 
 function* secureCar(formValues) {
   const {
     vehicle,
-    brand,
     model,
     name,
     lastName,
@@ -138,7 +137,6 @@ function* secureCar(formValues) {
       "https://cors-anywhere.herokuapp.com/" + url,
       dataFormValues,
     );
-
     const data = response.data;
 
     if (response.status === 200) {
@@ -164,10 +162,9 @@ function* secureCar(formValues) {
       yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
 
     }
-
   } catch (err) {
-    console.log(err);
-    console.log(err.status);
+    yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
+    yield put({ type: "SECURE_CAR_FAILURE", response: {}, });
   }
 }
 

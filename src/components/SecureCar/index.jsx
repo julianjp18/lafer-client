@@ -53,6 +53,7 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
       city: values.city,
       genre: values.genre,
       email: values.email,
+      phone: values.phone,
       address: values.address,
       birthDate: moment(values.birthDate).format('YYYY-MM-DD'),
       vehicle: values.vehicle,
@@ -136,7 +137,20 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
                 ]}
                 initialValue={brand}
               >
-                <Input onChange={(value) => setBrand(value.target.value)} />
+                <Select
+                showSearch
+                placeholder="Selecciona por favor una marca"
+                onChange={(value) => setBrand(value)}
+                allowClear
+                defaultValue={brand}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                <Option key={`4601258-mazda`} value={`4601258-mazda`}>Mazda</Option>
+                <Option key={`4601258-chevrolet`} value={`4601258-chevrolet`}>Chevrolet</Option>
+                <Option key={`4601258-renault`} value={`4601258-renault`}>Renault</Option>
+              </Select>
               </Form.Item>
             </Col>
           )}
@@ -376,8 +390,9 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
                   whitespace: true,
                 },
               ]}
+              defaultValue={address}
             >
-              <Input defaultValue={address} onChange={(value) => setAddress(value.target.value)} />
+              <Input onChange={(value) => setAddress(value.target.value)} />
             </Form.Item>
           </Col>
         </Row>
