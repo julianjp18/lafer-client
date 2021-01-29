@@ -18,7 +18,6 @@ const createLead = async (dataFormValues) => {
     name,
     identification,
     email,
-    cityCode,
     address,
     identificationType,
     model,
@@ -30,6 +29,8 @@ const createLead = async (dataFormValues) => {
     phone,
     cityName,
   } = dataFormValues;
+
+  console.log(brand);
 
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -94,6 +95,7 @@ function* secureCar(formValues) {
     phoneNumber,
     phone,
     cityName,
+    brand,
   } = formValues.payload;
 
   let dataFormValues = {
