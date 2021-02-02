@@ -10,6 +10,9 @@ import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
 import Countries from "../components/Admin/Countries";
 import StepsForm from "../components/Landing/StepsForm";
+import SuccessPayment from "../components/Payments/SuccessPayment";
+import FailurePayment from "../components/Payments/FailurePayment";
+import PendingPayment from "../components/Payments/PendingPayment";
 
 const ROUTES = [
   { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
@@ -44,6 +47,9 @@ const ROUTES = [
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
   { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
+  { path: "/success-payment", key: "Success payment", exact: true, component: SuccessPayment, show: false, auth: false, },
+  { path: "/failure-payment", key: "Failure payment", exact: true, component: FailurePayment, show: false, auth: false, },
+  { path: "/pending-payment", key: "Pending payment", exact: true, component: PendingPayment, show: false, auth: false, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
 ];
 
