@@ -10,7 +10,7 @@ const PendingPayment = () => {
       <Col className="img-container" xs={24}>
         <img className="img" src="images/logo-large.png" alt="logo tanSeguro"/>
       </Col>
-      <Col className="pending-container" xs={12}>
+      <Col className="pending-container" xs={24}>
         <h2 className="pending-title">¡Pago pendiente!</h2>
         <p>Se ha realizado tu pago, pero se encuentra en verificación con nuestra pasarela de pagos.</p>
         <p>Muchas gracias por confiar en nosotros.</p>

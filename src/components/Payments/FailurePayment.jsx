@@ -10,11 +10,11 @@ const FailurePayment = () => {
       <Col className="img-container" xs={24}>
         <img className="img" src="images/logo-large.png" alt="logo tanSeguro"/>
       </Col>
-      <Col className="failure-container" xs={12}>
+      <Col className="failure-container" xs={24}>
         <h2 className="failure-title">¡Pago Rechazado!</h2>
         <p>No se ha realizado tu pago, por favor inténtalo nuevamente.</p>
         <p>Muchas gracias por confiar en nosotros.</p>
-        <Link className="btn btn-danger" to={''}>Finalizar</Link>
+        <Link className="btn btn-failure" to={''}>Finalizar</Link>
       </Col>
     </Row>
   )
