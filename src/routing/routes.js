@@ -13,6 +13,7 @@ import StepsForm from "../components/Landing/StepsForm";
 import SuccessPayment from "../components/Payments/SuccessPayment";
 import FailurePayment from "../components/Payments/FailurePayment";
 import PendingPayment from "../components/Payments/PendingPayment";
+import AbortPayment from "../components/Payments/AbortPayment";
 
 const ROUTES = [
   { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
@@ -50,6 +51,7 @@ const ROUTES = [
   { path: "/success-payment", key: "Success payment", exact: true, component: SuccessPayment, show: false, auth: false, },
   { path: "/failure-payment", key: "Failure payment", exact: true, component: FailurePayment, show: false, auth: false, },
   { path: "/pending-payment", key: "Pending payment", exact: true, component: PendingPayment, show: false, auth: false, },
+  { path: "/abort-payment", key: "Abort payment", exact: true, component: AbortPayment, show: false, auth: false, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
 ];
 
