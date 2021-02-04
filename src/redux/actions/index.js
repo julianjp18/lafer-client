@@ -38,11 +38,38 @@ import {
   GET_TYPEACTIVITIES,
   GET_TYPEACTIVITY_BY_ID,
   UPDATE_TYPEACTIVITY,
-  CREATE_ACCOUNT,
-  //DELETE_ACCOUNT,
-  //GET_ACCOUNT,
-  //GET_ACCOUNT_BY_ID,
-  //UPDATE_ACCOUNT,
+  CREATE_PRODUCTS,
+  DELETE_PRODUCTS,
+  GET_PRODUCTS,
+  GET_PRODUCTS_BY_ID,
+  UPDATE_PRODUCTS,
+  CREATE_INSURERS,
+  DELETE_INSURERS,
+  GET_INSURERS,
+  GET_INSURERS_BY_ID,
+  UPDATE_INSURERS,
+  CREATE_TYPEOPERATIONS,
+  DELETE_TYPEOPERATIONS,
+  GET_TYPEOPERATIONS,
+  GET_TYPEOPERATIONS_BY_ID,
+  UPDATE_TYPEOPERATIONS,
+  CREATE_TYPEINDUSTRIES,
+  DELETE_TYPEINDUSTRIES,
+  GET_TYPEINDUSTRIES,
+  GET_TYPEINDUSTRIES_BY_ID,
+  UPDATE_TYPEINDUSTRIES,
+  CREATE_TYPEIDENTIFICATIONS,
+  DELETE_TYPEIDENTIFICATIONS,
+  GET_TYPEIDENTIFICATIONS,
+  GET_TYPEIDENTIFICATIONS_BY_ID,
+  UPDATE_TYPEIDENTIFICATIONS,
+  CREATE_TYPECOMPANIES,
+  DELETE_TYPECOMPANIES,
+  GET_TYPECOMPANIES,
+  GET_TYPECOMPANIES_BY_ID,
+  UPDATE_TYPECOMPANIES,
+  IDLEADSHARP_SUCCESS,
+  IDLEADSHARP,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -236,3 +263,160 @@ export const getTypeActivityById = (payload) => ({
   payload,
 });
 
+/**
+ * PRODUCTS
+ */
+export const getProducts = () => ({ type: GET_PRODUCTS });
+
+export const deleteProducts = (payload) => ({
+  type: DELETE_PRODUCTS,
+  payload,
+});
+
+export const updateProducts = (payload) => ({
+  type: UPDATE_PRODUCTS,
+  payload,
+});
+
+export const createProducts = (payload) => ({
+  type: CREATE_PRODUCTS,
+  payload,
+});
+
+export const getProductsById = (payload) => ({
+  type: GET_PRODUCTS_BY_ID,
+  payload,
+});
+
+/**
+ * INSURERS
+ */
+export const getInsurers = () => ({ type: GET_INSURERS });
+
+export const deleteInsurers = (payload) => ({
+  type: DELETE_INSURERS,
+  payload,
+});
+
+export const updateInsurers = (payload) => ({
+  type: UPDATE_INSURERS,
+  payload,
+});
+
+export const createInsurers = (payload) => ({
+  type: CREATE_INSURERS,
+  payload,
+});
+
+export const getInsurersById = (payload) => ({
+  type: GET_INSURERS_BY_ID,
+  payload,
+});
+
+/**
+ * TYPEOPERATIONS
+ */
+export const getTypeOperations = () => ({ type: GET_TYPEOPERATIONS });
+
+export const deleteTypeOperations = (payload) => ({
+  type: DELETE_TYPEOPERATIONS,
+  payload,
+});
+
+export const updateTypeOperations = (payload) => ({
+  type: UPDATE_TYPEOPERATIONS,
+  payload,
+});
+
+export const createTypeOperations = (payload) => ({
+  type: CREATE_TYPEOPERATIONS,
+  payload,
+});
+
+export const getTypeOperationsById = (payload) => ({
+  type: GET_TYPEOPERATIONS_BY_ID,
+  payload,
+});
+
+/**
+ * TYPEINDUSTRIES
+ */
+export const getTypeIndustries = () => ({ type: GET_TYPEINDUSTRIES });
+
+export const deleteTypeIndustries = (payload) => ({
+  type: DELETE_TYPEINDUSTRIES,
+  payload,
+});
+
+export const updateTypeIndustries = (payload) => ({
+  type: UPDATE_TYPEINDUSTRIES,
+  payload,
+});
+
+export const createTypeIndustries = (payload) => ({
+  type: CREATE_TYPEINDUSTRIES,
+  payload,
+});
+
+export const getTypeIndustriesById = (payload) => ({
+  type: GET_TYPEINDUSTRIES_BY_ID,
+  payload,
+});
+
+/**
+ * TYPEIDENTIFICATIONS
+ */
+export const getTypeIdentifications = () => ({ type: GET_TYPEIDENTIFICATIONS });
+
+export const deleteTypeIdentifications = (payload) => ({
+  type: DELETE_TYPEIDENTIFICATIONS,
+  payload,
+});
+
+export const updateTypeIdentifications = (payload) => ({
+  type: UPDATE_TYPEIDENTIFICATIONS,
+  payload,
+});
+
+export const createTypeIdentifications = (payload) => ({
+  type: CREATE_TYPEIDENTIFICATIONS,
+  payload,
+});
+
+export const getTypeIdentificationsById = (payload) => ({
+  type: GET_TYPEIDENTIFICATIONS_BY_ID,
+  payload,
+});
+
+/**
+ * TYPECOMPANIES
+ */
+export const getTypeCompanies = () => ({ type: GET_TYPECOMPANIES });
+
+export const deleteTypeCompanies = (payload) => ({
+  type: DELETE_TYPECOMPANIES,
+  payload,
+});
+
+export const updateTypeCompanies = (payload) => ({
+  type: UPDATE_TYPECOMPANIES,
+  payload,
+});
+
+export const createTypeCompanies = (payload) => ({
+  type: CREATE_TYPECOMPANIES,
+  payload,
+});
+
+export const getTypeCompaniesById = (payload) => ({
+  type: GET_TYPECOMPANIES_BY_ID,
+  payload,
+});
+
+/**
+ * SHARPRING
+ */
+export const getIdLeadSharp = (payload) => ({
+  type: IDLEADSHARP,
+  payload,
+});

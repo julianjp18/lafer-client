@@ -15,6 +15,12 @@ import LinkClasses from "../components/Admin/LinkClasses";
 import PQRContacts from "../components/Admin/PQRContacts";
 import TypeActivities from "../components/Admin/TypeActivities";
 import StepsForm from "../components/Landing/StepsForm";
+import Products from "../components/Admin/Products";
+import Insurers from "../components/Admin/Insurers";
+import TypeOperations from "../components/Admin/TypeOperations";
+import TypeIndustries from "../components/Admin/TypeIndustries";
+import TypeIdentification from "../components/Admin/TypeIdentifications";
+import TypeCompanies from "../components/Admin/TypeCompanies";
 
 const ROUTES = [
   { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
@@ -55,6 +61,12 @@ const ROUTES = [
   { path: "/link-classes", key: "Link Classes", exact: true, component: LinkClasses, show: false, auth: true },
   { path: "/PQR-contacts", key: "PQR Contacts", exact: true, component: PQRContacts, show: false, auth: true },
   { path: "/type-activities", key: "Type Activities", exact: true, component: TypeActivities, show: false, auth: true },
+  { path: "/products", key: "Products", exact: true, component: Products, show: false, auth: true },
+  { path: "/insurers", key: "Products", exact: true, component: Insurers, show: false, auth: true },
+  { path: "/type-operations", key: "Products", exact: true, component: TypeOperations, show: false, auth: true },
+  { path: "/type-industries", key: "Products", exact: true, component: TypeIndustries, show: false, auth: true },
+  { path: "/type-identification", key: "Products", exact: true, component: TypeIdentification, show: false, auth: true },
+  { path: "/type-companies", key: "Products", exact: true, component: TypeCompanies, show: false, auth: true },
 ];
 
 export default ROUTES;

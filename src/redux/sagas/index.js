@@ -11,6 +11,13 @@ import { mediumResponsesWatcher } from './admin/mediumResponses';
 import { linkClassesWatcher } from './admin/linkClasses';
 import { PQRContactsWatcher } from './admin/PQRContacts';
 import { typeActivitiesWatcher } from './admin/typeActivities';
+import { productsWatcher } from './admin/products';
+import { insurersWatcher } from './admin/insurers';
+import { typeOperationsWatcher } from './admin/typeOperations';
+import { typeIndustriesWatcher } from './admin/typeIndustries';
+import { typeIdentificationsWatcher } from './admin/typeIdentifications';
+import { typeCompaniesWatcher } from './admin/typeCompanies';
+
 
 export default function* rootSaga() {
   yield all([
@@ -26,5 +33,11 @@ export default function* rootSaga() {
     linkClassesWatcher(),
     PQRContactsWatcher(),
     typeActivitiesWatcher(),
+    productsWatcher(),
+    insurersWatcher(),
+    typeOperationsWatcher(),
+    typeIndustriesWatcher(),
+    typeIdentificationsWatcher(),
+    typeCompaniesWatcher(),
   ]);
 };

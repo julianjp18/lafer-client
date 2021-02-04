@@ -30,8 +30,6 @@ const createLead = async (dataFormValues) => {
     cityName,
   } = dataFormValues;
 
-  console.log(brand);
-
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*");
@@ -73,7 +71,29 @@ const createLead = async (dataFormValues) => {
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
-    .then(result => result)
+    .then(result => {
+      const idLeadSharp = JSON.parse(result).result.creates[0].id;
+      console.log(JSON.parse(result).result.creates[0].id)
+      var list = JSON.stringify(
+        {
+          "method": "addListMember",
+          "params": {
+              "listID": "3668343810",
+              "memberID": idLeadSharp
+          },
+          "id": `123${identification}`
+      }
+      );
+      var requestList = {
+        method: 'POST',
+        headers: myHeaders,
+        body: list,
+      };
+      fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
+      .then(response => response.text())
+    .then(result => {
+      console.log("Envío exitoso");})
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -98,6 +118,23 @@ function* secureCar(formValues) {
     brand,
   } = formValues.payload;
 
+  createLead({
+    vehicle,
+    name,
+    identification,
+    email,
+    address,
+    identificationType,
+    zeroKm,
+    genre,
+    birthDate,
+    lastName,
+    phone,
+    cityName,
+    brand,
+    model,
+  });
+
   let dataFormValues = {
     "placaVehiculo": vehicle ? vehicle : 'QWQ654',
     "tipoDocumentoTomador": identificationType,
@@ -114,24 +151,6 @@ function* secureCar(formValues) {
     "marcaVehiculo": "4601258",
     "modeloVehiculo": Number.parseInt(model),
   };
-
-  createLead({
-    vehicle,
-    name,
-    identification,
-    email,
-    cityCode,
-    address,
-    identificationType,
-    model,
-    brand,
-    zeroKm,
-    genre,
-    birthDate,
-    lastName,
-    phone,
-    cityName
-  });
 
   try {
     const url = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion";

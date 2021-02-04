@@ -19,6 +19,7 @@ const StepsForm = ({
   buySoatState,
   response,
   buySoatForm,
+  idLeadSharp,
 }) => {
   const [current, setCurrent] = useState(0);
   const [success, setsuccess] = useState(false);
@@ -46,6 +47,7 @@ const StepsForm = ({
       title: 'Tu vehiculo',
       content: (
         <FirstForm
+          idLeadSharp={idLeadSharp}
           next={next}
           current={current}
           vehicleInfo={vehicleInfo}
@@ -58,6 +60,7 @@ const StepsForm = ({
       title: 'Tus datos',
       content: (
         <SecondForm
+          idLeadSharp={idLeadSharp}
           next={next}
           prev={prev}
           current={current}
@@ -72,6 +75,7 @@ const StepsForm = ({
       content: (
         <ThirdForm
           prev={prev}
+          idLeadSharp={idLeadSharp}
           current={current}
           butSoat={buySoat}
           success={success}
@@ -124,6 +128,7 @@ const mapStateToProps = (state) => ({
   clientInfoState: state.client_info_soat,
   buySoatState: state.buy_soat,
   response: state.response,
+  idLeadSharp: state.idLeadSharp,
 });
 
 const mapDispatchToProps = {

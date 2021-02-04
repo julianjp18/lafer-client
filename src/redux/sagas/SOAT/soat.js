@@ -2,6 +2,76 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
 
+const createLead = async (dataFormValues) => {
+  const {
+    typeVehicle, //VALOR $$
+    line,
+    classVehicle,
+    model,
+    plate,  //Placa
+    brand,
+    identificationType,
+    phoneNumber,
+    name,
+    lastName,
+    email,
+    address,
+    city,
+    identification,
+  } = dataFormValues;
+
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
+
+  var raw = JSON.stringify(
+    {
+      "method": "createLeads",
+      "params":
+      {
+        "objects": [
+          {
+            firstName: name,
+            lastName: lastName,
+            emailAddress: email,
+            city: city,
+            street: address,
+            phoneNumber: phoneNumber,
+            identificacion_6010175c91f14: identificationType,
+            placa_600763145ae42: plate,
+            modelo_601019a742dcd: model,
+            marca_6010193d75a00: brand,
+            numeroid_6010179c38d01: identification,
+            preciosoat_6014802814e37: typeVehicle,
+          }
+        ]
+      },
+      "id": `123${identification}`
+    }
+  );
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+  };
+
+  console.log("Vamo aqui");
+
+  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
+  fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+    .then(response => {
+      response.text();
+       //const data =response.json();
+       //console.log(data);
+     //console.log(response);
+    })
+    .then(result => 
+      console.log(result)
+      )
+    .catch(error => console.log('error', error));
+}
+
 function* buySoat(formValues) {
   //123qweQ!
   const { username, password } = formValues.payload;
@@ -53,7 +123,7 @@ function* buySoatForm(formValues) {
 
   const data = [];
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers`, {
-    id:identification,
+    id: identification,
     name,
     lastName,
     email,
@@ -72,7 +142,7 @@ function* buySoatForm(formValues) {
     codigoCupon: cupon,
     isBuy: true,
     startDate: "2020-12-25T08:44:53.510Z",
-    endDate:"2021-12-24T08:44:53.510Z",
+    endDate: "2021-12-24T08:44:53.510Z",
     currentQuote: "2020-12-24T08:44:53.510Z"
   }, {
     "accept": "*/*",
@@ -84,8 +154,25 @@ function* buySoatForm(formValues) {
     console.log(e);
   });
 
+  createLead({
+    typeVehicle,
+    line,
+    classVehicle,
+    model,
+    plate,
+    brand,
+    identificationType,
+    phoneNumber,
+    name,
+    lastName,
+    email,
+    address,
+    city,
+    identification,
+  });
+
   yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
-    
+
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
     yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
