@@ -1,0 +1,70 @@
+
+.img-container {
+  .img {
+    width: 30%;
+    margin: 40px auto;
+  }
+}
+
+.pending-container {
+  text-align: center;
+
+  p { 
+    font-size: 20px;
+  }
+
+  .pending-title {
+    color: darkorange;
+    font-size: 30px;
+  }
+
+  .btn-pending {
+    font-size: 20px;
+    background: darkorange;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+  }
+}
+
+.failure-container {
+  text-align: center;
+
+  p { 
+    font-size: 20px;
+  }
+
+  .failure-title {
+    color: crimson;
+    font-size: 30px;
+  }
+
+  .btn-failure {
+    font-size: 20px;
+    background: crimson;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+  }
+}
+
+.success-container {
+  text-align: center;
+
+  p { 
+    font-size: 20px;
+  }
+
+  .success-title {
+    color: chartreuse;
+    font-size: 30px;
+  }
+
+  .btn-success {
+    font-size: 20px;
+    background: chartreuse;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+  }
+}
