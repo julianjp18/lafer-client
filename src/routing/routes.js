@@ -16,43 +16,24 @@ import PendingPayment from "../components/Payments/PendingPayment";
 import AbortPayment from "../components/Payments/AbortPayment";
 
 const ROUTES = [
-  { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
-  { path: "/soat", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
-  { path: "/profile", key: "Mi perfil", exact: true, component: Landing, show: false, auth: true },
-  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: false },
-  {
-    path: "/secures-list",
-    key: "Seguros",
-    show: true,
-    auth: false,
-    component: props => {
-      return <RenderRoutes {...props} />;
-    },
-    routes: [
-      {
-        path: "/secure-car",
-        key: "Seguro para auto",
-        exact: true,
-        component: SecureCar,
-        show: true,
-        auth: false,
-      },
-    ],
-  },
-  { path: "/blogs", key: "Blogs", exact: true, component: LogIn, show: true, auth: false },
-  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
-  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
-  { path: "/contact-us", key: "Contáctanos", exact: true, component: SignUp, show: true, auth: false },
-  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
-  { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
-  { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
-  { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
-  { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
   { path: "/success-payment", key: "Success payment", exact: true, component: SuccessPayment, show: false, auth: false, },
   { path: "/failure-payment", key: "Failure payment", exact: true, component: FailurePayment, show: false, auth: false, },
   { path: "/pending-payment", key: "Pending payment", exact: true, component: PendingPayment, show: false, auth: false, },
   { path: "/abort-payment", key: "Abort payment", exact: true, component: AbortPayment, show: false, auth: false, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
+  { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
+  { path: "/soat", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
+  { path: "/profile", key: "Mi perfil", exact: true, component: Landing, show: false, auth: true },
+  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: false },
+  { path: "/contact-us", key: "Contáctanos", exact: true, component: SignUp, show: true, auth: false },
+  { path: "/blogs", key: "Blog", exact: true, component: LogIn, show: true, auth: false },
+  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
+  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
+  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
+  { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
+  { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
+  { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
+  { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
 ];
 
 export default ROUTES;

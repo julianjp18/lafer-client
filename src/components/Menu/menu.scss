@@ -156,10 +156,8 @@ h1 {
 		&-link {
 			font-family: inherit;
 			font-size: 14px;
-			font-weight: 500;
 			line-height: inherit;
 			color: $color-black;
-			text-transform: uppercase;
 			text-rendering: optimizeLegibility;
 			transition: all 0.35s ease;
 
@@ -178,7 +176,7 @@ h1 {
 		@include largescreen {
 			display: flex;
 			flex-direction: row;
-			justify-content: center;
+			justify-content: end;
 			align-items: center;
 			height: auto;
 
