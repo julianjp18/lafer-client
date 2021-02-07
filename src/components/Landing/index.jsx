@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox, Row, Col, message, Carousel } from 'antd';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { Button, Row, Col, Carousel } from 'antd';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
 import './landing.scss';
@@ -33,7 +33,9 @@ function Landing({ mainInfo, response }) {
                   <strong>Tan fácil </strong>
                   que puedes asegurar tu vehículo en solo 3 pasos...
                 </p>
-                <Button>Cotizar</Button>
+                <div className="btn-container">
+                  <Button className="carousel-main-btn">Cotizar</Button>
+                </div>
               </Col>
             </Row>
           </div>
@@ -62,29 +64,16 @@ function Landing({ mainInfo, response }) {
           <img src="https://via.placeholder.com/300x200.png/F67411/FFFFFF?text=Image+Tan+Seguro" alt="fl"/>
         </Col>
       </Row>
-      <Row className="footer-container">
-        <Col xs={24} md={12}>
-          <h2>Bogotá, Colombia</h2>  
-          <p>Calle 105 # 33 - 23</p>
-          <p>+57 1 435 56 96</p>
-          <p>email@gmail.com</p>
-        </Col>
-        <Col xs={24} md={12}>
-          <div className="social">
-            <a href="#" className="social-item"><i className="fab fa-facebook"></i></a>
-            <a href="#" className="social-item"><i className="fab fa-twitter"></i></a>
-            <a href="#" className="social-item"><i className="fab fa-instagram"></i></a>
-            <a href="#" className="social-item"><i className="fab fa-whatsapp"></i></a>
-          </div>
-        </Col>
-      </Row>
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  response: state.response,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    response: state.response,
+  });
+};
 
 const mapDispatchToProps = {
   mainInfo

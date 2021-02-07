@@ -75,10 +75,13 @@ function Countries({
   );
 }
 
-const mapStateToProps = (state) => ({
-  get_countries_list: state.get_countries_list,
-  get_country: state.get_country,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    get_countries_list: state.get_countries_list,
+    get_country: state.get_country,
+  });
+};
 
 const mapDispatchToProps = { 
   getCountries,

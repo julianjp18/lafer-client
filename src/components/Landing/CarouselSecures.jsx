@@ -48,13 +48,15 @@ const items = [
 // https://github.com/maxmarinich/react-alice-carousel
 // https://maxmarinich.github.io/react-alice-carousel/
 const CarouselSecures = () => (
+  <div className="carousel-container">
     <AliceCarousel
-        mouseTracking
-        items={items}
-        responsive={responsive}
-        disableDotsControls
-        disableButtonsControls
+      mouseTracking
+      items={items}
+      responsive={responsive}
+      disableDotsControls
+      disableButtonsControls
     />
+  </div>
 );
 
 export default CarouselSecures;

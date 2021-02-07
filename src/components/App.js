@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 import './app.scss';
 import Menu from './Menu';
 import ConfigProvider from "antd/es/config-provider";
+import Footer from "./Footer";
 
 function App() {
   const [current, setcurrent] = useState('root');
@@ -18,14 +19,16 @@ function App() {
   return (
     <ConfigProvider locale={esEs}>
       <Row>
+        <Col xs={24}>
+          <Menu />
+          <div className="routes-container">
+            <RenderRoutes routes={ROUTES} />
+          </div>
+        </Col>
       <Col xs={24}>
-        <Menu />
-        <div>
-          <RenderRoutes routes={ROUTES} />
-        </div>
-      </Col>
-    </Row>
-  
+          <Footer />
+        </Col>
+      </Row>
     </ConfigProvider>
   );
 }

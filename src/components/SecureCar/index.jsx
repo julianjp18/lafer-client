@@ -412,9 +412,12 @@ const SecureCar = ({ secureCar, getCities, cities }) => {
   );
 }
 
-const mapStateToProps = (state) => ({
-  cities: state.cities_secure_car,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    cities: state.cities_secure_car,
+  });
+};
 
 const mapDispatchToProps = {
   secureCar,

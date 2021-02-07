@@ -1,0 +1,31 @@
+@import "../utils/colors.scss";
+
+.footer-container {
+  min-height: 30vh;
+  padding: 50px 110px;
+  background-color: $color-black;
+  color: $color-white;
+
+  h2 {
+    color: $color-white;
+  }
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &-item {
+      font-size: 1.65rem;
+      line-height: inherit;
+      margin: 0 1.5rem;
+      color: $color-white;
+      transition: all 0.35s ease;
+
+      &:hover {
+        color: $color-blue;
+      }
+    }
+  }
+}
