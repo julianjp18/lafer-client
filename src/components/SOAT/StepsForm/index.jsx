@@ -41,6 +41,7 @@ const StepsForm = ({
     setCurrent(current - 1);
   };
 
+  console.log(response);
   const steps = [
     {
       title: 'Tu vehiculo',
@@ -119,12 +120,15 @@ const StepsForm = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  vehicleInfoState: state.vehicle_info_soat,
-  clientInfoState: state.client_info_soat,
-  buySoatState: state.buy_soat,
-  response: state.response,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    vehicleInfoState: state.vehicle_info_soat,
+    clientInfoState: state.client_info_soat,
+    buySoatState: state.buy_soat,
+    response: state.response,
+  });
+};
 
 const mapDispatchToProps = {
   vehicleInfo,

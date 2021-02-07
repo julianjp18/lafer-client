@@ -71,9 +71,12 @@ function LogIn({ signIn, auth }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    auth: state.auth,
+  });
+};
 
 const mapDispatchToProps = {
   signIn: signIn,

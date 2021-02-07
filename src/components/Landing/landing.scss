@@ -1,12 +1,12 @@
 @import "react-alice-carousel/lib/scss/alice-carousel.scss";
-
-$primary-color: #F67411;
-$color-white: #ffffff;
-$color-black: #252a32;
-$color-light: #f1f5f8;
-$color-blue: #148cb8;
+@import "../utils/colors.scss";
 
 .landing-container {
+
+  .carousel-container {
+
+  }
+
   .carousel-item {
     min-height: 85vh;
     color: #fff;
@@ -20,9 +20,23 @@ $color-blue: #148cb8;
   
       p {
         font-size: 58px;
-        text-align: left;
+        text-align: center;
         line-height: 70px;
         margin-bottom: 0;
+      }
+
+      .btn-container {
+        text-align: center;
+        line-height: 125px;
+
+        .carousel-main-btn {
+          padding: 20px 72px;
+          font-size: 23px;
+          line-height: 0;
+          margin: auto;
+          border-radius: 5px;
+          box-shadow: 0px 0px 24px 0px rgba(0,0,0,0.75);
+        }
       }
     }
   }
@@ -45,36 +59,6 @@ $color-blue: #148cb8;
         margin-top: 20px;
         font-size: 16px;
         padding-left: 10px;
-      }
-    }
-  }
-
-  .footer-container {
-    min-height: 30vh;
-    padding: 50px 110px;
-    background-color: $color-black;
-    color: $color-white;
-
-    h2 {
-      color: $color-white;
-    }
-
-    .social {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-  
-      &-item {
-        font-size: 1.65rem;
-        line-height: inherit;
-        margin: 0 1.5rem;
-        color: $color-white;
-        transition: all 0.35s ease;
-  
-        &:hover {
-          color: $color-blue;
-        }
       }
     }
   }

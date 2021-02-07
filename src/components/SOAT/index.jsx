@@ -3,9 +3,9 @@ import { useHistory, Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Row, Col, message } from 'antd';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
-import './landing.scss';
+import './soat.scss';
 
-function Landing({ mainInfo, response }) {
+function Soat({ mainInfo, response }) {
   const history = useHistory();
 
   const onFinish = (values) => {
@@ -142,12 +142,15 @@ function Landing({ mainInfo, response }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  response: state.response,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    response: state.response,
+  });
+};
 
 const mapDispatchToProps = {
   mainInfo
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default connect(mapStateToProps, mapDispatchToProps)(Soat);
