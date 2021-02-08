@@ -68,6 +68,11 @@ import {
   GET_TYPECOMPANIES,
   GET_TYPECOMPANIES_BY_ID,
   UPDATE_TYPECOMPANIES,
+  CREATE_REQUESTTYPES,
+  DELETE_REQUESTTYPES,
+  GET_REQUESTTYPES,
+  GET_REQUESTTYPES_BY_ID,
+  UPDATE_REQUESTTYPES,
   IDLEADSHARP_SUCCESS,
   IDLEADSHARP,
 } from '../constants';
@@ -410,6 +415,31 @@ export const createTypeCompanies = (payload) => ({
 
 export const getTypeCompaniesById = (payload) => ({
   type: GET_TYPECOMPANIES_BY_ID,
+  payload,
+});
+
+/**
+ * REQUESTTYPES
+ */
+export const getRequestTypes = () => ({ type: GET_REQUESTTYPES });
+
+export const deleteRequestTypes = (payload) => ({
+  type: DELETE_REQUESTTYPES,
+  payload,
+});
+
+export const updateRequestTypes = (payload) => ({
+  type: UPDATE_REQUESTTYPES,
+  payload,
+});
+
+export const createRequestTypes = (payload) => ({
+  type: CREATE_REQUESTTYPES,
+  payload,
+});
+
+export const getRequestTypesById = (payload) => ({
+  type: GET_REQUESTTYPES_BY_ID,
   payload,
 });
 

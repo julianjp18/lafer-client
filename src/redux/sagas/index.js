@@ -17,7 +17,7 @@ import { typeOperationsWatcher } from './admin/typeOperations';
 import { typeIndustriesWatcher } from './admin/typeIndustries';
 import { typeIdentificationsWatcher } from './admin/typeIdentifications';
 import { typeCompaniesWatcher } from './admin/typeCompanies';
-
+import { requestTypesWatcher } from './admin/requestTypes';
 
 export default function* rootSaga() {
   yield all([
@@ -39,5 +39,6 @@ export default function* rootSaga() {
     typeIndustriesWatcher(),
     typeIdentificationsWatcher(),
     typeCompaniesWatcher(),
+    requestTypesWatcher(),
   ]);
 };

@@ -206,8 +206,24 @@ import {
   GET_TYPECOMPANIES_BY_ID,
   GET_TYPECOMPANIES_BY_ID_SUCCESS,
   GET_TYPECOMPANIES_BY_ID_FAILURE,
+  CREATE_REQUESTTYPES,
+  CREATE_REQUESTTYPES_FAILURE,
+  CREATE_REQUESTTYPES_SUCCESS,
+  DELETE_REQUESTTYPES,
+  DELETE_REQUESTTYPES_FAILURE,
+  DELETE_REQUESTTYPES_SUCCESS,
+  GET_REQUESTTYPES,
+  GET_REQUESTTYPES_FAILURE,
+  GET_REQUESTTYPES_SUCCESS,
+  UPDATE_REQUESTTYPES,
+  UPDATE_REQUESTTYPES_FAILURE,
+  UPDATE_REQUESTTYPES_SUCCESS,
+  GET_REQUESTTYPES_BY_ID,
+  GET_REQUESTTYPES_BY_ID_SUCCESS,
+  GET_REQUESTTYPES_BY_ID_FAILURE,
   IDLEADSHARP_SUCCESS,
-  IDLEADSHARP_FAILURE,
+  //IDLEADSHARP_SUCCESS,
+  //IDLEADSHARP_FAILURE,
 } from '../constants';
 
 const reducer = (state = {}, action) => {
@@ -304,10 +320,17 @@ const reducer = (state = {}, action) => {
     case GET_TYPECOMPANIES_BY_ID:
     case UPDATE_TYPECOMPANIES:
     case CREATE_TYPECOMPANIES:
-      /* END TYPECOMPANIES */
+    /* END TYPECOMPANIES */
+    /* REQUESTTYPES */
+    case GET_REQUESTTYPES:
+    case DELETE_REQUESTTYPES:
+    case GET_REQUESTTYPES_BY_ID:
+    case UPDATE_REQUESTTYPES:
+    case CREATE_REQUESTTYPES:
+      /* END REQUESTTYPES */
       return { ...state, loading: true };
     case IDLEADSHARP_SUCCESS:
-      return{...state, idLeadSharp: action.idLeadSharp};
+      return { ...state, idLeadSharp: action.idLeadSharp };
     case SECURE_CAR_FAILURE:
     case SIGN_IN_FAILURE:
     case SIGN_UP_FAILURE:
@@ -436,7 +459,17 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPECOMPANIES_SUCCESS:
     case DELETE_TYPECOMPANIES_SUCCESS:
     case GET_TYPECOMPANIES_BY_ID_FAILURE:
-      /* END TYPECOMPANIES */
+    /* END TYPECOMPANIES */
+    /* REQUESTTYPES */
+    case CREATE_REQUESTTYPES_FAILURE:
+    case UPDATE_REQUESTTYPES_FAILURE:
+    case DELETE_REQUESTTYPES_FAILURE:
+    case GET_REQUESTTYPES_FAILURE:
+    case CREATE_REQUESTTYPES_SUCCESS:
+    case UPDATE_REQUESTTYPES_SUCCESS:
+    case DELETE_REQUESTTYPES_SUCCESS:
+    case GET_REQUESTTYPES_BY_ID_FAILURE:
+      /* END REQUESTTYPES */
       return {
         ...state,
         response: action.response,
@@ -653,6 +686,20 @@ const reducer = (state = {}, action) => {
         loading: false,
       };
     /* END TYPECOMPANIES */
+    /* REQUESTTYPES */
+    case GET_REQUESTTYPES_BY_ID_SUCCESS:
+      return {
+        ...state,
+        get_requesttypes: action.response,
+        loading: false,
+      };
+    case GET_REQUESTTYPES_SUCCESS:
+      return {
+        ...state,
+        get_requesttypes_list: action.response,
+        loading: false,
+      };
+    /* END REQUESTTYPES */
     case BUY_SOAT_FORM_SUCCESS:
     default:
       return state;
