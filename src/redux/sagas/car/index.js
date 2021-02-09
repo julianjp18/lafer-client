@@ -49,8 +49,6 @@ const createLead = async (dataFormValues) => {
             phoneNumber: phone,
             identificacion_6010175c91f14: identificationType,
             placa_600763145ae42: vehicle,
-            modelo_601019a742dcd: model,
-            marca_6010193d75a00: brand,
             km_60103e68e2f71: zeroKm.toString(),
             genero_601018cc37291: genre,
             fechanacimiento_601018915d3bf: birthDate,
@@ -72,17 +70,18 @@ const createLead = async (dataFormValues) => {
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
     .then(result => {
+      console.log(result)
       const idLeadSharp = JSON.parse(result).result.creates[0].id;
       console.log(JSON.parse(result).result.creates[0].id)
       var list = JSON.stringify(
         {
           "method": "addListMember",
           "params": {
-              "listID": "3668343810",
-              "memberID": idLeadSharp
+            "listID": "3668343810",
+            "memberID": idLeadSharp
           },
           "id": `123${identification}`
-      }
+        }
       );
       var requestList = {
         method: 'POST',
@@ -90,10 +89,11 @@ const createLead = async (dataFormValues) => {
         body: list,
       };
       fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
-      .then(response => response.text())
-    .then(result => {
-      console.log("Envío exitoso");})
-    })
+        .then(response => response.text())
+        .then(result => {
+          console.log("Envío exitoso desde Car");
+        })
+      })
     .catch(error => console.log('error', error));
 }
 
