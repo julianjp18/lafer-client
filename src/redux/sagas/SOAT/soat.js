@@ -56,19 +56,39 @@ const createLead = async (dataFormValues) => {
     body: raw,
   };
 
-  console.log("Vamo aqui");
+  console.log("Perfecto");
 
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
-    .then(response => {
-      response.text();
-       //const data =response.json();
-       //console.log(data);
-     //console.log(response);
+    .then(response => response.text())
+    .then((result) => {
+      console.log(result);
+      const idLeadSharp = JSON.parse(result).result.creates[0].id;
+      console.log(idLeadSharp)
+      localStorage.setItem('ID', idLeadSharp)
+      var list = JSON.stringify(
+        {
+          "method": "addListMember",
+          "params": {
+            "listID": "3670574082",
+            "memberID": idLeadSharp
+          },
+          "id": `123${identification}`
+        }
+      );
+
+      var requestList = {
+        method: 'POST',
+        headers: myHeaders,
+        body: list,
+      };
+
+      fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
+        .then(response => response.text())
+        .then(result => {
+          console.log("Envío acontacto desde SOAT 3er paso");
+        })
     })
-    .then(result => 
-      console.log(result)
-      )
     .catch(error => console.log('error', error));
 }
 

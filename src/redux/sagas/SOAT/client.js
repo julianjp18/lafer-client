@@ -12,9 +12,12 @@ const createLead = async (dataFormValues) => {
     brand,
   } = dataFormValues;
 
+  console.log()
+
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*");
+  console.log();
 
   var raw = JSON.stringify(
     {
@@ -42,6 +45,7 @@ const createLead = async (dataFormValues) => {
   };
 
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
+
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
     .then((result) => {
@@ -60,11 +64,13 @@ const createLead = async (dataFormValues) => {
           "id": `123${identification}`
         }
       );
+
       var requestList = {
         method: 'POST',
         headers: myHeaders,
         body: list,
       };
+
       fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
         .then(response => response.text())
         .then(result => {

@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 const createLead = async (dataFormValues) => {
     const {
@@ -10,9 +10,9 @@ const createLead = async (dataFormValues) => {
         email,
         cityName,
         address,
-        idLeadSharp,
     } = dataFormValues;
 
+    var idLeadSharp = localStorage.getItem('ID')
     console.log(idLeadSharp);
 
     // var myHeaders = new Headers();
