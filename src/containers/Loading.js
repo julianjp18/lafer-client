@@ -11,7 +11,10 @@ let Loading = ({ loading }) => (
     null
 );
 
-const mapStateToProps = (state) => ({ loading: state.loading });
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({ loading: state.loading });
+};
 
 Loading = connect(mapStateToProps, null)(Loading);
 

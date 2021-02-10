@@ -364,9 +364,12 @@ const Quote = ({ secure_car }) => {
   );
 }
 
-const mapStateToProps = (state) => ({
-  secure_car: state.secure_car,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    secure_car: state.secure_car,
+  });
+};
 
 const mapDispatchToProps = {
   mainInfo
