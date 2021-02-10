@@ -14,7 +14,6 @@ import MediumResponses from "../components/Admin/MediumResponses"
 import LinkClasses from "../components/Admin/LinkClasses";
 import PQRContacts from "../components/Admin/PQRContacts";
 import TypeActivities from "../components/Admin/TypeActivities";
-import StepsForm from "../components/Landing/StepsForm";
 import Products from "../components/Admin/Products";
 import Insurers from "../components/Admin/Insurers";
 import TypeOperations from "../components/Admin/TypeOperations";

@@ -230,6 +230,7 @@ function* getCities() {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Accept", "application/json");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
   myHeaders.append("x-api-key", API_KEY);
 
   var raw = JSON.stringify({ "claveAsesor": PASSWORD_ASESOR });
@@ -241,7 +242,8 @@ function* getCities() {
     redirect: 'follow'
   };
 
-  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json", requestOptions);
+  const url = "https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json";
+  const response = yield fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions);
   const data = yield response.json();
 
   if (data.dataHeader.codRespuesta === 200) {
