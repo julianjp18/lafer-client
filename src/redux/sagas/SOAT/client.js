@@ -44,11 +44,11 @@ const createLead = async (dataFormValues) => {
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
-    .then((result) => {
+    .then(function* (result) {
       console.log(result);
       const idLeadSharp = JSON.parse(result).result.creates[0].id;
       getIdLeadSharp(idLeadSharp);
-      put({ type: "IDLEADSHARP_SUCCESS", idLeadSharp });
+      yield put({ type: "IDLEADSHARP_SUCCESS", idLeadSharp });
       console.log(idLeadSharp)
       var list = JSON.stringify(
         {
@@ -60,16 +60,20 @@ const createLead = async (dataFormValues) => {
           "id": `123${identification}`
         }
       );
+
       var requestList = {
         method: 'POST',
         headers: myHeaders,
         body: list,
       };
+
+      /*
       fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
         .then(response => response.text())
         .then(result => {
           console.log("Envío exitoso SOAT");
         })
+        */
     })
     .catch(error => console.log('error', error));
 }

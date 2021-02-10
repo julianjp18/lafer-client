@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ROUTES from "../../routing/routes";
 import './menu.scss';
 
 function Menu({ }) {
   const [isToggle, setisToggle] = useState(false);
-  const history = useHistory();
-
-  const burgerMenu = document.getElementById("burger");
-  const navbarMenu = document.getElementById("menu");
 
   const burgerOnClick = () => {
     setisToggle(!isToggle);
@@ -37,14 +33,6 @@ function Menu({ }) {
       <ul className={`menu ${isToggle ? 'active' : ''}`} id="menu">
         {!localStorage.getItem("user") ? displayRouteMenu(ROUTES) : displayAuthRouteMenu(ROUTES)}
       </ul>
-      <div className="social">
-        <a href="#" className="social-item"><i className="fab fa-facebook"></i></a>
-        <a href="#" className="social-item"><i className="fab fa-twitter"></i></a>
-        <a href="#" className="social-item"><i className="fab fa-instagram"></i></a>
-        <a href="#" className="social-item">
-          <img src={'/images/icons/wa-large.png'} alt="whatsapp icon" />
-        </a>
-      </div>
     </nav>
   );
 };

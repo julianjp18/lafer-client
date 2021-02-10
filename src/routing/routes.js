@@ -22,49 +22,32 @@ import TypeIndustries from "../components/Admin/TypeIndustries";
 import TypeIdentification from "../components/Admin/TypeIdentifications";
 import TypeCompanies from "../components/Admin/TypeCompanies";
 import RequestTypes from "../components/Admin/RequestTypes";
+import StepsForm from "../components/SOAT/StepsForm";
 import SuccessPayment from "../components/Payments/SuccessPayment";
 import FailurePayment from "../components/Payments/FailurePayment";
 import PendingPayment from "../components/Payments/PendingPayment";
 import AbortPayment from "../components/Payments/AbortPayment";
+import SOAT from "../components/SOAT";
 
 const ROUTES = [
-  { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
-  { path: "/soat", key: "SOAT", exact: true, component: Landing, show: true, auth: false },
-  { path: "/profile", key: "Mi perfil", exact: true, component: Landing, show: false, auth: true },
-  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: false },
-  {
-    path: "/secures-list",
-    key: "Seguros",
-    show: true,
-    auth: false,
-    component: props => {
-      return <RenderRoutes {...props} />;
-    },
-    routes: [
-      {
-        path: "/secure-car",
-        key: "Seguro para auto",
-        exact: true,
-        component: SecureCar,
-        show: true,
-        auth: false,
-      },
-    ],
-  },
-  { path: "/blogs", key: "Blogs", exact: true, component: LogIn, show: true, auth: false },
-  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
-  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
-  { path: "/contact-us", key: "Contáctanos", exact: true, component: SignUp, show: true, auth: false },
-  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
-  { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
-  { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
-  { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
-  { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
   { path: "/success-payment", key: "Success payment", exact: true, component: SuccessPayment, show: false, auth: false, },
   { path: "/failure-payment", key: "Failure payment", exact: true, component: FailurePayment, show: false, auth: false, },
   { path: "/pending-payment", key: "Pending payment", exact: true, component: PendingPayment, show: false, auth: false, },
   { path: "/abort-payment", key: "Abort payment", exact: true, component: AbortPayment, show: false, auth: false, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
+  { path: "/", key: "Inicio", exact: true, component: Landing, show: true, auth: false },
+  { path: "/soat", key: "SOAT", exact: true, component: SOAT, show: true, auth: false },
+  { path: "/profile", key: "Mi perfil", exact: true, component: Landing, show: false, auth: true },
+  { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: true, auth: false },
+  { path: "/contact-us", key: "Contáctanos", exact: true, component: SignUp, show: true, auth: false },
+  { path: "/blogs", key: "Blog", exact: true, component: LogIn, show: true, auth: false },
+  { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: true, auth: false },
+  { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: true, auth: false },
+  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
+  { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
+  { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
+  { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
+  { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
   { path: "/main-activities", key: "Main Activities", exact: true, component: MainActivities, show: false, auth: true },
   { path: "/medium-responses", key: "Medium Responses", exact: true, component: MediumResponses, show: false, auth: true },
   { path: "/link-classes", key: "Link Classes", exact: true, component: LinkClasses, show: false, auth: true },
@@ -76,8 +59,7 @@ const ROUTES = [
   { path: "/type-industries", key: "Type Industries", exact: true, component: TypeIndustries, show: false, auth: true },
   { path: "/type-identification", key: "Type Identification", exact: true, component: TypeIdentification, show: false, auth: true },
   { path: "/type-companies", key: "Type Companies", exact: true, component: TypeCompanies, show: false, auth: true },
-  { path: "/request-types", key: "Request Types", exact: true, component: RequestTypes, show: false, auth: true },
-
+  { path: "/request-types", key: "Request Types", exact: true, component: RequestTypes, show: false, auth: true },  
 ];
 
 export default ROUTES;

@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Row, Col, Select, Radio, Card, Button, message, Spin } from 'antd';
-import { connect } from 'react-redux';
+import {
+  Form,
+  Input,
+  Row,
+  Col,
+  Select,
+  Radio,
+  Card,
+  Button,
+  Spin,
+} from 'antd';
 
 const { Option } = Select;
 
@@ -208,13 +217,4 @@ function FirstForm({ next, vehicleInfo, response, idLeadSharp }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  responseState: state.response,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FirstForm);
+export default FirstForm;
