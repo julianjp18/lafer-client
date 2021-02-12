@@ -84,9 +84,12 @@ function CustomQuote({ mainInfo, response }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  response: state.response,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    response: state.response,
+  });
+};
 
 const mapDispatchToProps = {
   mainInfo

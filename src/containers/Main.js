@@ -26,8 +26,11 @@ let NewsItem = ({ article }) => (
     null
 );
 
-const mapStateToProps = (state) => ({
-  article: state.news,
-});
+const mapStateToProps = (globalState) => {
+  const state = globalState.app;
+  return ({
+    article: state.news,
+  });
+};
 NewsItem = connect(mapStateToProps, null)(NewsItem);
 export default NewsItem;

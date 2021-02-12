@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Input, Row, Col, Button, Select } from 'antd';
-import { connect } from 'react-redux';
 
 const { Option } = Select;
 
@@ -218,6 +217,4 @@ function SecondForm({ next, prev, clientInfo, response }) {
   );
 }
 
-const mapDispatchToProps = {};
-
-export default connect(null, mapDispatchToProps)(SecondForm);
+export default SecondForm;

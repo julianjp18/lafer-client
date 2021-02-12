@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Input, Row, Col, Button, Card, Modal } from 'antd';
-import { connect } from 'react-redux';
 import moment from 'moment';
 
 function ThirdForm({
@@ -104,6 +103,4 @@ function ThirdForm({
   );
 }
 
-const mapDispatchToProps = {};
-
-export default connect(null, mapDispatchToProps)(ThirdForm);
+export default ThirdForm;
