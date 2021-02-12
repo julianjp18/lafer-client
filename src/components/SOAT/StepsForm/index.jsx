@@ -42,7 +42,6 @@ const StepsForm = ({
     setCurrent(current - 1);
   };
 
-  console.log(response);
   const steps = [
     {
       title: 'Tu vehiculo',
@@ -131,6 +130,7 @@ const mapStateToProps = (globalState) => {
     clientInfoState: state.client_info_soat,
     buySoatState: state.buy_soat,
     response: state.response,
+    idLeadSharp: state.idLeadSharp,
   });
 };
 

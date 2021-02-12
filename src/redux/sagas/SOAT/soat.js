@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
+import { BUY_SOAT, BUY_SOAT_FAILURE, BUY_SOAT_FORM, BUY_SOAT_FORM_FAILURE, BUY_SOAT_FORM_SUCCESS, BUY_SOAT_SUCCESS } from '../../constants';
 
 const createLead = async (dataFormValues) => {
   const {
@@ -62,9 +63,6 @@ const createLead = async (dataFormValues) => {
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => {
       response.text();
-       //const data =response.json();
-       //console.log(data);
-     //console.log(response);
     })
     .then(result => 
       console.log(result)
@@ -91,10 +89,10 @@ function* buySoat(formValues) {
 
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: data[0].message });
-    yield put({ type: "BUY_SOAT_SUCCESS", buy_soat: { ...data[0], username }, });
+    yield put({ type: BUY_SOAT_SUCCESS, buy_soat: { ...data[0], username }, });
   } else {
     yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "BUY_SOAT_FAILURE", response: { ...data[0], username }, });
+    yield put({ type: BUY_SOAT_FAILURE, response: { ...data[0], username }, });
   }
 
 }
@@ -175,15 +173,15 @@ function* buySoatForm(formValues) {
 
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
-    yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
+    yield put({ type: BUY_SOAT_FORM_SUCCESS, response: { formValues }, });
   } else {
     yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { ...data[0] }, });
+    yield put({ type: BUY_SOAT_FORM_FAILURE, response: { ...data[0] }, });
   }
 
 }
 
 export function* soatWatcher() {
-  yield takeLatest('BUY_SOAT', buySoat)
-  yield takeLatest('BUY_SOAT_FORM', buySoatForm)
+  yield takeLatest(BUY_SOAT, buySoat)
+  yield takeLatest(BUY_SOAT_FORM, buySoatForm)
 }
