@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { VEHICLE_INFO, VEHICLE_INFO_SUCCESS } from '../../constants';
+import { PropTypes } from 'prop-types';
 
 const createLead = async (dataFormValues) => {
     const {

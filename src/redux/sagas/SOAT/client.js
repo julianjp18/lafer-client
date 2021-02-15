@@ -12,9 +12,12 @@ const createLead = async (dataFormValues) => {
     brand,
   } = dataFormValues;
 
+  console.log()
+
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*");
+  console.log();
 
   var raw = JSON.stringify(
     {
