@@ -64,8 +64,7 @@ const ROUTES = [
   { path: "/type-industries", key: "Type Industries", exact: true, component: TypeIndustries, show: false, auth: true },
   { path: "/type-identification", key: "Type Identification", exact: true, component: TypeIdentification, show: false, auth: true },
   { path: "/type-companies", key: "Type Companies", exact: true, component: TypeCompanies, show: false, auth: true },
-  { path: "/request-types", key: "Request Types", exact: true, component: RequestTypes, show: false, auth: true },
-
+  { path: "/request-types", key: "Request Types", exact: true, component: RequestTypes, show: false, auth: true },  
 ];
 
 export default ROUTES;

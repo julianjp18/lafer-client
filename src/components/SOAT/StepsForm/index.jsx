@@ -42,7 +42,6 @@ const StepsForm = ({
     setCurrent(current - 1);
   };
 
-  console.log(response);
   const steps = [
     {
       title: 'Tu vehiculo',

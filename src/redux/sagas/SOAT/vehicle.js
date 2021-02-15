@@ -1,82 +1,78 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import {PropTypes} from 'prop-types';
+import { VEHICLE_INFO, VEHICLE_INFO_SUCCESS } from '../../constants';
 
 const createLead = async (dataFormValues) => {
     const {
-        identificationType,
+        brand,
+        line,
+        model,
+        typeVehicle,
+        classVehicle,
         identification,
-        name,
-        lastName,
-        email,
-        cityName,
-        address,
         idLeadSharp,
     } = dataFormValues;
 
-    console.log(idLeadSharp);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", "*");
 
-    // var myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Access-Control-Allow-Origin", "*");
+    var raw = JSON.stringify(
+        {
+            "id": "1234",
+            "method": "updateLeads",
+            "params": {
+                "objects": [
+                    {
+                        "id": idLeadSharp,
+                        "marca_6010193d75a00": brand,
+                        "clase_vehiculo_602a82666a7f3": classVehicle,
+                        "linea_602a834ac4e41": line,
+                        "modelo_601019a742dcd": model,
+                        "precio_602a84d510cb3": typeVehicle,
+                    }
+                ]
+            }
+        }
+    );
 
-    // var raw = JSON.stringify(
-    //     {
-    //         "method": "createLeads",
-    //         "params":
-    //         {
-    //             "objects": [
-    //                 {
-    //                     firstName: name,
-    //                     lastName: lastName,
-    //                     emailAddress: email,
-    //                     city: cityName,
-    //                     street: address,
-    //                     identificacion_6010175c91f14: identificationType,
-    //                     numeroid_6010179c38d01: identification,
-    //                 }
-    //             ]
-    //         },
-    //         "id": `123${identification}`
-    //     }
-    // );
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+    };
 
-    // var requestOptions = {
-    //     method: 'POST',
-    //     headers: myHeaders,
-    //     body: raw,
-    // };
+    const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5";
+    return await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+        .then(response => response.text())
+        .then(async (result) => {
+            var list = JSON.stringify(
+                {
+                    "method": "addListMember",
+                    "params": {
+                        "listID": "3676802050",
+                        "memberID": idLeadSharp
+                    },
+                    "id": `123${identification}`
+                }
+            );
 
-    // const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
-    // fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
-    //     .then(response => response.text())
-    //     .then(result => {
-    //         const idLeadSharp = JSON.parse(result).result.creates[0].id;
-    //         console.log(JSON.parse(result).result.creates[0].id)
-    //         var list = JSON.stringify(
-    //             {
-    //                 "method": "addListMember",
-    //                 "params": {
-    //                     "listID": "3670574082",
-    //                     "memberID": idLeadSharp
-    //                 },
-    //                 "id": `123${identification}`
-    //             }
-    //         );
-    //         var requestList = {
-    //             method: 'POST',
-    //             headers: myHeaders,
-    //             body: list,
-    //         };
-    //         fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
-    //             .then(response => response.text())
-    //             .then(result => {
-    //                 console.log("Envío exitoso SOAT 2do PASO");
-    //             })
-    //     })
-    //     .catch(error => console.log('error', error));
+            var requestList = {
+                method: 'POST',
+                headers: myHeaders,
+                body: list,
+            };
+
+            fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
+                .then(response => response.text())
+                .then(result => {
+                });
+            return idLeadSharp;
+        })
+        .catch(error => console.log('error', error));
 }
 
 function* vehicle(formValues) {
+
     const { identificationType } = formValues.payload;
     const { identification } = formValues.payload;
     const { name } = formValues.payload;
@@ -84,24 +80,27 @@ function* vehicle(formValues) {
     const { email } = formValues.payload;
     const { cityName } = formValues.payload;
     const { address } = formValues.payload;
+    const { phone } = formValues.payload;
+    const { brand } = formValues.payload;
+    const { line } = formValues.payload;
+    const { model } = formValues.payload;
+    const { typeVehicle } = formValues.payload;
+    const { classVehicle } = formValues.payload;
     const { idLeadSharp } = formValues.payload;
 
-    console.log(idLeadSharp);
-
     createLead({
-        identificationType,
+        brand,
+        line,
+        model,
+        typeVehicle,
+        classVehicle,
         identification,
-        name,
-        lastName,
-        email,
-        cityName,
-        address,
         idLeadSharp,
-    });
+    })
 
-    yield put({ type: "VEHICLE_INFO_SUCCESS", vehicle_info: formValues.payload, });
+    yield put({ type: VEHICLE_INFO_SUCCESS, vehicle_info: formValues.payload });
 }
 
 export function* vehicleWatcher() {
-    yield takeLatest('VEHICLE_INFO', vehicle);
+    yield takeLatest(VEHICLE_INFO, vehicle);
 }

@@ -236,97 +236,71 @@ const reducer = (state = {}, action) => {
     case SECURE_CAR:
     case GET_CITIES:
     case MAIN_INFO:
-    /* COUNTRIES */
     case GET_COUNTRIES:
     case DELETE_COUNTRY:
     case GET_COUNTRY_BY_ID:
     case UPDATE_COUNTRY:
     case CREATE_COUNTRY:
-    /* END COUNTRIES */
-    /* MAINACTIVITIES */
     case GET_MAINACTIVITIES:
     case DELETE_MAINACTIVITY:
     case GET_MAINACTIVITY_BY_ID:
     case UPDATE_MAINACTIVITY:
     case CREATE_MAINACTIVITY:
-    /* END MAINACTIVITIES */
-    /* MEDIUMRESPONSES */
     case GET_MEDIUMRESPONSES:
     case DELETE_MEDIUMRESPONSES:
     case GET_MEDIUMRESPONSES_BY_ID:
     case UPDATE_MEDIUMRESPONSES:
     case CREATE_MEDIUMRESPONSES:
-    /* END MEDIUMRESPONSES */
-    /* LINKCLASSES */
     case GET_LINKCLASSES:
     case DELETE_LINKCLASSES:
     case GET_LINKCLASSES_BY_ID:
     case UPDATE_LINKCLASSES:
     case CREATE_LINKCLASSES:
-    /* END LINKCLASSES */
-    /* PQRCONTACTS */
     case GET_PQRCONTACTS:
     case DELETE_PQRCONTACTS:
     case GET_PQRCONTACTS_BY_ID:
     case UPDATE_PQRCONTACTS:
     case CREATE_PQRCONTACTS:
-    /* END PQRCONTACTS */
-    /* TYPEACTIVITIES */
     case GET_TYPEACTIVITIES:
     case DELETE_TYPEACTIVITY:
     case GET_TYPEACTIVITY_BY_ID:
     case UPDATE_TYPEACTIVITY:
     case CREATE_TYPEACTIVITY:
-    /* END TYPEACTIVITIES */
-    /* PRODUCTS */
     case GET_PRODUCTS:
     case DELETE_PRODUCTS:
     case GET_PRODUCTS_BY_ID:
     case UPDATE_PRODUCTS:
     case CREATE_PRODUCTS:
-    /* END PRODUCTS */
-    /* INSURERS */
     case GET_INSURERS:
     case DELETE_INSURERS:
     case GET_INSURERS_BY_ID:
     case UPDATE_INSURERS:
     case CREATE_INSURERS:
-    /* END INSURERS */
-    /* TYPEOPERATIONS */
     case GET_TYPEOPERATIONS:
     case DELETE_TYPEOPERATIONS:
     case GET_TYPEOPERATIONS_BY_ID:
     case UPDATE_TYPEOPERATIONS:
     case CREATE_TYPEOPERATIONS:
-    /* END TYPEOPERATIONS */
-    /* TYPEINDUSTRIES */
     case GET_TYPEINDUSTRIES:
     case DELETE_TYPEINDUSTRIES:
     case GET_TYPEINDUSTRIES_BY_ID:
     case UPDATE_TYPEINDUSTRIES:
     case CREATE_TYPEINDUSTRIES:
-    /* END TYPEINDUSTRIES */
-    /* TYPEIDENTIFICATIONS */
     case GET_TYPEIDENTIFICATIONS:
     case DELETE_TYPEIDENTIFICATIONS:
     case GET_TYPEIDENTIFICATIONS_BY_ID:
     case UPDATE_TYPEIDENTIFICATIONS:
     case CREATE_TYPEIDENTIFICATIONS:
-    /* END TYPEIDENTIFICATIONS */
-    /* TYPECOMPANIES */
     case GET_TYPECOMPANIES:
     case DELETE_TYPECOMPANIES:
     case GET_TYPECOMPANIES_BY_ID:
     case UPDATE_TYPECOMPANIES:
     case CREATE_TYPECOMPANIES:
-    /* END TYPECOMPANIES */
-    /* REQUESTTYPES */
     case GET_REQUESTTYPES:
     case DELETE_REQUESTTYPES:
     case GET_REQUESTTYPES_BY_ID:
     case UPDATE_REQUESTTYPES:
     case CREATE_REQUESTTYPES:
-      /* END REQUESTTYPES */
       return { ...state, loading: true };
     case IDLEADSHARP_SUCCESS:
       return { ...state, idLeadSharp: action.idLeadSharp };
@@ -339,7 +313,6 @@ const reducer = (state = {}, action) => {
     case BUY_SOAT_FORM_FAILURE:
     case GET_CITIES_FAILURE:
     case MAIN_INFO_FAILURE:
-    /* COUNTRIES */
     case CREATE_COUNTRY_FAILURE:
     case UPDATE_COUNTRY_FAILURE:
     case DELETE_COUNTRY_FAILURE:
@@ -348,8 +321,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_COUNTRY_SUCCESS:
     case DELETE_COUNTRY_SUCCESS:
     case GET_COUNTRY_BY_ID_FAILURE:
-    /* END COUNTRIES */
-    /* MAINACTIVITIES */
     case CREATE_MAINACTIVITY_FAILURE:
     case UPDATE_MAINACTIVITY_FAILURE:
     case DELETE_MAINACTIVITY_FAILURE:
@@ -358,8 +329,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_MAINACTIVITY_SUCCESS:
     case DELETE_MAINACTIVITY_SUCCESS:
     case GET_MAINACTIVITY_BY_ID_FAILURE:
-    /* END MAINACTIVITIES */
-    /* MEDIUMRESPONSES */
     case CREATE_MEDIUMRESPONSES_FAILURE:
     case UPDATE_MEDIUMRESPONSES_FAILURE:
     case DELETE_MEDIUMRESPONSES_FAILURE:
@@ -368,8 +337,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_MEDIUMRESPONSES_SUCCESS:
     case DELETE_MEDIUMRESPONSES_SUCCESS:
     case GET_MEDIUMRESPONSES_BY_ID_FAILURE:
-    /* END MEDIUMRESPONSES */
-    /* LINKCLASSES */
     case CREATE_LINKCLASSES_FAILURE:
     case UPDATE_LINKCLASSES_FAILURE:
     case DELETE_LINKCLASSES_FAILURE:
@@ -378,8 +345,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_LINKCLASSES_SUCCESS:
     case DELETE_LINKCLASSES_SUCCESS:
     case GET_LINKCLASSES_BY_ID_FAILURE:
-    /* END LINKCLASSES */
-    /* PQRCONTACTS */
     case CREATE_PQRCONTACTS_FAILURE:
     case UPDATE_PQRCONTACTS_FAILURE:
     case DELETE_PQRCONTACTS_FAILURE:
@@ -388,8 +353,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_PQRCONTACTS_SUCCESS:
     case DELETE_PQRCONTACTS_SUCCESS:
     case GET_PQRCONTACTS_BY_ID_FAILURE:
-    /* END PQRCONTACTS */
-    /* TYPEACTIVITIES */
     case CREATE_TYPEACTIVITY_FAILURE:
     case UPDATE_TYPEACTIVITY_FAILURE:
     case DELETE_TYPEACTIVITY_FAILURE:
@@ -398,8 +361,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPEACTIVITY_SUCCESS:
     case DELETE_TYPEACTIVITY_SUCCESS:
     case GET_TYPEACTIVITY_BY_ID_FAILURE:
-    /* END TYPEACTIVITIES */
-    /* PRODUCTS */
     case CREATE_PRODUCTS_FAILURE:
     case UPDATE_PRODUCTS_FAILURE:
     case DELETE_PRODUCTS_FAILURE:
@@ -408,8 +369,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_PRODUCTS_SUCCESS:
     case DELETE_PRODUCTS_SUCCESS:
     case GET_PRODUCTS_BY_ID_FAILURE:
-    /* END PRODUCTS */
-    /* INSURERS */
     case CREATE_INSURERS_FAILURE:
     case UPDATE_INSURERS_FAILURE:
     case DELETE_INSURERS_FAILURE:
@@ -418,8 +377,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_INSURERS_SUCCESS:
     case DELETE_INSURERS_SUCCESS:
     case GET_INSURERS_BY_ID_FAILURE:
-    /* END INSURERS */
-    /* TYPEOPERATIONS */
     case CREATE_TYPEOPERATIONS_FAILURE:
     case UPDATE_TYPEOPERATIONS_FAILURE:
     case DELETE_TYPEOPERATIONS_FAILURE:
@@ -428,8 +385,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPEOPERATIONS_SUCCESS:
     case DELETE_TYPEOPERATIONS_SUCCESS:
     case GET_TYPEOPERATIONS_BY_ID_FAILURE:
-    /* END TYPEOPERATIONS */
-    /* TYPEINDUSTRIES */
     case CREATE_TYPEINDUSTRIES_FAILURE:
     case UPDATE_TYPEINDUSTRIES_FAILURE:
     case DELETE_TYPEINDUSTRIES_FAILURE:
@@ -438,8 +393,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPEINDUSTRIES_SUCCESS:
     case DELETE_TYPEINDUSTRIES_SUCCESS:
     case GET_TYPEINDUSTRIES_BY_ID_FAILURE:
-    /* END TYPEINDUSTRIES */
-    /* TYPEIDENTIFICATIONS */
     case CREATE_TYPEIDENTIFICATIONS_FAILURE:
     case UPDATE_TYPEIDENTIFICATIONS_FAILURE:
     case DELETE_TYPEIDENTIFICATIONS_FAILURE:
@@ -448,8 +401,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPEIDENTIFICATIONS_SUCCESS:
     case DELETE_TYPEIDENTIFICATIONS_SUCCESS:
     case GET_TYPEIDENTIFICATIONS_BY_ID_FAILURE:
-    /* END TYPEIDENTIFICATIONS */
-    /* TYPECOMPANIES */
     case CREATE_TYPECOMPANIES_FAILURE:
     case UPDATE_TYPECOMPANIES_FAILURE:
     case DELETE_TYPECOMPANIES_FAILURE:
@@ -458,8 +409,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_TYPECOMPANIES_SUCCESS:
     case DELETE_TYPECOMPANIES_SUCCESS:
     case GET_TYPECOMPANIES_BY_ID_FAILURE:
-    /* END TYPECOMPANIES */
-    /* REQUESTTYPES */
     case CREATE_REQUESTTYPES_FAILURE:
     case UPDATE_REQUESTTYPES_FAILURE:
     case DELETE_REQUESTTYPES_FAILURE:
@@ -468,7 +417,6 @@ const reducer = (state = {}, action) => {
     case UPDATE_REQUESTTYPES_SUCCESS:
     case DELETE_REQUESTTYPES_SUCCESS:
     case GET_REQUESTTYPES_BY_ID_FAILURE:
-      /* END REQUESTTYPES */
       return {
         ...state,
         response: action.response,
@@ -530,8 +478,6 @@ const reducer = (state = {}, action) => {
         get_countries_list: action.response,
         loading: false,
       };
-    /* END COUNTRIES */
-    /* MAINACTIVITIES */
     case GET_MAINACTIVITY_BY_ID_SUCCESS:
       return {
         ...state,
@@ -544,8 +490,6 @@ const reducer = (state = {}, action) => {
         get_mainactivities_list: action.response,
         loading: false,
       };
-    /* END MAINACTIVITIES */
-    /* MEDIUMRESPONSES */
     case GET_MEDIUMRESPONSES_BY_ID_SUCCESS:
       return {
         ...state,
@@ -558,8 +502,6 @@ const reducer = (state = {}, action) => {
         get_mediumresponses_list: action.respon,
         loading: false,
       };
-    /* END MAINACTIVITIES */
-    /* LINKCLASSES */
     case GET_LINKCLASSES_BY_ID_SUCCESS:
       return {
         ...state,
@@ -572,8 +514,6 @@ const reducer = (state = {}, action) => {
         get_linkclasses_list: action.response,
         loading: false,
       };
-    /* END LINKCLASSES */
-    /* PQRCONTACTS */
     case GET_PQRCONTACTS_BY_ID_SUCCESS:
       return {
         ...state,
@@ -586,8 +526,6 @@ const reducer = (state = {}, action) => {
         get_pqrcontacts_list: action.response,
         loading: false,
       };
-    /* END PQRCONTACTS */
-    /* TYPEACTIVITIES */
     case GET_TYPEACTIVITY_BY_ID_SUCCESS:
       return {
         ...state,
@@ -600,8 +538,6 @@ const reducer = (state = {}, action) => {
         get_typeactivities_list: action.response,
         loading: false,
       };
-    /* TYPEACTIVITIES */
-    /* PRODUCTS */
     case GET_PRODUCTS_BY_ID_SUCCESS:
       return {
         ...state,
@@ -614,8 +550,6 @@ const reducer = (state = {}, action) => {
         get_products_list: action.response,
         loading: false,
       };
-    /* END PRODUCTS */
-    /* INSURERS */
     case GET_INSURERS_BY_ID_SUCCESS:
       return {
         ...state,
@@ -628,8 +562,6 @@ const reducer = (state = {}, action) => {
         get_insurers_list: action.response,
         loading: false,
       };
-    /* END INSURERS */
-    /* TYPEOPERATIONS */
     case GET_TYPEOPERATIONS_BY_ID_SUCCESS:
       return {
         ...state,
@@ -642,8 +574,6 @@ const reducer = (state = {}, action) => {
         get_typeoperations_list: action.response,
         loading: false,
       };
-    /* END TYPEOPERATIONS */
-    /* TYPEINDUSTRIES */
     case GET_TYPEINDUSTRIES_BY_ID_SUCCESS:
       return {
         ...state,
@@ -656,8 +586,6 @@ const reducer = (state = {}, action) => {
         get_typeindustries_list: action.response,
         loading: false,
       };
-    /* END TYPEINDUSTRIES */
-    /* TYPEIDENTIFICATIONS */
     case GET_TYPEIDENTIFICATIONS_BY_ID_SUCCESS:
       return {
         ...state,
@@ -670,8 +598,6 @@ const reducer = (state = {}, action) => {
         get_typeidentifications_list: action.response,
         loading: false,
       };
-    /* END TYPEIDENTIFICATIONS */
-    /* TYPECOMPANIES */
     case GET_TYPECOMPANIES_BY_ID_SUCCESS:
       return {
         ...state,
@@ -684,8 +610,6 @@ const reducer = (state = {}, action) => {
         get_typecompanies_list: action.response,
         loading: false,
       };
-    /* END TYPECOMPANIES */
-    /* REQUESTTYPES */
     case GET_REQUESTTYPES_BY_ID_SUCCESS:
       return {
         ...state,
@@ -698,7 +622,6 @@ const reducer = (state = {}, action) => {
         get_requesttypes_list: action.response,
         loading: false,
       };
-    /* END REQUESTTYPES */
     case BUY_SOAT_FORM_SUCCESS:
     default:
       return state;

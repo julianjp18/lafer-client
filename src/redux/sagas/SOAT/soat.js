@@ -1,14 +1,15 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
+import { BUY_SOAT, BUY_SOAT_FAILURE, BUY_SOAT_FORM, BUY_SOAT_FORM_FAILURE, BUY_SOAT_FORM_SUCCESS, BUY_SOAT_SUCCESS } from '../../constants';
 
 const createLead = async (dataFormValues) => {
   const {
-    typeVehicle, //VALOR $$
+    typeVehicle,
     line,
     classVehicle,
     model,
-    plate,  //Placa
+    plate,
     brand,
     identificationType,
     phoneNumber,
@@ -18,6 +19,7 @@ const createLead = async (dataFormValues) => {
     address,
     city,
     identification,
+    idLeadSharp,
   } = dataFormValues;
 
   var myHeaders = new Headers();
@@ -26,29 +28,17 @@ const createLead = async (dataFormValues) => {
 
   var raw = JSON.stringify(
     {
-      "method": "createLeads",
-      "params":
-      {
+      "id": `123${identification}`,
+      "method": "updateLeads",
+      "params": {
         "objects": [
           {
-            firstName: name,
-            lastName: lastName,
-            emailAddress: email,
-            city: city,
-            street: address,
-            phoneNumber: phoneNumber,
-            identificacion_6010175c91f14: identificationType,
-            placa_600763145ae42: plate,
-            modelo_601019a742dcd: model,
-            marca_6010193d75a00: brand,
-            numeroid_6010179c38d01: identification,
-            preciosoat_6014802814e37: typeVehicle,
+            "id": idLeadSharp,
+            "compra_soat_602ab17697fee": "Comprado",
           }
         ]
-      },
-      "id": `123${identification}`
-    }
-  );
+      }
+    });
 
   var requestOptions = {
     method: 'POST',
@@ -56,23 +46,64 @@ const createLead = async (dataFormValues) => {
     body: raw,
   };
 
-  console.log("Vamo aqui");
+  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5";
 
-  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
-  fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
-    .then(response => {
-      response.text();
-       //const data =response.json();
-       //console.log(data);
-     //console.log(response);
+  return await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      var list = JSON.stringify(
+        {
+          "method": "addListMember",
+          "params": {
+            "listID": "3676804098",
+            "memberID": idLeadSharp
+          },
+          "id": `123${identification}`
+        }
+      );
+
+      var requestList = {
+        method: 'POST',
+        headers: myHeaders,
+        body: list,
+      };
+
+      fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
+        .then(response => response.text())
+        .then(result => {
+
+          var removelist = JSON.stringify(
+            {
+              "method": "removeListMember",
+              "params": {
+                "where": {
+                  "listID": "3676803074",
+                  "contactID": idLeadSharp
+                }
+              },
+              "id": `123${identification}`
+            }
+          );
+
+          var requestRemoveList = {
+            method: 'POST',
+            headers: myHeaders,
+            body: removelist,
+          };
+
+          fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
+            .then(response => response.text())
+            .then(result => {
+            });
+
+          return idLeadSharp;
+        })
     })
-    .then(result => 
-      console.log(result)
-      )
     .catch(error => console.log('error', error));
 }
 
 function* buySoat(formValues) {
+
   //123qweQ!
   const { username, password } = formValues.payload;
   const data = [];
@@ -91,15 +122,16 @@ function* buySoat(formValues) {
 
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: data[0].message });
-    yield put({ type: "BUY_SOAT_SUCCESS", buy_soat: { ...data[0], username }, });
+    yield put({ type: BUY_SOAT_SUCCESS, buy_soat: { ...data[0], username }, });
   } else {
     yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "BUY_SOAT_FAILURE", response: { ...data[0], username }, });
+    yield put({ type: BUY_SOAT_FAILURE, response: { ...data[0], username }, });
   }
 
 }
 
 function* buySoatForm(formValues) {
+
   const { vehicle_info, client_info, buy_soat } = formValues.payload;
   const {
     typeVehicle,
@@ -118,6 +150,7 @@ function* buySoatForm(formValues) {
     address,
     city,
     identification,
+    idLeadSharp,
   } = client_info;
   const { cupon } = buy_soat;
 
@@ -169,21 +202,22 @@ function* buySoatForm(formValues) {
     address,
     city,
     identification,
+    idLeadSharp,
   });
 
   yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
 
   if (data[0].status !== 'Error') {
     yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
-    yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
+    yield put({ type: BUY_SOAT_FORM_SUCCESS, response: { formValues }, });
   } else {
     yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { ...data[0] }, });
+    yield put({ type: BUY_SOAT_FORM_FAILURE, response: { ...data[0] }, });
   }
 
 }
 
 export function* soatWatcher() {
-  yield takeLatest('BUY_SOAT', buySoat)
-  yield takeLatest('BUY_SOAT_FORM', buySoatForm)
+  yield takeLatest(BUY_SOAT, buySoat)
+  yield takeLatest(BUY_SOAT_FORM, buySoatForm)
 }

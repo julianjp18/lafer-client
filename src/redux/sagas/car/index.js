@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import http from "../../../axios/sura";
 import showNotification from '../../showNotification';
+import { GET_CITIES, GET_CITIES_FAILURE, GET_CITIES_SUCCESS, SECURE_CAR, SECURE_CAR_FAILURE, SECURE_CAR_SUCCESS } from '../../constants';
 
 const PASSWORD_ASESOR = "29528";
 const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
@@ -162,7 +163,7 @@ function* secureCar(formValues) {
 
     if (response.status === 200) {
       yield call(showNotification, { type: 'success', message: 'Visualiza la lista de productos' });
-      yield put({ type: "SECURE_CAR_SUCCESS", response: { ...data.data }, });
+      yield put({ type: SECURE_CAR_SUCCESS, response: { ...data.data }, });
 
     } else if (response.status === 400) {
       if (data.dataHeader.errores[0].idError === 1000) {
@@ -172,20 +173,20 @@ function* secureCar(formValues) {
         yield call(showNotification, { type: 'warning', message: data.dataHeader.errores[0].descError });
 
       }
-      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader.errores[0] }, });
+      yield put({ type: SECURE_CAR_FAILURE, response: { ...data.dataHeader.errores[0] }, });
 
     } else if (response.status === 500 || response.status === 504) {
       yield call(showNotification, { type: 'warning', message: 'Error en la liquidación, por favor inténtelo nuevamente.' });
-      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
+      yield put({ type: SECURE_CAR_FAILURE, response: { ...data.dataHeader }, });
 
     } else {
       yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
-      yield put({ type: "SECURE_CAR_FAILURE", response: { ...data.dataHeader }, });
+      yield put({ type: SECURE_CAR_FAILURE, response: { ...data.dataHeader }, });
 
     }
   } catch (err) {
     yield call(showNotification, { type: 'warning', message: 'Error en la liquidación' });
-    yield put({ type: "SECURE_CAR_FAILURE", response: {}, });
+    yield put({ type: SECURE_CAR_FAILURE, response: {}, });
   }
 }
 
@@ -223,13 +224,14 @@ function* getQuotation(formValues) {
 
   const resOne = yield dataOne.json();
 
-  yield put({ type: "SECURE_CAR_SUCCESS", response: { ...resOne.data } });
+  yield put({ type: SECURE_CAR_SUCCESS, response: { ...resOne.data } });
 }
 
 function* getCities() {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Accept", "application/json");
+  myHeaders.append("Access-Control-Allow-Origin", "*");
   myHeaders.append("x-api-key", API_KEY);
 
   var raw = JSON.stringify({ "claveAsesor": PASSWORD_ASESOR });
@@ -241,18 +243,19 @@ function* getCities() {
     redirect: 'follow'
   };
 
-  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json", requestOptions);
+  const url = "https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json";
+  const response = yield fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions);
   const data = yield response.json();
 
   if (data.dataHeader.codRespuesta === 200) {
-    yield put({ type: "GET_CITIES_SUCCESS", response: [...data.data.catalogoDato], });
+    yield put({ type: GET_CITIES_SUCCESS, response: [...data.data.catalogoDato], });
   } else {
     yield call(showNotification, { type: 'warning', message: 'Error en la obtención de ciudades' });
-    yield put({ type: "GET_CITIES_FAILURE", response: { ...data }, });
+    yield put({ type: GET_CITIES_FAILURE, response: { ...data }, });
   }
 }
 
 export function* secureCarWatcher() {
-  yield takeLatest('SECURE_CAR', secureCar)
-  yield takeLatest('GET_CITIES', getCities)
+  yield takeLatest(SECURE_CAR, secureCar)
+  yield takeLatest(GET_CITIES, getCities)
 }
