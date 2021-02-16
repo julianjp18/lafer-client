@@ -13,7 +13,7 @@ import {
 
 const { Option } = Select;
 
-function FirstForm({ next, vehicleInfo, response, idLeadSharp }) {
+function FirstForm({ next, vehicleInfo, response }) {
   const [typeVehicle, setTypeVehicle] = useState();
   const [line, setLine] = useState(response && response.line);
   const [classVehicle, setClassVehicle] = useState(response && response.class);
@@ -39,7 +39,7 @@ function FirstForm({ next, vehicleInfo, response, idLeadSharp }) {
       model,
       plate,
       brand,
-      idLeadSharp,
+      idLeadSharp: response.idLeadSharp,
     };
 
     vehicleInfo(vehicleData);

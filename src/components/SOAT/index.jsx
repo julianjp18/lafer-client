@@ -146,7 +146,6 @@ const mapStateToProps = (globalState) => {
   const state = globalState.app;
   return ({
     response: state.response,
-    idLeadSharp: state.idLeadSharp,
   });
 };
 

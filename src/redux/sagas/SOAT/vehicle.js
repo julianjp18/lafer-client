@@ -1,15 +1,13 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { VEHICLE_INFO, VEHICLE_INFO_SUCCESS } from '../../constants';
-import { PropTypes } from 'prop-types';
 
-const createLead = async (dataFormValues) => {
+const updateLead = async (dataFormValues) => {
     const {
         brand,
         line,
         model,
         typeVehicle,
         classVehicle,
-        identification,
         idLeadSharp,
     } = dataFormValues;
 
@@ -43,7 +41,7 @@ const createLead = async (dataFormValues) => {
     };
 
     const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5";
-    return await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+    await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
         .then(response => response.text())
         .then(async (result) => {
             var list = JSON.stringify(
@@ -53,7 +51,7 @@ const createLead = async (dataFormValues) => {
                         "listID": "3676802050",
                         "memberID": idLeadSharp
                     },
-                    "id": `123${identification}`
+                    "id": `123${idLeadSharp}`
                 }
             );
 
@@ -67,21 +65,12 @@ const createLead = async (dataFormValues) => {
                 .then(response => response.text())
                 .then(result => {
                 });
-            return idLeadSharp;
         })
         .catch(error => console.log('error', error));
 }
 
 function* vehicle(formValues) {
 
-    const { identificationType } = formValues.payload;
-    const { identification } = formValues.payload;
-    const { name } = formValues.payload;
-    const { lastName } = formValues.payload;
-    const { email } = formValues.payload;
-    const { cityName } = formValues.payload;
-    const { address } = formValues.payload;
-    const { phone } = formValues.payload;
     const { brand } = formValues.payload;
     const { line } = formValues.payload;
     const { model } = formValues.payload;
@@ -89,19 +78,18 @@ function* vehicle(formValues) {
     const { classVehicle } = formValues.payload;
     const { idLeadSharp } = formValues.payload;
 
-    createLead({
+    updateLead({
         brand,
         line,
         model,
         typeVehicle,
         classVehicle,
-        identification,
         idLeadSharp,
-    })
+    });
 
     yield put({ type: VEHICLE_INFO_SUCCESS, vehicle_info: formValues.payload });
 }
 
 export function* vehicleWatcher() {
-    yield takeLatest(VEHICLE_INFO, vehicle);
+  yield takeLatest(VEHICLE_INFO, vehicle);
 }
