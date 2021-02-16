@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
+import {getIdLeadSharp} from '../../../redux/actions';
+
 import {
   Form,
   Input,
@@ -48,7 +51,7 @@ function FirstForm({ next, vehicleInfo, response, idLeadSharp }) {
 
   return response ? (
     <div style={{ padding: 50 }}>
-      <h1>Información de tu vehiculo</h1>
+      <h1 onClick={jaksdf({getIdLeadSharp})}>Información de tu vehiculo</h1>
       <p>Revisa que este sea la información de tu vehiculo, recuerda que el SOAT no se puede anular</p>
       <>
         <Row>
