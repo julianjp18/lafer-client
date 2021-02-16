@@ -3,7 +3,7 @@ import { Form, Input, Row, Col, Button, Select } from 'antd';
 
 const { Option } = Select;
 
-function SecondForm({ next, prev, clientInfo, response, idLeadSharp }) {
+function SecondForm({ next, prev, clientInfo, response }) {
   const clientData = localStorage.getItem('client-data-soat') ? JSON.parse(localStorage.getItem('client-data-soat')) : {};
   const [identificationType, setIdentificationType] = useState(clientData.identificationType);
   const [name, setName] = useState(clientData.name);
@@ -24,7 +24,7 @@ function SecondForm({ next, prev, clientInfo, response, idLeadSharp }) {
       address,
       city,
       identification,
-      idLeadSharp,
+      idLeadSharp: response.idLeadSharp,
     };
 
     clientInfo(clientData);

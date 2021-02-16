@@ -12,13 +12,10 @@ const createLead = async (dataFormValues) => {
     brand,
   } = dataFormValues;
 
-  console.log()
-
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*");
-  console.log();
-
+  
   var raw = JSON.stringify(
     {
       "method": "createLeads",
@@ -30,7 +27,7 @@ const createLead = async (dataFormValues) => {
             phoneNumber: phone,
             placa_600763145ae42: vehicle,
             marca_6010193d75a00: brand,
-            numeroid_6010179c38d01: identification,
+            numeroid_6010179c38d01: `${identification}${phone}`,
           }
         ]
       },
@@ -46,9 +43,9 @@ const createLead = async (dataFormValues) => {
 
   const id = [];
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5";
-  return await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+  await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
-    .then(async (result) => {
+    .then((result) => {
       const idLeadSharp = JSON.parse(result).result.creates[0].id;
       id.push(idLeadSharp);
 
@@ -57,7 +54,7 @@ const createLead = async (dataFormValues) => {
           "method": "addListMember",
           "params": {
             "listID": "3670574082",
-            "memberID": idLeadSharp
+            "memberID": '123'
           },
           "id": `123${identification}`
         }
@@ -78,6 +75,8 @@ const createLead = async (dataFormValues) => {
       return idLeadSharp;
     })
     .catch(error => console.log('error', error));
+
+    return id;
 }
 
 const upgradeLead = async (dataFormValues) => {
@@ -99,7 +98,7 @@ const upgradeLead = async (dataFormValues) => {
 
   var raw = JSON.stringify(
     {
-      "id": `123${identification}`,
+      "id": `123${idLeadSharp}`,
       "method": "updateLeads",
       "params": {
         "objects": [
@@ -124,7 +123,7 @@ const upgradeLead = async (dataFormValues) => {
   };
 
   const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5";
-  return await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
+  await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
     .then((result) => {
       var list = JSON.stringify(
@@ -156,21 +155,20 @@ const upgradeLead = async (dataFormValues) => {
                   "contactID": idLeadSharp
                 }
               },
-              "id": `123${identification}`
+              "id": `123${idLeadSharp}`
             }
           );
 
-          var requestRemoveList = {
-            method: 'POST',
-            headers: myHeaders,
-            body: removelist,
-          };
+        var requestRemoveList = {
+          method: 'POST',
+          headers: myHeaders,
+          body: removelist,
+        };
 
-          fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
-            .then(response => response.text())
-            .then(result => {
-            });
-      return idLeadSharp;
+        fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
+          .then(response => response.text())
+          .then(result => {
+          });
     })
   })
     .catch(error => console.log('error', error));
@@ -191,7 +189,6 @@ function* client(formValues) {
     address,
     city,
     email,
-    idLeadSharp,
     identification,
     identificationType,
     lastName,
@@ -219,9 +216,6 @@ function* mainInfo(formValues) {
     brand,
   });
 
-  const idLead = [];
-  yield idLeadSharp.then((res) => idLead.push(res));
-
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers/${identification}`, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",
@@ -231,6 +225,8 @@ function* mainInfo(formValues) {
     localStorage.setItem('client-data-soat', '');
     error.push(e);
   });
+
+  const idLead = yield idLeadSharp.then((res) => res);
 
   if (error.length === 0) {
     localStorage.setItem('client-data-soat', JSON.stringify(data[0].data));
