@@ -9,6 +9,7 @@ const updateLead = async (dataFormValues) => {
         typeVehicle,
         classVehicle,
         idLeadSharp,
+        identification,
     } = dataFormValues;
 
     var myHeaders = new Headers();
@@ -64,6 +65,29 @@ const updateLead = async (dataFormValues) => {
             fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
                 .then(response => response.text())
                 .then(result => {
+                    var removelist = JSON.stringify(
+                        {
+                          "method": "removeListMember",
+                          "params": {
+                            "where": {
+                              "listID": "3670574082",
+                              "contactID": idLeadSharp
+                            }
+                          },
+                          "id": `123${identification}`
+                        }
+                      );
+            
+                      var requestRemoveList = {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: removelist,
+                      };
+            
+                      fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
+                        .then(response => response.text())
+                        .then(result => {
+                        });
                 });
         })
         .catch(error => console.log('error', error));
@@ -77,6 +101,7 @@ function* vehicle(formValues) {
     const { typeVehicle } = formValues.payload;
     const { classVehicle } = formValues.payload;
     const { idLeadSharp } = formValues.payload;
+    const { identification } = formValues.payload;
 
     updateLead({
         brand,
@@ -85,11 +110,12 @@ function* vehicle(formValues) {
         typeVehicle,
         classVehicle,
         idLeadSharp,
+        identification,
     });
 
     yield put({ type: VEHICLE_INFO_SUCCESS, vehicle_info: formValues.payload });
 }
 
 export function* vehicleWatcher() {
-  yield takeLatest(VEHICLE_INFO, vehicle);
+    yield takeLatest(VEHICLE_INFO, vehicle);
 }

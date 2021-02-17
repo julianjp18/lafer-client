@@ -15,7 +15,7 @@ const createLead = async (dataFormValues) => {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Access-Control-Allow-Origin", "*");
-  
+
   var raw = JSON.stringify(
     {
       "method": "createLeads",
@@ -27,7 +27,7 @@ const createLead = async (dataFormValues) => {
             phoneNumber: phone,
             placa_600763145ae42: vehicle,
             marca_6010193d75a00: brand,
-            numeroid_6010179c38d01: `${identification}${phone}`,
+            numeroid_6010179c38d01: `${identification}`,
           }
         ]
       },
@@ -54,7 +54,7 @@ const createLead = async (dataFormValues) => {
           "method": "addListMember",
           "params": {
             "listID": "3670574082",
-            "memberID": '123'
+            "memberID": idLeadSharp,
           },
           "id": `123${identification}`
         }
@@ -69,14 +69,13 @@ const createLead = async (dataFormValues) => {
       fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
         .then(response => response.text())
         .then(result => {
-          console.log("Envío exitoso SOAT");
         });
 
       return idLeadSharp;
     })
     .catch(error => console.log('error', error));
 
-    return id;
+  return id;
 }
 
 const upgradeLead = async (dataFormValues) => {
@@ -98,7 +97,7 @@ const upgradeLead = async (dataFormValues) => {
 
   var raw = JSON.stringify(
     {
-      "id": `123${idLeadSharp}`,
+      "id": `1234`,
       "method": "updateLeads",
       "params": {
         "objects": [
@@ -159,18 +158,18 @@ const upgradeLead = async (dataFormValues) => {
             }
           );
 
-        var requestRemoveList = {
-          method: 'POST',
-          headers: myHeaders,
-          body: removelist,
-        };
+          var requestRemoveList = {
+            method: 'POST',
+            headers: myHeaders,
+            body: removelist,
+          };
 
-        fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
-          .then(response => response.text())
-          .then(result => {
-          });
+          fetch("https://cors-anywhere.herokuapp.com/" + url, requestRemoveList)
+            .then(response => response.text())
+            .then(result => {
+            });
+        })
     })
-  })
     .catch(error => console.log('error', error));
 }
 
@@ -236,7 +235,7 @@ function* mainInfo(formValues) {
   } else {
     //message.info('!Por favor completa los datos!');
     yield call(showNotification, { type: 'warning', message: 'Por favor completa la información requerida' });
-    yield put({ type: MAIN_INFO_FAILURE, response: {}, idLeadSharp: idLead[0] });
+    yield put({ type: MAIN_INFO_FAILURE, response: {idLeadSharp: idLead[0]}});
   }
 }
 

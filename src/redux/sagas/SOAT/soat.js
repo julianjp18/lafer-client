@@ -155,7 +155,7 @@ function* buySoatForm(formValues) {
   const { cupon } = buy_soat;
 
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers`, {
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Customers`, {
     id: identification,
     name,
     lastName,

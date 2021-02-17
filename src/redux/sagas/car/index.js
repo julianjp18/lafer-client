@@ -71,9 +71,7 @@ const createLead = async (dataFormValues) => {
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
     .then(result => {
-      console.log(result)
       const idLeadSharp = JSON.parse(result).result.creates[0].id;
-      console.log(JSON.parse(result).result.creates[0].id)
       var list = JSON.stringify(
         {
           "method": "addListMember",
@@ -92,7 +90,6 @@ const createLead = async (dataFormValues) => {
       fetch("https://cors-anywhere.herokuapp.com/" + url, requestList)
         .then(response => response.text())
         .then(result => {
-          console.log("Envío exitoso desde Car");
         })
       })
     .catch(error => console.log('error', error));
