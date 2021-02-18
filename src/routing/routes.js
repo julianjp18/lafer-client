@@ -15,6 +15,7 @@ import FailurePayment from "../components/Payments/FailurePayment";
 import PendingPayment from "../components/Payments/PendingPayment";
 import AbortPayment from "../components/Payments/AbortPayment";
 import SOAT from "../components/SOAT";
+import SettingsProduct from "../components/Admin/Product/SettingsProduct/SettingsProduct";
 
 const ROUTES = [
   { path: "/success-payment", key: "Success payment", exact: true, component: SuccessPayment, show: false, auth: false, },
@@ -35,6 +36,7 @@ const ROUTES = [
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },
   { path: "/dashboard", key: "dashboard", exact: true, component: () => <h1>Dashboard</h1>, show: false, auth: true, },
+  { path: "/settings-product", key: "Configuración de producto", exact: true, component: SettingsProduct, show: false, auth: false, },
 ];
 
 export default ROUTES;
