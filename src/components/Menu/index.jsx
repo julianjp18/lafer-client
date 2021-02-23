@@ -13,13 +13,14 @@ function Menu({ }) {
   return (
     <nav className="navbar">
       <div className="navbrand">
-        <h1 className="Brand"><Link to='/'><img className="img-logo" src={'/images/logo-small.png'} /></Link></h1>
+        {/* <h1 className="Brand"><Link to='/'><img className="img-logo" src={'/images/logo-small.png'} /></Link></h1> */}
+        <h1 className="Brand"><Link to='/'><img className="img-logo" src={'/images/Siendo-Seguros-logo.png'} /></Link></h1>
         <div className={`burger ${isToggle ? 'active' : ''}`} onClick={burgerOnClick} id="burger">
-          <div className="social-responsive">
+          {/* <div className="social-responsive">
             <a href="#" className="social-item-responsive">
               <img src={'/images/icons/wa-small.png'} alt="whatsapp icon"/>
             </a>
-          </div>
+          </div> */}
           <span className="burger-open">
             <img className="menu-open" src={'/images/menu-open.svg'} alt="menu open"/>
           </span>

@@ -1,0 +1,31 @@
+@import "react-alice-carousel/lib/scss/alice-carousel.scss";
+
+.carousel__container {
+  order: 1;
+
+  .alice-carousel__dots {
+    margin: 0;
+    position: absolute;
+    left: calc(50%);
+    top: 12px;
+    @media (min-width: 768px) {
+      top: auto;
+      bottom: 90px;
+    }
+
+    .alice-carousel__dots-item {
+      height: 6px;
+      width: 6px;
+      background: #fff;
+      margin: 0 6px 0 0;
+      @media (min-width: 768px) {
+        height: 12px;
+        width: 12px;
+      }
+
+      &.__active {
+        background: #F67411;
+      }
+    }
+  }
+}

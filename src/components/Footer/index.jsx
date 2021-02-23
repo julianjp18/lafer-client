@@ -1,24 +1,34 @@
 import React from 'react';
-import { Row, Col } from "antd";
 import './footer.scss';
 
 const Footer = ({}) => (
-  <Row className="footer-container">
-    <Col xs={24} md={12}>
-      <h2>Bogotá, Colombia</h2>  
-      <p>Calle 105 # 33 - 23</p>
-      <p>+57 1 435 56 96</p>
-      <p>email@gmail.com</p>
-    </Col>
-    <Col xs={24} md={12}>
+  <footer className="footer">
+    <section className="footer__container">
+      <article>
+        <h2>Bogotá, Colombia</h2>  
+        <p>Calle 105 # 33 - 23</p>
+        <p>+57 1 435 56 96</p>
+        <p>email@gmail.com</p>
+      </article>
       <div className="social">
-        <a href="#" className="social-item"><i className="fab fa-facebook"></i></a>
-        <a href="#" className="social-item"><i className="fab fa-twitter"></i></a>
-        <a href="#" className="social-item"><i className="fab fa-instagram"></i></a>
-        <a href="#" className="social-item"><i className="fab fa-whatsapp"></i></a>
+        <a href="#" className="social-item">
+          <img src="/images/icons/facebook.svg" alt="icono facebook" />
+        </a>
+        <a href="#" className="social-item">
+          <img src="/images/icons/twitter.svg" alt="icono twitter" />
+        </a>
+        <a href="#" className="social-item">
+          <img src="/images/icons/linkedin.svg" alt="icono linkedin" />
+        </a>
+        <a href="#" className="social-item">
+          <img src="/images/icons/youtube.svg" alt="icono youtube" />
+        </a>
+        <a href="#" className="social-item">
+          <img src="/images/icons/telephone.svg" alt="icono telephone" />
+        </a>
       </div>
-    </Col>
-  </Row>
+    </section>
+  </footer>
 );
 
 export default Footer;

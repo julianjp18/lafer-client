@@ -1,31 +1,72 @@
 @import "../utils/colors.scss";
 
-.footer-container {
-  min-height: 30vh;
-  padding: 50px 110px;
-  background-color: $color-black;
+.footer {
+  min-height: 227px;
+  background-color: #101010;
   color: $color-white;
 
-  h2 {
-    color: $color-white;
-  }
-
-  .social {
+  &__container {
+    max-width: 1246px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 60px 12px;
 
-    &-item {
-      font-size: 1.65rem;
-      line-height: inherit;
-      margin: 0 1.5rem;
-      color: $color-white;
-      transition: all 0.35s ease;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      text-align: left;
+      padding: 0 12px;
+    }
 
-      &:hover {
-        color: $color-blue;
+    article {
+      max-width: 344px;
+      width: 100%;
+      padding: 0 0 60px;
+      margin: 0 auto;
+      @media (min-width: 768px) {
+        padding: 60px 0;
+      }
+
+      h2 {
+        color: $color-white;
+        font-size: 24px;
+        line-height: 39px;
+        font-weight: 600;
+        margin: 0;
+        @media (min-width: 768px) {
+          font-size: 31px;
+        }
+      }
+      p {
+        margin: 0;
+        color: #BFBFBF;
+        font-size: 12px;
+        line-height: 26px;
+        @media (min-width: 768px) {
+          font-size: 16px;
+        }
       }
     }
+  
+    .social {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      max-width: 344px;
+      width: 100%;
+      margin: 0 auto;
+  
+      &-item {
+        color: $color-white;
+        transition: all 0.35s ease;
+        padding: 0 0 0 12px;
+        &:first-child { padding: 0 };
+      }
+    }
+
   }
+
 }

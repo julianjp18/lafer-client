@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Form,
   Input,
@@ -20,6 +21,7 @@ function FirstForm({ next, vehicleInfo, response }) {
   const [model, setModel] = useState(response && response.model);
   const [plate, setPlate] = useState(response && response.placa);
   const [brand, setBrand] = useState(response && response.brand);
+  const history = useHistory();
 
   useEffect(() => {
     if (response) {
@@ -28,7 +30,13 @@ function FirstForm({ next, vehicleInfo, response }) {
       setModel(response.model);
       setPlate(response.placa);
       setBrand(response.brand);
+      console.log("info completa ", response)
+    }else{
+      if(localStorage.getItem("fetchedInfo")===null){
+        history.push("/");
+      }
     }
+    
   }, [response]);
 
   const nextSubmit = () => {

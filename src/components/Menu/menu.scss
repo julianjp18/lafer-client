@@ -3,6 +3,7 @@ $color-black: #252a32;
 $color-light: #f1f5f8;
 $color-red: #d32f2f;
 $color-blue: #148cb8;
+$primary-color: #F67411;
 
 $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
 
@@ -71,19 +72,21 @@ h1 {
 .navbar {
 	width: 100%;
 	height: auto;
-	padding: 1rem 2rem;
+	// padding: 12px 20px;
 	color: $color-black;
 	background: $color-white;
-  box-shadow: $box-shadow;
+	box-shadow: $box-shadow;
   
 
 	// Media Query for Desktop
 	@include largescreen {
+		padding: 20px 60px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 		margin: 0 auto;
+		height: 83px;
 	}
 
 	.navbrand {
@@ -91,6 +94,17 @@ h1 {
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		padding: 6px;
+
+		.Brand {
+			overflow: hidden;
+			width: 80px;
+			height: 45px;
+			@include largescreen {
+				width: auto;
+				height: auto;
+			}
+		}
 
 		.burger {
 			display: flex;
@@ -140,36 +154,69 @@ h1 {
 				display: none;
 			}
 		}
+
+		.Brand a img {
+			width: 80px;
+			@include largescreen {
+				height: 83px;
+				width: auto;
+			}
+		}
 	}
 
 	.menu {
-    width: 100%;
-    height: 0;
-    margin-bottom: 0;
+		width: 100%;
+		height: 0;
+		margin-bottom: 0;
 		overflow: hidden;
 		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-ms-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		@media (max-width: 767px) {
+			position: absolute;
+			background: #fff;
+			z-index: 4;
+			text-align: right;
+			box-shadow: $box-shadow;
+		}
 
 		&-item {
-			margin: 0.5rem 0;
+			margin: 0 0 20px;
+			@media (max-width: 767px) {
+				padding: 0 30px 20px 0;
+				border-bottom: 1px solid gray;
+				&:last-child{
+					margin: 0;
+					padding: 0 30px 0 0;
+					border-bottom: 0;
+				}
+			}
 		}
 
 		&-link {
 			font-family: inherit;
 			font-size: 14px;
 			line-height: inherit;
-			color: $color-black;
+			color: #4A4F5D;
 			text-rendering: optimizeLegibility;
 			transition: all 0.35s ease;
 
 			&:hover {
-				color: $color-blue;
+				color: $primary-color;
 			}
 		}
 
 		&.active {
 			width: 100%;
-			height: 14rem;
-			margin: 1rem 0;
+			height: auto;
+			margin: 0;
+			padding: 20px 12px;
+			text-align: right;
+			position: absolute;
+			background: #fff;
+			z-index: 4;
 		}
 
 		// Media Query for Desktop
@@ -179,10 +226,12 @@ h1 {
 			justify-content: end;
 			align-items: center;
 			height: auto;
+			width: auto;
 
 			&-item {
-				padding: 0;
-				margin: 0 0.5rem;
+				padding: 0 0 0 40px;
+				margin: 0;
+				&:first-child { padding: 0; }
 			}
 		}
 	}
@@ -212,6 +261,6 @@ h1 {
   }
   
   .menu-open {
-    width: 40px;
+    width: 24px;
   }
 }
