@@ -1,0 +1,120 @@
+@import '../utils/colors.scss';
+
+.soat-main-container {
+  margin-top: 60px;
+  padding: 20px 0;
+  background-image: url(../../assets/images/bg-1-gray.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .soat-main-content {
+    width: 400px;
+    margin: auto;
+
+    .descrip-container {
+      background-color: #ffffff;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 7px 13px #D7D6E7;
+
+      h2 {
+        text-align: center;
+      }
+  
+      .img-auto-container {
+        .img-auto {
+          margin: auto;
+        }
+      }
+      .extra-info {
+        font-size: 12px;
+        color: #979BA7;
+        margin: 0 10px;
+      }
+    }
+
+    .main-text {
+      color: $color-dark-blue;
+      text-align: center;
+      padding: 0 90px;
+      margin: 30px 0;
+
+      .text {
+        font-size: 16px;
+        letter-spacing: 0.28px;
+      }
+    }
+
+    .show-secure-container {
+      background-color: #ffffff;
+      padding: 10px 30px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 7px 13px #D7D6E7;
+
+      .secure-text {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 2px;
+        margin-top: 5px;
+      }
+      
+      .secure-value {
+        color: $second-color;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+
+      .img-secure {
+        margin-top: 10px;
+      }
+    }
+
+    .main-text-second {
+      color: $color-dark-blue;
+      text-align: center;
+      padding: 0 60px;
+      margin: 30px 0;
+
+      .text {
+        font-size: 16px;
+        letter-spacing: 0.28px;
+      }
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 10px 30px;
+      border-radius: 5px;
+      box-shadow: 0px 7px 13px #D7D6E7;
+      
+      .ant-form  {
+        margin: auto;
+      }
+
+      .ant-input {
+        background: #f3f3f3;
+        font-weight: 400;
+        padding: 9px 0 9px 16px;
+        border-radius: 6px;
+        border: 0;
+      }
+
+      .btn-submit {
+        line-height: 15px;
+        height: 40px;
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 7px;
+        background-color: $primary-color;
+        border: 0;
+      }
+
+      .warning-text {
+        color: $primary-color;
+      }
+    }
+
+  }
+}

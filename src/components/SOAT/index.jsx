@@ -1,87 +1,107 @@
-import React, { useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox, Row, Col, message } from 'antd';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Form, Input, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
 import './soat.scss';
+import CarQuoteDescription from './CarQuoteDescription';
+
+const fakeCar = {
+  vehicle: 'KUJ123',
+  brand:'KIA Picanto',
+  model: '2020',
+  cylinderCapacity: '2000',
+  name: 'Julian David Perez Forero',
+};
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 24,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 24,
+    },
+  },
+};
 
 function Soat({ mainInfo, response }) {
   const history = useHistory();
+  const [emptyError, setemptyError] = useState(false);
 
   const onFinish = (values) => {
-    mainInfo(values);
-    history.push("/steps-form");
+
+    if (values.email && values.phone) {
+      setemptyError(false);
+      mainInfo(values);
+      history.push("/steps-form");
+    } else {
+      setemptyError(true);
+    }
+
   };
 
   return (
-    <div className="landing-container">
-      <div className="title-container">
-        <Row>
-          <Col xs={10} md={14}>
-            <p>
-              <strong>Tan fácil </strong>
-              que puedes asegurar tu vehículo en solo 3 pasos...
-            </p>
-          </Col>
-        </Row>
-      </div>
-      <div className="soat-container">
-        <Form
-          name="form_pre_soat"
-          className="soat-pre-form"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-        >
-          <Row>
-          <Col xs={24}>
-              <Form.Item
-                name="vehicle"
-                label="Placa"
-                placeholder="Ej: ABC123"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Por favor inserta la placa del vehiculo!',
-                    whitespace: true,
-                  },
-                  () => ({
-                    validator(rule, value) {
-                      const reg = /[a-z]{3}[0-9]{3}[a-z]?$/;
-                      if (reg.exec(value.toLowerCase())) return Promise.resolve();
-                      return Promise.reject('Structure of plate: XXX123 ó AAA11A');
-                    },
-                  }),
-                ]}
-                normalize={(value) => (value || '').toUpperCase()}
-              >
-                <Input />
-              </Form.Item>
+    <div className="soat-main-container">
+      <div className="soat-main-content">
+        <CarQuoteDescription
+          vehicle={fakeCar.vehicle}
+          brand={fakeCar.brand}
+          model={fakeCar.model}
+          cylinderCapacity={fakeCar.cylinderCapacity}
+          name={fakeCar.name}
+          isFirstForm
+        />
+        <div className="main-text">
+          <p className="text">
+            Este es el precio de tu SOAT <b>sin el bono de descuento</b>
+          </p>
+        </div>
+        <Row className="show-secure-container">
+          <Col xs={18}>
+              <p className="secure-text">SOAT Seguros Mundial</p>
+              <p className="secure-value">Costo: $ 556.000</p>
             </Col>
+            <Col xs={6}>
+              <div className="img-secure-content">
+                <img src={'/images/secures_logos/seguros-mundial.png'} alt="secure" className="img-secure" />
+              </div>
+            </Col>
+        </Row>
+        <div className="main-text-second">
+          <p className="text">
+            Para calcular tu bono de descuento, requerimos los siguientes datos
+          </p>
+        </div>
+        <Row className="form-container">
+          <Form
+            layout={'vertical'}
+            name="control-ref"
+            onFinish={onFinish}
+            scrollToFirstError
+            {...formItemLayout}
+          >
             <Col xs={24}>
               <Form.Item
-                name="identification"
-                label="Número de identificación"
-                labelCol={{
-                  span: 10,
-                }}
-                wrapperCol={{
-                  span: 14,
-                }}
+                name="email"
+                label="Correo electrónico"
                 rules={[
                   {
-                    required: true,
-                    message: 'Inserta tu número de identificación!',
-                    whitespace: true,
+                    type: 'email',
+                    message: 'El correo electrónico no es válido!',
                   },
-                  () => ({
-                    validator(rule, value) {
-                      const reg = /[0-9]{6,10}$/;
-                      if (reg.exec(value)) return Promise.resolve();;
-                      return Promise.reject('Mínimo 6 números, máximo 10.');
-                    },
-                  }),
+                  {
+                    required: true,
+                    message: 'Por favor ingresa un correo electrónico!',
+                  },
                 ]}
               >
                 <Input />
@@ -94,50 +114,33 @@ function Soat({ mainInfo, response }) {
                 rules={[
                   {
                     required: true,
-                    message: 'Por favor inserta un celular!',
-                    whitespace: true,
+                    message: 'Por favor ingresa tu celular!',
                   },
                   () => ({
                     validator(rule, value) {
                       const reg = /[0-9]{10}$/;
-                      if (reg.exec(value)) return Promise.resolve();;
-                      return Promise.reject('Estructura del telefono: 1234567890');
+                      if (reg.exec(value)) return Promise.resolve();
+                      return Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
                     },
                   }),
+
                 ]}
+                hasFeedback
               >
                 <Input />
               </Form.Item>
             </Col>
-          </Row>
-          <Row>
-            <Col xs={24}>
-              <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    required: true,
-                    validator: (_, value) =>
-                      value ? Promise.resolve() : Promise.reject('Acepta los terminos y condiciones'),
-                  },
-                ]}
-              >
-                <Checkbox>
-                  He leído los <Link to={'agreement'}>terminos y condiciones</Link>
-                </Checkbox>
-              </Form.Item>
-            </Col>
-            <Col className="button-col" xs={24}>
-              <Button type="primary" htmlType="submit" className="btn-submit">
-                Siguiente
+            <Form.Item>
+              <Button className="btn-submit" type="primary" htmlType="submit">
+                Quiero mi bono
               </Button>
-            </Col>
-          </Row>
-          <Form.Item>
-          </Form.Item>
-        </Form>
-      </div>  
+              {emptyError && (
+                <p className="warning-text">Para continuar, ingresa tus dato</p>
+              )}
+            </Form.Item>
+          </Form>
+        </Row>
+      </div>
     </div>
   );
 }

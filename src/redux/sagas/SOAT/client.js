@@ -8,12 +8,17 @@ function* client(formValues) {
 }
 
 function* mainInfo(formValues) {
-  const { identification } = formValues.payload;
+  const { vehicle, bonus } = formValues.payload;
   const error = [];
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers/${identification}`, {
-    "accept": "*/*",
-    "Access-Control-Allow-Origin": "*",
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers/${vehicle}`, {
+    vehicle,
+    bonus,
+  }, {
+    headers: {
+      "accept": "*/*",
+      "Access-Control-Allow-Origin": "*",
+    }
   }).then((response) => {
     data.push(response);
   }).catch(e => {

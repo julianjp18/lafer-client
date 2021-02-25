@@ -7,13 +7,13 @@ import './landing.scss';
 
 const { Option } = Select;
 
-function Landing({ mainInfo, response }) {
+function Landing({ mainInfo }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const history = useHistory();
 
   const onFinish = (values) => {
     mainInfo(values);
-    history.push("/steps-form");
+    history.push("/buy-secure-soat");
   };
 
   const onBonusChange = (value) => {

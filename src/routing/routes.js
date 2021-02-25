@@ -9,12 +9,12 @@ import CustomQuote from "../components/SecureCar/CustomQuote";
 import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
 import Countries from "../components/Admin/Countries";
-import StepsForm from "../components/SOAT/StepsForm";
+import SOAT from "../components/SOAT";
+import StepsForm from '../components/SOAT/StepsForm';
 import SuccessPayment from "../components/Payments/SuccessPayment";
 import FailurePayment from "../components/Payments/FailurePayment";
 import PendingPayment from "../components/Payments/PendingPayment";
 import AbortPayment from "../components/Payments/AbortPayment";
-import SOAT from "../components/SOAT";
 import SettingsProduct from "../components/Admin/Product/SettingsProduct/SettingsProduct";
 
 const ROUTES = [
@@ -24,7 +24,7 @@ const ROUTES = [
   { path: "/abort-payment", key: "Abort payment", exact: true, component: AbortPayment, show: false, auth: false, },
   { path: "/countries", key: "Países", exact: true, component: Countries, show: false, auth: true },
   { path: "/", key: "Inicio", exact: true, component: Landing, show: false, auth: false },
-  { path: "/soat", key: "SOAT", exact: true, component: SOAT, show: true, auth: false },
+  { path: "/buy-secure-soat", key: "SOAT", exact: true, component: SOAT, show: true, auth: false },
   { path: "/profile", key: "Mi perfil", exact: true, component: Landing, show: false, auth: true },
   { path: "/secure-car", key: "Seguro para auto", exact: true, component: SecureCar, show: false, auth: false },
   { path: "/contact-us", key: "Contáctanos", exact: true, component: SignUp, show: false, auth: false },

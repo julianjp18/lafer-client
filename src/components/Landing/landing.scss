@@ -260,11 +260,11 @@
         text-align: center;
       
         .back-btn {
-          background: #283843;
+          background: $color-dark-blue;
           color: $color-white;
           font-size: 14px;
           font-weight: bold;
-          border-color: #283843;
+          border-color: $color-dark-blue;
           border-radius: 5px;
           padding: 0 50px;
         }
