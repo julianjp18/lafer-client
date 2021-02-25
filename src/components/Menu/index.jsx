@@ -13,20 +13,18 @@ function Menu({ }) {
   return (
     <nav className="navbar">
       <div className="navbrand">
-        <h1 className="Brand"><Link to='/'><img className="img-logo" src={'/images/logo-small.png'} /></Link></h1>
+        <h1 className="Brand"><Link to='/'><img className="img-logo" src={'/images/logo-large.png'} /></Link></h1>
         <div className={`burger ${isToggle ? 'active' : ''}`} onClick={burgerOnClick} id="burger">
           <div className="social-responsive">
-            <a href="#" className="social-item-responsive">
+            {/*<a href="#" className="social-item-responsive">
               <img src={'/images/icons/wa-small.png'} alt="whatsapp icon"/>
-            </a>
+            </a>*/}
           </div>
           <span className="burger-open">
             <img className="menu-open" src={'/images/menu-open.svg'} alt="menu open"/>
           </span>
           <span className="burger-close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-              <path fill="#252a32" fillRule="evenodd" d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z" />
-            </svg>
+            <img className="menu-open" src={'/images/menu-close.svg'} alt="menu close"/>
           </span>
         </div>
       </div>

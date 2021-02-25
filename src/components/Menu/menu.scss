@@ -1,3 +1,7 @@
+@import "../utils/colors.scss";
+@import "../utils/mixins.scss";
+
+
 $color-white: #ffffff;
 $color-black: #252a32;
 $color-light: #f1f5f8;
@@ -5,12 +9,6 @@ $color-red: #d32f2f;
 $color-blue: #148cb8;
 
 $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
-
-@mixin largescreen {
-	@media only screen and(min-width: 768px) {
-		@content;
-	}
-}
 
 *,
 *::before,
@@ -30,6 +28,10 @@ img {
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+.img-logo {
+	width: 110px;
 }
 
 a,
@@ -71,10 +73,12 @@ h1 {
 .navbar {
 	width: 100%;
 	height: auto;
-	padding: 1rem 2rem;
+  padding: 0 30px;
 	color: $color-black;
 	background: $color-white;
   box-shadow: $box-shadow;
+  position: fixed;
+  z-index: 101;
   
 
 	// Media Query for Desktop
@@ -116,7 +120,7 @@ h1 {
           }
 
           &:hover {
-            color: $color-blue
+            color: $primary-color
           }
         }
       }
@@ -150,7 +154,7 @@ h1 {
 		transition: all 0.5s ease;
 
 		&-item {
-			margin: 0.5rem 0;
+			margin: 1.5rem 0;
 		}
 
 		&-link {
@@ -162,14 +166,13 @@ h1 {
 			transition: all 0.35s ease;
 
 			&:hover {
-				color: $color-blue;
+				color: $primary-color;
 			}
 		}
 
 		&.active {
 			width: 100%;
-			height: 14rem;
-			margin: 1rem 0;
+			min-height: 0;
 		}
 
 		// Media Query for Desktop
@@ -182,9 +185,16 @@ h1 {
 
 			&-item {
 				padding: 0;
-				margin: 0 0.5rem;
+				margin: 0 1.5rem;
 			}
 		}
+
+    @include smallscreen {
+      &.active {
+        width: 100%;
+        min-height: 110px;
+      }
+    }
 	}
 
 	.social {
@@ -196,12 +206,12 @@ h1 {
 		&-item {
 			font-size: 1.65rem;
 			line-height: inherit;
-			margin: 0 0.5rem;
+			margin: 0 1.5rem;
 			color: $color-black;
 			transition: all 0.35s ease;
 
 			&:hover {
-				color: $color-blue;
+				color: $primary-color;
 			}
 		}
 

@@ -1,31 +1,109 @@
 @import "../utils/colors.scss";
+@import "../utils/mixins.scss";
 
 .footer-container {
   min-height: 30vh;
-  padding: 50px 110px;
+  padding: 50px 40px;
   background-color: $color-black;
-  color: $color-white;
+  color: $color-gray;
+  font-size: 16px;
 
-  h2 {
-    color: $color-white;
+  .footer-info-content {
+    h2 {
+      color: $color-white;
+      margin-bottom: 3px;
+      font-size: 16px;  
+    }
+
+    p {
+      margin-bottom: 2px;
+    }
+  }
+
+  .terms-container {
+    margin-top: 40px;
+
+    .terms {
+      padding: 0 20px;
+
+      a {
+        color: $color-gray;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    @include smallscreen {
+      margin: 10px 0px;
+    }
+  }
+
+  .payment-container {
+    
+    p {
+      padding-left: 20px;
+    }
+
+    .payment-img {
+      width: 80px;
+      margin: auto;
+      text-align: center;
+
+      &.visa {
+        padding-top: 20px;
+      }
+
+      &.pse {
+        margin-top: -7px;
+      }
+    }
+  }
+
+  .gray-right-line {
+    border-right: 1px solid $color-second-gray;
+
+    @include smallscreen {
+      border-right: 0;
+      border-bottom: 1px solid $color-second-gray;
+      padding: 10px 0;
+      margin-bottom: 10px;
+    }
   }
 
   .social {
+    /*
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    */
 
+    p {
+      padding-left: 20px;
+      margin-bottom: 4px;
+    }
     &-item {
-      font-size: 1.65rem;
+      /*font-size: 1.65rem;
       line-height: inherit;
       margin: 0 1.5rem;
       color: $color-white;
       transition: all 0.35s ease;
-
+      */
       &:hover {
         color: $color-blue;
       }
+
+      .social-img {
+        width: 90px;
+        margin: auto;
+      }
     }
+  }
+
+  @include smallscreen {
+    padding: 20px 40px;
+    text-align: center;
   }
 }

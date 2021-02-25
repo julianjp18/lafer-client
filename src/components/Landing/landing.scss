@@ -1,43 +1,78 @@
 @import "react-alice-carousel/lib/scss/alice-carousel.scss";
 @import "../utils/colors.scss";
+@import "../utils/mixins.scss";
+
 
 .landing-container {
+  margin-top: 60px;
 
-  .carousel-container {
+  .ant-carousel {
+    .slick-dots {
+      li {
+        width: 15px;
 
+        button {
+          height: 14px;
+          border-radius: 50%;
+          background-color: $primary-color;
+          opacity: 1;
+          border: 1px solid rgba(0,0,0,0.25);
+
+          @include smallscreen {
+            border: 0;
+          }
+        }
+
+        &.slick-active {
+          width: 15px;
+          
+          button {
+            background-color: $color-white;
+          } 
+        }
+      }
+
+      @include smallscreen {
+        top: 30px;
+      }
+    }
   }
 
   .carousel-item {
-    min-height: 85vh;
+    min-height: 100vh;
     color: #fff;
-    line-height: 160px;
     text-align: 'center';
-    background-color: $primary-color;
 
-    .title-container {
-      background-color: $primary-color;
-      padding: 50px 0 50px 34px;
-  
-      p {
-        font-size: 58px;
-        text-align: center;
-        line-height: 70px;
-        margin-bottom: 0;
-      }
+    &.item-1 {
+      background-image: url(../../assets/images/banner/banner-1-s.png);
+      background-repeat:no-repeat;
+      background-size: cover;
 
-      .btn-container {
-        text-align: center;
-        line-height: 125px;
+    }
 
-        .carousel-main-btn {
-          padding: 20px 72px;
-          font-size: 23px;
-          line-height: 0;
-          margin: auto;
-          border-radius: 5px;
-          box-shadow: 0px 0px 24px 0px rgba(0,0,0,0.75);
-        }
-      }
+    &.item-2 {
+      background-image: url(../../assets/images/banner/banner-2-s.png);
+      background-repeat:no-repeat;
+      background-size: cover;
+    }
+
+    @include smallscreen {
+      min-height: 35vh;
+    }
+  }
+
+  .main-form-container {
+    position: absolute;
+    top: 120px;
+    right: 0;
+    z-index: 10;
+    
+    .title-form {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+      color: $color-black;
     }
   }
 
@@ -45,10 +80,15 @@
     margin: 50px 0;
     .us-description-col {
       padding: 80px 40px 80px 80px;
+
+      @include smallscreen {
+        padding: 60px 40px 20px 80px;
+      }
       
       .us-title {
         font-size: 58px;
         font-weight: bold;
+        color: $second-color;
   
         .company-name {
           color: $primary-color;
@@ -59,6 +99,8 @@
         margin-top: 20px;
         font-size: 16px;
         padding-left: 10px;
+        font-family: Roboto, regular;
+        line-height: 21px;
       }
     }
   }
@@ -84,6 +126,194 @@
         color: #FFFFFF;
         font-weight: 600;
       }
+    }
+  }
+
+  .form-soat-container {
+    width: 50%;
+    background: $color-white;
+    margin: auto;
+    margin-top: 70px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 24px 0px rgba(0,0,0,0.75);
+
+    .ant-input {
+      background: #f3f3f3;
+      font-weight: 400;
+      padding: 9px 0 9px 16px;
+      border-radius: 6px;
+      border: 0;
+    }
+
+    .ant-select {
+
+      .ant-select-selector {
+        height: 45px;
+        background: $second-color;
+        font-weight: bold;
+        border-radius: 6px;
+        border: 0;
+        padding-top: 4px;
+
+        .ant-select-selection-placeholder,
+        .ant-select-selection-item {
+          padding: 5px 0;
+          color: $color-white;
+        }
+
+        .ant-select-selection-placeholder {
+          background-color: $second-color;
+        }
+      }
+    }
+
+    .img-select-item {
+      max-width: 100%;
+      margin-top: 5px;
+    }
+
+    .img-select-item-dollar {
+      max-width: 70%;
+    }
+
+    .select-item {
+      padding-left: 5px;
+      font-weight: bold;
+      color: $color-white;
+      margin-bottom: 0;
+    }
+
+    .btn-submit {
+      line-height: 15px;
+      height: 50px;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 7px;
+      background-color: $primary-color;
+      border: 0;
+    }
+
+    .extra-info {
+      margin-top: 10px;
+      font-size: 12px;
+
+      .btn-terms {
+        color: rgba(0, 0, 0, 0.45);
+        font-weight: 700;
+        text-decoration: underline;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    &.mobile-form {
+      display: none;
+      width: 70%; 
+    }
+  
+    &.desktop-form {
+      display: block;
+      
+      @include mediumscreen {
+        width: 350px;
+        margin-right: 50px;
+      }
+    }
+  
+    @include smallscreen {
+      &.mobile-form {
+        display: block;
+        position: relative;
+        margin-top: -20px;
+        z-index: 100;
+
+        .title-form {
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 10px;
+          color: $color-black;
+        }
+      }
+  
+      &.desktop-form {
+        display: none;
+      }
+    }
+  }
+
+  @include smallscreen {
+    margin-top: 40px;
+  }
+}
+
+.ant-modal-root {
+
+  .ant-modal-wrap {
+    .ant-modal {
+      width: 80% !important;
+    
+      .footer-modal-container {
+        text-align: center;
+      
+        .back-btn {
+          background: #283843;
+          color: $color-white;
+          font-size: 14px;
+          font-weight: bold;
+          border-color: #283843;
+          border-radius: 5px;
+          padding: 0 50px;
+        }
+      }
+    }
+  }
+  
+}
+
+.ant-select-dropdown {
+  background-color: $second-color;
+  
+  .rc-virtual-list {
+    .ant-select-item {
+      background-color: $second-color;
+      color: $color-white;
+
+      &:hover {
+        background-color: $primary-color;
+      }
+
+      .img-select-item {
+        max-width: 100%;
+        margin-top: 6px;
+      }
+
+      .img-select-item-dollar {
+        max-width: 60%;
+        margin-top: 4px;
+      }
+  
+      .select-item {
+        padding-top: 4px;
+        padding-left: 5px;
+        font-weight: bold;
+        color: $color-white;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
+.ant-form-item-has-error {
+
+  .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) {
+
+    .ant-select-selector {
+      background-color: $second-color !important;
     }
   }
 }
