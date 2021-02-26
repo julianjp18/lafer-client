@@ -1,219 +1,83 @@
 import React, { useState } from "react";
-import { Form, Input, Row, Col, Button, Select } from 'antd';
+import { Form, Input, Row, Col, Button, Select, Modal } from 'antd';
 
 const { Option } = Select;
 
 function SecondForm({ next, prev, clientInfo, response }) {
-  const clientData = localStorage.getItem('client-data-soat') ? JSON.parse(localStorage.getItem('client-data-soat')) : {};
-  const [identificationType, setIdentificationType] = useState(clientData.identificationType);
-  const [name, setName] = useState(clientData.name);
-  const [lastName, setLastName] = useState(clientData.lastName);
-  const [email, setEmail] = useState(clientData.email);
-  const [address, setAddress] = useState(clientData.address);
-  const [city, setCity] = useState(clientData.city);
-  const [identification, setIdentification] = useState(clientData.identification);
-  const [phoneNumber, setPhoneNumber] = useState(clientData.movil);
+  const [visible, setVisible] = useState(false);
+  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones : null);
+  const [clientData, setClientData] = useState(response ? response : {});
 
-  const nextSubmit = () => {
-    const clientData = {
-      identificationType,
-      phoneNumber,
-      name,
-      lastName,
-      email,
-      address,
-      city,
-      identification,
-    };
-
+  const nextSubmit = (id) => {
+    const soat = cotizacion && cotizacion.filter(c=>c.discount_id===id)[0]
+    clientData.selectedSoat = soat
     clientInfo(clientData);
     next();
   };
 
   return (
-    <div style={{ padding: 50 }}>
-      <h1>Tu información</h1>
-      <Row>
-        <Col xs={8}>
-          <Form.Item
-            name="identificationType"
-            label="Tipo de identificación"
-            labelCol={{
-              span: 10,
-            }}
-            wrapperCol={{
-              span: 14,
-            }}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Select
-              placeholder="Selecciona por favor un tipo de identificación"
-              onChange={(value) => setIdentificationType(value)}
-              allowClear
-              defaultValue={identificationType}
-            >
-              <Option value="cc">Cédula de ciudadanía</Option>
-              <Option value="passport">Pasaporte</Option>
-              <Option value="other">Otro</Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col xs={8}>
-          <Form.Item
-            name="identification"
-            label="Número de identificación"
-
-            labelCol={{
-              span: 10,
-            }}
-            wrapperCol={{
-              span: 14,
-            }}
-            rules={[
-              {
-                required: true,
-                message: 'Inserta tu número de identificación!',
-                whitespace: true,
-              },
-              () => ({
-                validator(rule, value) {
-                  const reg = /[0-9]{6,10}$/;
-                  if (reg.exec(value)) return Promise.resolve();;
-                  return Promise.reject('Mínimo 6 números, máximo 10.');
-                },
-              }),
-            ]}
-          >
-            <Input defaultValue={identification} onChange={(value) => setIdentification(value.target.value)} />
-          </Form.Item>
-        </Col>
-        <Col xs={8}>
-          <Form.Item
-            name="name"
-            label="Nombre"
-
-            rules={[
-              {
-                required: true,
-                message: 'Por favor inserta tu nombre!',
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input defaultValue={name} onChange={(value) => setName(value.target.value)} />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={8}>
-          <Form.Item
-            name="lastName"
-            label="Apellidos"
-            rules={[
-              {
-                required: true,
-                message: 'Por favor inserta tus apellidos!',
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input defaultValue={lastName} onChange={(value) => setLastName(value.target.value)} />
-          </Form.Item>
-        </Col>
-        <Col xs={8}>
-          <Form.Item
-            name="email"
-            label="Correo electrónico"
-
-            rules={[
-              {
-                type: 'email',
-                message: 'Ingresa correctamente un correo eletrónico!',
-              },
-              {
-                required: true,
-                message: 'Por favor inserta un correo electrónico!',
-              },
-            ]}
-          >
-            <Input defaultValue={email} onChange={(value) => setEmail(value.target.value)} />
-          </Form.Item>
-        </Col>
-        <Col xs={8}>
-          <Form.Item
-            name="city"
-            label="Ciudad"
-            rules={[
-              {
-                required: true,
-                message: 'Por favor ingresa la ciudad!',
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input defaultValue={city} onChange={(value) => setCity(value.target.value)} />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={8}>
-          <Form.Item
-            name="address"
-            label="Dirección"
-            rules={[
-              {
-                required: true,
-                message: 'Por favor ingresa la dirección!',
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input defaultValue={address} onChange={(value) => setAddress(value.target.value)} />
-          </Form.Item>
-        </Col>
-        <Col xs={8}>
-          <Form.Item
-            name="phoneNumber"
-            label="Celular"
-            rules={[
-              {
-                required: true,
-                message: 'Por favor ingresa tu celular!',
-              },
-              () => ({
-                validator(rule, value) {
-                  const reg = /[0-9]{10}$/;
-                  if (reg.exec(value)) return Promise.resolve();
-                  return Promise.reject('Por favor ingresar tu número celular. Ej:1234567890');
-                },
-              }),
-
-            ]}
-            hasFeedback
-          >
-            <Input defaultValue={phoneNumber} onChange={(value) => setPhoneNumber(value.target.value)} />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row>
-        <Col offset={10} xs={2}>
-          <div className="steps-action">
-            <Button type="primary" onClick={nextSubmit}>
-              Siguiente
+    <>
+      <h1 className="paycard__container--title">Escoge el BONO de tu SOAT</h1>
+      {response && response.cotizaciones && Object.values(response.cotizaciones).map((data, key) => {
+        return (
+          <section className="paycard__container" key={key}>
+            <h2>{data.producto}</h2>
+            <article className="paycard__container--info">
+              <section className="info__container">
+                {data.discount_id === 1 && (
+                  <>
+                    {data.imp_total && (
+                      <p className="info__container--descuento">Costo: {data.imp_total}</p>
+                    )}
+                    <p>Bono: {data.discount_text}</p>
+                    <p><b>Costo: {data.discount_total}</b></p>
+                  </>
+                )}
+                {data.discount_id === 2 && (
+                  <>
+                    <p>Bono: {data.discount_text} millas</p>
+                    <p><b>Costo: {data.discount_total}</b></p>
+                  </>
+                )}
+              </section>
+              <section className="logo__container">
+                {data.logo && data.miles ? (
+                  <>
+                    <img src={`/images/secures_logos/${data.cod_aseguradora}.png`} alt="seguro" />
+                    <img src={`/images/secures_logos/miles.png`} alt="seguro" className="img-smiles" />
+                  </>
+                ) : (
+                  <img src={`/images/secures_logos/${data.cod_aseguradora}.png`} alt="seguro" className="img-not-smiles"/>
+                )}
+              </section>
+            </article>
+            <article className="payment__container">
+              <h4>Medios de pago:</h4>
+              <img src="/images/cards_logos/mastercard.png" alt="mastercard"/>
+              <img src="/images/cards_logos/visa.png" alt="visa"/>
+              <img src="/images/cards_logos/pse.png" alt="pse"/>
+            </article>
+            <span className="btn--coberturas">
+              <a onClick={() => setVisible(true)}>Ver coberturas</a>
+              <Modal
+                title="Coberturas"
+                centered
+                visible={visible}
+                onOk={() => setVisible(false)}
+                onCancel={() => setVisible(false)}
+                width={330}
+                okText="Volver"
+              >
+                <p>{data.coberturas}</p>
+              </Modal>
+            </span>
+            <Button type="primary" onClick={()=>nextSubmit(data.discount_id)} className="btn--next">
+              {data.discount_id === 1 ? (<span>Comprar SOAT con descuento</span>) : (<span>Ganar millas con mi SOAT</span>)}
             </Button>
-          </div>
-        </Col>
-        <Col xs={12}>
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Volver
-          </Button>
-        </Col>
-      </Row>
-    </div>
+          </section>
+        )
+      })}
+    </>
   );
 }
 

@@ -8,11 +8,10 @@ function* client(formValues) {
 }
 
 function* mainInfo(formValues) {
-  localStorage.setItem("fetchedInfo", "")
-  const { plate } = formValues.payload;
+  localStorage.setItem("fetchedInfo", "");
   const error = [];
   const data = [];
-  yield axios.get(`https://lafersegurosapi.azurewebsites.net/api/Soat/${plate}`, {
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Soat`, formValues.payload, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",
   }).then((response) => {

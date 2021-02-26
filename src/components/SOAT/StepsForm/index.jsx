@@ -21,7 +21,6 @@ const StepsForm = ({
   buySoatForm,
 }) => {
   const [current, setCurrent] = useState(0);
-  const [success, setsuccess] = useState(false);
   const onFinish = (values) => {
     const requestData = {
       vehicle_info: vehicleInfoState,
@@ -29,8 +28,6 @@ const StepsForm = ({
       buy_soat: values ? values : {},
     };
     buySoatForm(requestData);
-    //message.success('¡Proceso completado!');
-    setsuccess(true);
   };
 
   const next = () => {
@@ -50,6 +47,7 @@ const StepsForm = ({
           next={next}
           current={current}
           vehicleInfo={vehicleInfo}
+          clientInfo={clientInfo}
           response={response}
           key={Math.random()}
         />
@@ -63,7 +61,7 @@ const StepsForm = ({
           prev={prev}
           current={current}
           clientInfo={clientInfo}
-          response={response}
+          response={clientInfoState}
           key={Math.random()}
         />
       ),
@@ -72,14 +70,10 @@ const StepsForm = ({
       title: 'Compra tu SOAT',
       content: (
         <ThirdForm
-          prev={prev}
           current={current}
           butSoat={buySoat}
-          success={success}
-          currentQuote={response && response.currentQuote}
-          endDate={response && response.endDate}
-          billValue={response && response.valorPrima}
-          billNumber={response && `${response.identification}-${response.placa}-${response.valorPrima}`}
+          response={response}
+          clientInfo={clientInfoState}
           key={Math.random()}
         />
       ),
@@ -87,36 +81,25 @@ const StepsForm = ({
   ];
 
   return (
-    <>
-      <Row>
-        <Col className="col-steps-title" xs={24}>
-          <Steps current={current}>
-            {steps.map(item => (
-              <Step key={item.title} title={item.title} />
-            ))}
-          </Steps>
-        </Col>
-      </Row>
-      <div className="steps-content">
-        <Form
-          name="soat-form"
-          className="soat-form"
-          initialValues={{
-            remember: true
-          }}
-          onFinish={onFinish}
-          labelCol={{
-            span: 10,
-          }}
-          wrapperCol={{
-            span: 14,
-          }}
-          size="default"
-        >
-          {steps[current].content}
-        </Form>
-      </div>
-    </>
+    <main className="steps-content">
+      <Form
+        name="soat-form"
+        className="soat-form"
+        initialValues={{
+          remember: true
+        }}
+        onFinish={onFinish}
+        labelCol={{
+          span: 10,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        size="default"
+      >
+        {steps[current].content}
+      </Form>
+    </main>
   );
 };
 

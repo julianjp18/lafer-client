@@ -14,13 +14,20 @@ import {
 
 const { Option } = Select;
 
-function FirstForm({ next, vehicleInfo, response }) {
+function FirstForm({ next, vehicleInfo, response, clientInfo }) {
   const [typeVehicle, setTypeVehicle] = useState();
   const [line, setLine] = useState(response && response.line);
   const [classVehicle, setClassVehicle] = useState(response && response.class);
   const [model, setModel] = useState(response && response.model);
   const [plate, setPlate] = useState(response && response.placa);
   const [brand, setBrand] = useState(response && response.brand);
+  // const [email, setEmail] = useState(response && response.email);
+  // const [phoneNumber, setPhoneNumber] = useState(response && response.movil);
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [formError, setFormError] = useState({email:false, phoneNumber:false});
+  const [quotation, setQuotation] = useState(response && response.brand);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -30,7 +37,10 @@ function FirstForm({ next, vehicleInfo, response }) {
       setModel(response.model);
       setPlate(response.placa);
       setBrand(response.brand);
-      console.log("info completa ", response)
+      setQuotation(response.cotizaciones[0])
+      // setEmail(response.email);
+      // setPhoneNumber(response.phoneNumber);
+      // console.log("info completa ", response)
     }else{
       if(localStorage.getItem("fetchedInfo")===null){
         history.push("/");
@@ -40,185 +50,123 @@ function FirstForm({ next, vehicleInfo, response }) {
   }, [response]);
 
   const nextSubmit = () => {
-    const vehicleData = {
-      typeVehicle,
-      line,
-      classVehicle,
-      model,
-      plate,
-      brand,
-    };
+    if(!validateForm()){
+      let newClient = Object.assign({}, response, {})
+      newClient.email = email;
+      newClient.movil = phoneNumber;
+      clientInfo(newClient);
+      
+      const vehicleData = {
+        typeVehicle,
+        line,
+        classVehicle,
+        model,
+        plate,
+        brand,
+        email,
+        phoneNumber,
+      };
+      vehicleInfo(vehicleData);
+      next();      
+    }
 
-    vehicleInfo(vehicleData);
-    next();
   };
 
+  const validateForm=()=>{
+    let emailError = false;
+    let phoneError = false;
+    let hasError = false;
+
+    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) { 
+      emailError = true;
+      hasError = true;
+    }
+
+    if (!/[0-9]{10}$/.test(phoneNumber)) {  
+      phoneError = true;
+      hasError = true;
+    }
+
+    setFormError({ ...formError, email: emailError,  phoneNumber: phoneError});
+    return hasError;
+  }
+
   return response ? (
-    <div style={{ padding: 50 }}>
-      <h1>Información de tu vehiculo</h1>
-      <p>Revisa que este sea la información de tu vehiculo, recuerda que el SOAT no se puede anular</p>
-      <>
-        <Row>
-          <Col xs={8}>
-            <Form.Item
-              name="brand"
-              label="Marca"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor inserta la marca de tu vehiculo!',
-                  whitespace: true,
-                },
-              ]}
-              initialValue={brand}
-            >
-              <Input value={brand} onChange={(value) => setBrand(value.target.value)} />
-            </Form.Item>
-          </Col>
-          <Col xs={8}>
-            <Form.Item
-              name="typeVehicle"
-              label="Clase vehiculo"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-              initialValue={classVehicle}
-            >
-              <Select
-                placeholder="tipo de clase de vehiculo"
-                onChange={(value) => setClassVehicle(value)}
-                allowClear
-              >
-                <Option value="SUV">Automóvil</Option>
-                <Option value="MOTO">Moto</Option>
-                <Option value="TRUCK">Camión</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col xs={8}>
-            <Form.Item
-              name="line"
-              label="Línea"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor inserta la línea de tu vehiculo!',
-                  whitespace: true,
-                },
-              ]}
-              initialValue={line}
-            >
-              <Input onChange={(value) => setLine(value.target.value)} />
-            </Form.Item>
-          </Col>
-          <Col xs={8}>
-            <Form.Item
-              name="model"
-              label="Modelo"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor ingresa el modelo del vehiculo!',
-                  whitespace: true,
-                },
-                () => ({
-                  validator(rule, value) {
-                    const reg = /[0-9]{4}$/;
-                    if (reg.exec(value)) return Promise.resolve();
-                    return Promise.reject('Ingresa un año Ej: 2014.');
-                  },
-                }),
-              ]}
-              initialValue={model}
-            >
-              <Input onChange={(value) => setModel(value.target.value)} />
-            </Form.Item>
-          </Col>
-          <Col xs={8}>
-            <Form.Item
-              name="vehicle"
-              label="Placas del vehiculo"
-              placeholder="Ej: ABC-123"
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor inserta la placa del vehiculo!',
-                  whitespace: true,
-                },
-                () => ({
-                  validator(rule, value) {
-                    const reg = /[A-Z]{3}-[0-9]{3}$/;
-                    if (reg.exec(value)) return Promise.resolve();
-                    return Promise.reject('Structure of plate: XXX-123');
-                  },
-                }),
-              ]}
-              initialValue={plate}
-            >
-              <Input defaultValue={plate} onChange={(value) => setPlate(value.target.value)} />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={24}>
-            <Form.Item
-              name="selectVehicle"
-              label="Tipo de vehiculo"
-              labelCol={{
-                span: 3,
-              }}
-              wrapperCol={{
-                span: 21,
-              }}
-              rules={[
-                {
-                  required: true,
-                  message: 'Por favor selecciona tu tipo de vehiculo!',
-                },
-              ]}
-            >
-              <Radio.Group defaultValue={typeVehicle} onChange={(value) => setTypeVehicle(value.target.value)}>
-                <Row>
-                  <Col xs={24}>
-                    {classVehicle === "MOTO" && (
-                      <Card className="card-item" title="Motocicleta" style={{ width: 200 }}>
-                        <Radio value="425000">$ 425.000 COP</Radio>
-                        <p></p>
-                      </Card>
-                    )}
-                    {classVehicle === "SUV" && (
-                      <Card title="Automóvil" style={{ width: 200 }}>
-                        <Radio value="425000">$ 425.000 COP</Radio>
-                        <p></p>
-                      </Card>
-                    )}
-                    {classVehicle === "TRUCK" && (
-                      <Card title="Camión" style={{ width: 200 }}>
-                        <Radio value="700000">$ 700.000 COP</Radio>
-                        <p></p>
-                      </Card>
-                    )}
-                  </Col>
-                </Row>
-              </Radio.Group>
-            </Form.Item>
-            <Row>
-              <Col xs={20} offset={4}>
-                <div className="steps-action">
-                  <Button type="primary" onClick={nextSubmit}>
-                    Siguiente
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </>
-    </div>
+    <>
+      <section className="card__container">
+        <h1>Información del automóvil</h1>
+        <article className="info__container">
+          <img src="/images/icons/auto.svg" alt="auto" />
+          <ul>
+            <li>
+              <h6>Placa</h6>
+              <p>{response.placa}</p>
+            </li>
+            <li>
+              <h6>Marca</h6>
+              <p>{response.brand} {response.line}</p>
+            </li>
+            <li>
+              <h6>Modelo</h6>
+              <p>{response.model}</p>
+            </li>
+            <li>
+              <h6>Cilindraje</h6>
+              <p>falta</p>
+            </li>
+            <li>
+              <h6>Nombre propietario</h6>
+              <p>{response.name} {response.lastName}</p>
+            </li>
+          </ul>         
+        </article>
+        <footer>
+          Esta información se extrae directamente del RUNT, si hay algún error debes ponerte en contacto con ellos.
+        </footer>
+      </section>
+
+      {quotation &&
+        <>
+          <h2 className="soat__title">
+            Este es el precio de tu SOAT
+            <br />
+            <b>sin el bono de descuento</b>
+          </h2>
+          <section className="soat__container">
+            <article>
+              <h3>{quotation.producto}</h3>
+              <p>Costo: $ {quotation.imp_total}</p>
+            </article>
+            <img src={`/images/secures_logos/${quotation.cod_aseguradora}.png`} alt="seguro" />
+          </section>
+        </>
+      }
+
+      <h2 className="bono__title">
+        Para calcular tu bono de descuento,<br />
+        requerimos los siguientes datos
+      </h2>
+      <section className="bono__container">
+        <Form.Item>
+          <p>Correo electrónico</p>
+          <Input defaultValue={''} onChange={(value) => setEmail(value.target.value)} />
+          {formError && formError.email && <span className="error">Por favor inserta un email valido!</span>}
+        </Form.Item>
+        <Form.Item>
+          <p>Celular</p>
+          <Input defaultValue={''} onChange={(value) => setPhoneNumber(value.target.value)} />
+          {formError && formError.phoneNumber && <span className="error">Por favor inserta un celular! <br/>Estructura del telefono: 1234567890</span>}
+        </Form.Item>
+      </section>
+
+      <section className="nextstep__container">
+        <Button type="primary" onClick={nextSubmit} className="btn--nextstep">
+          Siguiente
+        </Button>
+      </section>
+    </>
   ): (
-    <div className="spin-container">
+    <div className="spin-container not--dates">
       <Spin tip="Cargando..." size="large"/>
     </div>
   );

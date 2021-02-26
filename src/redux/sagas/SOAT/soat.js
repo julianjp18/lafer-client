@@ -31,6 +31,11 @@ function* buySoat(formValues) {
 
 function* buySoatForm(formValues) {
   const { vehicle_info, client_info, buy_soat } = formValues.payload;
+  let d = new Date();
+  let tomorrow = d.setDate(d.getDate() + 1);
+  tomorrow = new Date(tomorrow).toISOString();
+  let today = new Date().toISOString();
+  
   const {
     typeVehicle,
     line,
@@ -52,7 +57,8 @@ function* buySoatForm(formValues) {
   const { cupon } = buy_soat;
 
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Costumers`, {
+  const error = [];
+  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Customers`, {
     id:identification,
     name,
     lastName,
@@ -71,9 +77,9 @@ function* buySoatForm(formValues) {
     address,
     codigoCupon: cupon,
     isBuy: true,
-    startDate: "2020-12-25T08:44:53.510Z",
-    endDate:"2021-12-24T08:44:53.510Z",
-    currentQuote: "2020-12-24T08:44:53.510Z"
+    startDate: tomorrow,
+    endDate: today,
+    currentQuote: today
   }, {
     "accept": "*/*",
     "Content-Type": "application/json",
@@ -81,17 +87,15 @@ function* buySoatForm(formValues) {
   }).then(response => {
     data.push(response);
   }).catch(e => {
-    console.log(e);
+    error.push(e);
   });
 
-  yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
-    
-  if (data[0].status !== 'Error') {
+  if (error.length === 0) {
     yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
     yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
   } else {
-    yield call(showNotification, { type: 'warning', message: data[0].message });
-    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { ...data[0] }, });
+    //yield call(showNotification, { type: 'error', message: "Error al adquirir el SOAT, por favor intente nuevamente en unos minutos" });
+    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { error: error} });
   }
 
 }

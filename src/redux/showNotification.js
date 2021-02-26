@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 
 notification.config({
-  duration: 7,
+  duration: 25,
   getContainer: () => document.getElementById('root'),
 });
 

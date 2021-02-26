@@ -15,24 +15,26 @@ function Landing({ mainInfo }) {
   localStorage.removeItem("fetchedInfo");
   let audio = new Audio("/snap_of_finger.mp3");
 
- const [formValues, setFormValues] = useState({plate:''});
- const [discount, setDiscount] = useState();
+ const [formValues, setFormValues] = useState({plate:null});
+ const [discount, setDiscount] = useState(null);
 
   const onFinish = () => {
-    try {
-      audio.play();
-    } catch (error) {
-      console.log("no se pudo reproducir audio");
-    } 
-    mainInfo(formValues);
-    history.push("/steps-form");
+    if(formValues && formValues.discount_id && formValues.plate){
+      try {
+        audio.play();
+      } catch (error) {
+        console.log("no se pudo reproducir audio");
+      }
+      mainInfo(formValues);
+      history.push("/steps-form");
+    }
   };
 
   const [visible, setVisible] = useState(false);
   const { Option } = Select;
 
   function handleChangeDiscount(value) {
-    setFormValues({...formValues, discount:value});
+    setFormValues({...formValues, discount_id:value});
   }
   function handleChangePlate({target}) {
     setFormValues({...formValues, plate:target.value});
@@ -55,7 +57,7 @@ function Landing({ mainInfo }) {
       <section className="mainSection__container">
         <article className="soatForm__container">
           <h2>Cotiza rápido y seguro aquí</h2>
-          <input type="plate" id="plate" name="plate" placeholder="Ingresa la placa" onChange={handleChangePlate} value={formValues.plate.toUpperCase()}></input>
+          <input type="plate" id="plate" name="plate" placeholder="Ingresa la placa" onChange={handleChangePlate} value={formValues.plate && formValues.plate.toUpperCase()}></input>
           <Select
             size={'large'}
             placeholder="Selecciona tu bono regalo"
