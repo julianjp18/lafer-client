@@ -10,7 +10,7 @@ import Quote from "../components/SecureCar/Quote";
 import CompareQuote from "../components/SecureCar/Quote/CompareQuote";
 import Countries from "../components/Admin/Countries";
 import SOAT from "../components/SOAT";
-import StepsForm from '../components/SOAT/StepsForm';
+import BonusSoat from '../components/SOAT/BonusSoat';
 import SuccessPayment from "../components/Payments/SuccessPayment";
 import FailurePayment from "../components/Payments/FailurePayment";
 import PendingPayment from "../components/Payments/PendingPayment";
@@ -31,7 +31,7 @@ const ROUTES = [
   { path: "/blogs", key: "Noticias", exact: true, component: LogIn, show: true, auth: false },
   { path: "/log-in", key: "Iniciar sesión", exact: true, component: LogIn, show: false, auth: false },
   { path: "/sign-up", key: "Registrarse", exact: true, component: SignUp, show: false, auth: false },
-  { path: "/steps-form", key: "pasos SOAT", exact: true, component: StepsForm, show: false, auth: false },
+  { path: "/steps-form", key: "pasos SOAT", exact: true, component: BonusSoat, show: false, auth: false },
   { path: "/custom-quote", key: "Cotización Personalizada", exact: true, component: CustomQuote, show: false },
   { path: "/quote-list", key: "Cotización", exact: true, component: Quote, show: false },
   { path: "/compare-quote", key: "Comparar lista seleccionada", exact: true, component: CompareQuote, show: false },

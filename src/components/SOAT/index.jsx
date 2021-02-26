@@ -42,7 +42,7 @@ function Soat({ mainInfo, response }) {
     if (values.email && values.phone) {
       setemptyError(false);
       mainInfo(values);
-      history.push("/steps-form");
+      history.push("/bonus-soat");
     } else {
       setemptyError(true);
     }

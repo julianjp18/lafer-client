@@ -1,0 +1,121 @@
+@import '../../utils/colors.scss';
+
+.bonus-soat-container {
+  margin-top: 60px;
+  padding: 20px 0;
+  min-height: 80vh;
+  background-image: url(../../../assets/images/bg-1-gray.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+
+  .subtitle-bonus-soat {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .card-bonus-container {
+    background-color: #ffffff;
+    width: 390px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 7px 13px #D7D6E7;
+    text-align: start;
+    font-size: 16px;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .card-title {
+      font-weight: bold;
+    }
+  
+    .card-last-cost {
+      font-size: 14px;
+      text-decoration: line-through;
+      color: $color-second-gray;
+    }
+
+    .card-bonus-info {
+      font-size: 14px;
+      color: $color-second-gray;
+    }
+
+    .card-cost {
+      font-weight: bold;
+      color: $second-color;
+    }
+
+    .card-secure-img {
+      margin-top: 25px;
+
+      &.lifemiles {
+        margin-top: 2px;
+      }
+    }
+
+    .payment-container {
+      margin-top: 15px;
+      padding: 15px 0;
+      background-color: #F8F7FC;
+      border-radius: 10px;
+      color: $color-second-gray;
+
+      p {
+        padding-left: 35px;
+        margin-bottom: 0;
+      }
+  
+      .payment-img {
+        width: 80px;
+        margin: auto;
+        text-align: center;
+  
+        &.visa {
+          padding-top: 0;
+        }
+  
+        &.pse {
+          margin-top: 0;
+        }
+      }
+    }
+
+    .see-points-container {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center;
+      
+      .see-points {
+        font-size: 16px;
+        color: $second-color;
+      }
+    }
+
+    .button-container {
+      text-align: center;
+      margin: auto;
+
+      .btn-submit {
+        height: 40px;
+        padding: 0 35px;
+        margin: 30px 0;
+        background-color: $color-dark-blue;
+        font-weight: bold;
+        border-radius: 5px;
+        border: 0;
+        box-shadow: 0px 0px 13px #D7D6E7;
+      }
+    }
+
+    .extra-info {
+      font-size: 12px;
+      color: #979BA7;
+      margin: 0 10px;
+    }
+  }
+}
