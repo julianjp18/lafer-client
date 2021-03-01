@@ -17,14 +17,14 @@ function ThirdForm({
 
   const [imagenCar, setImagenCar] = useState('/images/cars_logos/default_car.svg');
 
-  useEffect(() => {
-    var http = new XMLHttpRequest();
-    http.open("HEAD", `/images/cars_logos/${clientInfo.brand.toLowerCase()}.jpg`, false);
-    http.send();
-    if (http.status != 404) {
-      setImagenCar(`/images/cars_logos/${clientInfo.brand.toLowerCase()}.jpg`);
-    }
-  }, [])
+  // useEffect(() => {
+  //   var http = new XMLHttpRequest();
+  //   http.open("HEAD", `/images/cars_logos/${clientInfo.brand.toLowerCase()}.jpg`, false);
+  //   http.send();
+  //   if (http.status != 404) {
+  //     setImagenCar(`/images/cars_logos/${clientInfo.brand.toLowerCase()}.jpg`);
+  //   }
+  // }, [])
 
 
   
