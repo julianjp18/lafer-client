@@ -1,19 +1,18 @@
 import axios from "axios";
 
-const PASSWORD_ASESOR = "29528";
-const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
-const QUOTATION_ENDPOINT = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
+const PASSWORD_ASESOR = "";
+const QUOTATION_ENDPOINT = "";
 const HEADERS = {
   "accept": "application/json",
   "Content-Type": "application/json",
-  "x-api-key": API_KEY,
+  "x-api-key": "",
 };
 
 export const getQuote = async (userData, numerodeliquidacion) => {
   var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("Accept", "application/json");
-myHeaders.append("x-api-key", "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp");
+myHeaders.append("x-api-key", "");
 
 const {
   vehicle,
@@ -46,7 +45,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-  const url = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
+  const url = "";
   const response = await fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
   
   console.log(response);

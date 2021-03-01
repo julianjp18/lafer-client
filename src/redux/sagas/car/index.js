@@ -3,13 +3,12 @@ import axios from 'axios';
 import http from "../../../axios/sura";
 import showNotification from '../../showNotification';
 
-const PASSWORD_ASESOR = "29528";
-const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
-const QUOTATION_ENDPOINT = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/cotizacion";
+const PASSWORD_ASESOR = "";
+const QUOTATION_ENDPOINT = "";
 const HEADERS = {
   "Accept": "application/json",
   "Content-Type": "application/json",
-  "x-api-key": API_KEY,
+  "x-api-key": "",
 };
 
 const createLead = async (dataFormValues) => {
@@ -52,7 +51,7 @@ const createLead = async (dataFormValues) => {
     body: raw,
   };
 
-  const url = "https://api.sharpspring.com/pubapi/v1/?accountID=76FD61825495DAC83BD6A631F10B3E91&secretKey=08F1969173F67ABD5FB267D6E2547FB5"
+  const url = ""
   fetch("https://cors-anywhere.herokuapp.com/" + url, requestOptions)
     .then(response => response.text())
     .then(result => result)
@@ -106,7 +105,7 @@ function* secureCar (formValues) {
   });
 
   try {
-    const url = "https://stg-api-conecta.segurosbolivar.com/stage/seguro-autos/liquidacion";
+    const url = "";
     const response =  yield http.post(
       "https://cors-anywhere.herokuapp.com/" + url,
       dataFormValues,
@@ -183,7 +182,7 @@ function* getCities() {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Accept", "application/json");
-  myHeaders.append("x-api-key", API_KEY);
+  myHeaders.append("x-api-key", "");
 
   var raw = JSON.stringify({"claveAsesor": PASSWORD_ASESOR});
 
@@ -194,7 +193,7 @@ function* getCities() {
     redirect: 'follow'
   };
 
-  const response = yield fetch("https://stg-api-conecta.segurosbolivar.com/stage/listaCiudades?x-api-key=UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp&claveAsesor=29528&Content-Type=application/json", requestOptions);
+  const response = yield fetch("", requestOptions);
   const data = yield response.json();
 
   if (data.dataHeader.codRespuesta === 200) {

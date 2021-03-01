@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const API_KEY = "UK3ncSKYBD3dxMHSCLNVe4QYh6ZHEwbZ4dlc1dSp";
-const MAIN_ENDPOINT = "https://stg-api-conecta.segurosbolivar.com/stage/";
+const MAIN_ENDPOINT = "";
 const HEADERS = {
   "Accept": "application/json",
   "Content-Type": "application/json",
-  "x-api-key": API_KEY,
+  "x-api-key": "",
 };
 
 axios.interceptors.response.use(config => {

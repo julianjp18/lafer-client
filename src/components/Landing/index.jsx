@@ -7,6 +7,8 @@ import { Modal, Select } from 'antd';
 import axios from 'axios';
 import './landing.scss';
 import 'antd/dist/antd.css';
+import IconAirplane from "./IconAirplane";
+import IconMoney from "./IconMoney";
 
 function Landing({ mainInfo }) {
 
@@ -64,7 +66,17 @@ function Landing({ mainInfo }) {
             onChange={handleChangeDiscount}
           >
             {discount && discount.length>0 && discount.map(o=>{
-              return <Option key={o.id} value={o.id}>{o.description}</Option>
+              const iconMiles = o.description === 'Millas LifeMiles';
+              return (
+                <Option key={o.id} value={o.id}>
+                  {iconMiles ? (
+                    <IconAirplane />
+                  ) : (
+                    <IconMoney />
+                  )}
+                  {o.description}
+                </Option>
+              )
             })
             }
           </Select>
@@ -94,7 +106,7 @@ function Landing({ mainInfo }) {
             <h1>¿Quiénes <strong>somos?</strong></h1>
             <p>Somos intermediarios con más de 40 años de experiencia, líderes en mercadeo masivo de seguros y microseguros. Entregamos soluciones a la medida, excelente servicio al cliente y manejamos todos los riesgos para que tus intereses estén bien asegurados.</p>
           </article>
-          <img src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-1-desktop.png" alt="Image" />
+          <img src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-3-desktop.png" alt="Image" />
         </section>
       </div>
     </>

@@ -457,3 +457,121 @@
 .error{
   color: red;
 }
+
+.ant-select-item-option-content,
+.ant-select-selection-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  svg {
+    height: 16px;
+    width: 16px;
+    margin: 0 6px 0 0;
+  }
+}
+
+
+
+.coberturas__modal {
+  .ant-modal-content{
+    padding: 20px !important;
+
+    .ant-modal-header {
+      padding: 0 !important;
+      margin: 0;
+      text-align: left;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      line-height: 19px;
+      font-weight: 600;  
+      color: #161E24;
+    }
+    .ant-modal-body {
+      padding: 0 !important;
+
+      .detallesModal__container {
+        &--info {
+          display: flex;
+          flex-wrap: nowrap;
+          position: relative;
+          padding: 6px 0 15px;
+    
+          .info__container {
+            width: 100%;
+    
+            p {
+              font-family: 'Roboto', sans-serif;
+              color: #979BA7;
+              font-size: 14px;
+              line-height: 19px;
+              margin: 0;
+              text-align: left;
+              font-weight: 500;
+              padding: 0 0 1px;
+            }
+            b {
+              font-size: 16px;
+              line-height: 21px;
+              color: #0099B2;
+            }
+    
+            &--descuento {
+              text-decoration: line-through;
+              font-weight: 400 !important;
+            }
+    
+          }
+          .logo__container {
+            max-width: 56px;
+            width: 100%;
+            position: absolute;
+            top: -30px;
+            right: 0;
+    
+            img {}
+            .img-smiles {
+              position: relative;
+              top: -20px;
+            }
+            .img-not-smiles {
+              position: relative;
+              top: 20px;
+            }
+          }
+    
+        }
+        .cobertura__modal {
+          margin: 0;
+          background: #F8F7FC 0% 0% no-repeat padding-box;
+          border-radius: 13px;
+          padding: 19px;
+        
+          li {
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;  
+            letter-spacing: 0.21px;
+            color: #4A4F5D;
+            display: flex;
+            align-items: flex-start;
+            padding: 0 0 6px;
+        
+            &:last-child { padding: 0; }
+        
+            svg {
+              fill: #0099B2;
+              margin: 0 6px 0 0;
+            }
+          }
+        }
+      }
+    }
+
+    .ant-modal-footer {
+      padding: 20px 0 0 !important;
+    }
+  }
+}

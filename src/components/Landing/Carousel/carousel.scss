@@ -27,5 +27,11 @@
         background: #F67411;
       }
     }
+    .alice-carousel__dots-item:not(.__custom):not(:last-child) {
+      margin: 0 6px 0 0;
+      @media (min-width: 768px) {
+        margin: 0 12px 0 0;
+      }
+    }
   }
 }

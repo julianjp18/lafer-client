@@ -6,10 +6,7 @@ function ThirdForm({
   clientInfo,
   response
 }) {
-  console.log("🚀 ~ file: ThirdForm.jsx ~ line 9 ~ clientInfo", clientInfo)
-  debugger;
-
-  const {selectedSoat} = clientInfo;
+  const { selectedSoat } = clientInfo;
 
   useEffect(() => {
     if(response && response.error){
@@ -49,7 +46,7 @@ function ThirdForm({
     inputBillValue.type = 'hidden';
     inputBillValue.name = "valor";
     inputBillValue.id = "valor";
-    inputBillValue.value = selectedSoat.imp_total;
+    inputBillValue.value = parseInt(clientInfo.selectedSoat.discount_total.replace("$ ", "").replace(".", ""));
     
     inputBillDescription.type = 'hidden';
     inputBillDescription.name = "descripcionFactura";
@@ -133,13 +130,8 @@ function ThirdForm({
         </section>
       </section>
       <Button type="primary" htmlType="submit" className="btn--next last-step">
-            Proceder al pago
-          </Button>
-      {/* <Form.Item>
-          <Button type="primary" htmlType="submit" className="btn--next last-step">
-            Proceder al pago
-          </Button>
-      </Form.Item> */}
+        Proceder al pago
+      </Button>
     </>
   );
 }
