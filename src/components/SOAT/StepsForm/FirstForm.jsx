@@ -135,7 +135,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
           <section className="soat__container">
             <article>
               <h3>{quotation.producto}</h3>
-              <p>Costo: $ {quotation.imp_total}</p>
+              <p>Costo: $ {quotation && quotation.imp_total && quotation.imp_total.toLocaleString()}</p>
             </article>
             <img src={`/images/secures_logos/${quotation.cod_aseguradora}.png`} alt="seguro" />
           </section>

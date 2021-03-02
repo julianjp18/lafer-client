@@ -9,6 +9,7 @@ import './landing.scss';
 import 'antd/dist/antd.css';
 import IconAirplane from "./IconAirplane";
 import IconMoney from "./IconMoney";
+import Terms from "./terms"
 
 function Landing({ mainInfo }) {
 
@@ -94,7 +95,7 @@ function Landing({ mainInfo }) {
               width={820}
               okText="Volver"
             >
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc laoreet viverra purus, sed viverra eros efficitur vel. Donec euismod luctus faucibus. Ut vel lectus lectus. Nulla a suscipit massa. Nam in sodales dolor. Nulla nulla turpis, elementum ac eleifend nec, efficitur in arcu. Phasellus sodales sapien a semper egestas. Integer lacinia nisl ante, non placerat quam elementum sit amet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus eu sapien vel metus faucibus sollicitudin. Integer aliquet ac magna vel sagittis. Phasellus luctus mattis lacus sit amet varius. Donec pharetra id quam eu iaculis. Vivamus id blandit velit. Cras venenatis pharetra dui quis consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales a quam sed mattis. Etiam varius vel urna sed finibus. Aenean varius nibh vitae mauris rutrum suscipit quis eget diam. Nullam pellentesque cursus lorem non tincidunt. Suspendisse ultricies efficitur pretium. In eu pellentesque neque. Etiam pharetra libero nec neque pulvinar, id posuere elit interdum. Nam luctus augue lorem. Nullam tempor egestas libero eget iaculis. Phasellus eu sapien vel metus faucibus sollicitudin. Integer aliquet ac magna vel sagittis. Phasellus luctus mattis lacus sit amet varius. Donec pharetra id quam eu iaculis. Vivamus id blandit velit. Cras venenatis pharetra dui quis consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sodales a quam sed mattis. Etiam varius vel urna sed finibus. Aenean varius nibh vitae mauris rutrum suscipit quis eget diam. Nullam pellentesque cursus lorem non tincidunt. Suspendisse ultricies efficitur pretium. In eu pellentesque neque. Etiam pharetra libero nec neque pulvinar, id posuere elit interdum. Nam luctus augue lorem. Nullam tempor egestas libero eget iaculis.v</p>
+              {Terms}
             </Modal>
           </span>
         </article>
