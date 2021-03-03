@@ -12,58 +12,107 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    padding: 60px 12px;
+    padding: 75px 46px;
 
-    @media (min-width: 768px) {
+    // @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       flex-direction: row;
       text-align: left;
       padding: 0 12px;
     }
 
     article {
-      max-width: 344px;
-      width: 100%;
-      padding: 0 0 60px;
+      // max-width: 344px;
+      // width: 100%;
+      // padding: 0 0 60px;
       margin: 0 auto;
-      @media (min-width: 768px) {
+      // @media (min-width: 768px) {
+      @media (min-width: 1024px) {
         padding: 60px 0;
       }
 
-      h2 {
+      h6, p {
+        font-family: 'Roboto', sans-serif;
+        text-align: left;
         color: $color-white;
-        font-size: 24px;
-        line-height: 39px;
+        font-size: 16px;
+        line-height: 26px;
         font-weight: 600;
         margin: 0;
-        @media (min-width: 768px) {
-          font-size: 31px;
-        }
       }
-      p {
-        margin: 0;
+      p, a {
         color: #BFBFBF;
-        font-size: 12px;
-        line-height: 26px;
-        @media (min-width: 768px) {
-          font-size: 16px;
-        }
+        font-weight: 400;
+        text-decoration: none;
       }
+
+    }
+    &--cards {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .cards--mastercard {
+        height: 46px;
+        width: auto;
+      }
+      .cards--visa {
+        height: 21px;
+        width: auto;
+        padding: 0 3px 0 18px;
+      }
+      .cards--pse {
+        height: 80px;
+        width: auto;
+      }
+
     }
   
-    .social {
+    .line--gray {
+      border-top: 1px solid #BFBFBF;
+      width: 90%;
+      margin: 40px auto;
+      
+      // @media (min-width: 768px) {
+      @media (min-width: 1024px) {
+        border-right: 1px solid #BFBFBF;
+        width: auto;
+        margin: 40px 0;
+      }
+    }
+
+    &--info {
+      max-width: 283px;
+      width: 100%;
+      align-self: center;
+    }
+    &--policy {
+      max-width: 354px;
+      width: 100%;
+      align-self: center;
+    }
+    &--cards {
+      max-width: 240px;
+      width: 100%;
+      align-self: center;
+    }
+
+    &--social {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      max-width: 344px;
+      max-width: 108px;
       width: 100%;
-      margin: 0 auto;
   
-      &-item {
+      .social-item {
         color: $color-white;
         transition: all 0.35s ease;
-        padding: 0 0 0 12px;
-        &:first-child { padding: 0 };
+
+        img {
+          height: 80px;
+          width: 80px;
+        }
       }
     }
 

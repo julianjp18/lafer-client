@@ -22,7 +22,8 @@ function Landing({ mainInfo }) {
  const [discount, setDiscount] = useState(null);
 
   const onFinish = () => {
-    if(formValues && formValues.discount_id && formValues.plate){
+    //comento para que no se vean las millas
+    //if(formValues && formValues.discount_id && formValues.plate){
       try {
         audio.play();
       } catch (error) {
@@ -30,7 +31,7 @@ function Landing({ mainInfo }) {
       }
       mainInfo(formValues);
       history.push("/steps-form");
-    }
+    //}
   };
 
   const [visible, setVisible] = useState(false);
@@ -61,6 +62,9 @@ function Landing({ mainInfo }) {
         <article className="soatForm__container">
           <h2>Cotiza rápido y seguro aquí</h2>
           <input type="plate" id="plate" name="plate" placeholder="Ingresa la placa" onChange={handleChangePlate} value={formValues.plate && formValues.plate.toUpperCase()}></input>
+          {
+          /* 
+          comento para que no se vean las millas
           <Select
             size={'large'}
             placeholder="Selecciona tu bono regalo"
@@ -80,7 +84,7 @@ function Landing({ mainInfo }) {
               )
             })
             }
-          </Select>
+          </Select> */}
           <button className="soatForm__button" onClick={onFinish}>
             Cotiza SOAT gratis
           </button>
@@ -95,7 +99,7 @@ function Landing({ mainInfo }) {
               width={820}
               okText="Volver"
             >
-              {Terms}
+              {Terms} 
             </Modal>
           </span>
         </article>

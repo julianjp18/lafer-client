@@ -9,7 +9,7 @@ function SecondForm({ next, prev, clientInfo, response }) {
     show: false,
     id: null
   });
-  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones : null);
+  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.discount_id===1) : null);
   const [clientData, setClientData] = useState(response ? response : {});
 
   const nextSubmit = (id) => {
@@ -23,7 +23,7 @@ function SecondForm({ next, prev, clientInfo, response }) {
   return (
     <>
       <h1 className="paycard__container--title">Escoge el BONO de tu SOAT</h1>
-      {response && response.cotizaciones && Object.values(response.cotizaciones).map((data, key) => {
+      {cotizacion && Object.values(cotizacion).map((data, key) => {
         return (
           <section className="paycard__container" key={key}>
             <h2>{data.producto}</h2>
