@@ -35,8 +35,8 @@ export const Carousel = props => {
         mouseTrackingEnabled
         autoPlayInterval={6000}
         animationDuration={1000}
-        autoPlay
-        infinite
+        // autoPlay
+        // infinite
       />
     </div>
   );

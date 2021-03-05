@@ -29,8 +29,11 @@ function Landing({ mainInfo }) {
       } catch (error) {
         console.log("no se pudo reproducir audio");
       }
-      mainInfo(formValues);
-      history.push("/steps-form");
+      setTimeout(function(){
+        mainInfo(formValues);
+        history.push("/steps-form");
+      }, 900);
+
     //}
   };
 
