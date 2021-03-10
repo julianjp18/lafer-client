@@ -11,7 +11,7 @@ function* mainInfo(formValues) {
   localStorage.setItem("fetchedInfo", "");
   const error = [];
   const data = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Soat`, formValues.payload, {
+  yield axios.post(`${process.env.REACT_APP_API_URL}/getQuote`, formValues.payload, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",
   }).then((response) => {

@@ -11,6 +11,7 @@ import {
   Button,
   Spin,
 } from 'antd';
+import axios from 'axios';
 
 const { Option } = Select;
 
@@ -30,6 +31,10 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
 
   const history = useHistory();
 
+  const censorWord = function (str) {
+    return str[0] + "*".repeat(str.length - 2) + str.slice(-1);
+  }
+
   useEffect(() => {
     if (response) {
       setLine(response.line);
@@ -38,9 +43,6 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
       setPlate(response.placa);
       setBrand(response.brand);
       setQuotation(response.cotizaciones[0])
-      // setEmail(response.email);
-      // setPhoneNumber(response.phoneNumber);
-      // console.log("info completa ", response)
     }else{
       if(localStorage.getItem("fetchedInfo")===null){
         history.push("/");
@@ -51,23 +53,33 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
 
   const nextSubmit = () => {
     if(!validateForm()){
-      let newClient = Object.assign({}, response, {})
-      newClient.email = email;
-      newClient.movil = phoneNumber;
-      clientInfo(newClient);
-      
-      const vehicleData = {
-        typeVehicle,
-        line,
-        classVehicle,
-        model,
-        plate,
-        brand,
-        email,
-        phoneNumber,
-      };
-      vehicleInfo(vehicleData);
-      next();      
+      let newClient = Object.assign({}, response, {});
+
+      axios.post(`${process.env.REACT_APP_API_URL}/setAdditionalData`, {cotizacion_id: response.id, email: email, movil: phoneNumber}, {
+        "accept": "*/*",
+        "Access-Control-Allow-Origin": "*",
+      }).then((res) => {
+        if(res && res.data && res.data.response){
+          newClient.email = email;
+          newClient.movil = phoneNumber;
+          clientInfo(newClient);
+          const vehicleData = { 
+            typeVehicle,
+            line,
+            classVehicle,
+            model,
+            plate,
+            brand,
+            email,
+            phoneNumber,
+          };
+          vehicleInfo(vehicleData);
+          next();
+        }
+      }).catch(e => {
+        //error.push(e);
+      });
+   
     }
 
   };
@@ -116,12 +128,12 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
             </li>
             <li>
               <h6>Nombre propietario</h6>
-              <p>{response.name} {response.lastName}</p>
+              <p>{censorWord(response.name)} {censorWord(response.lastName)}</p>
             </li>
           </ul>         
         </article>
         <footer>
-          Esta información se extrae directamente del RUNT, si hay algún error debes ponerte en contacto con ellos.
+          Esta información se extrae directamente del RUNT,<br/> si hay algún error debes ponerte en contacto con ellos.
         </footer>
       </section>
 
@@ -130,7 +142,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
           <h2 className="soat__title">
             Este es el precio de tu SOAT
             <br />
-            <b>sin el bono de descuento</b>
+            sin el bono de descuento
           </h2>
           <section className="soat__container">
             <article>
@@ -149,12 +161,12 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
       <section className="bono__container">
         <Form.Item>
           <p>Correo electrónico</p>
-          <Input defaultValue={''} onChange={(value) => setEmail(value.target.value)} />
+          <Input defaultValue={''} onChange={(value) => setEmail(value.target.value)} name="email"/>
           {formError && formError.email && <span className="error">Por favor inserta un email valido!</span>}
         </Form.Item>
         <Form.Item>
           <p>Celular</p>
-          <Input defaultValue={''} onChange={(value) => setPhoneNumber(value.target.value)} />
+          <Input defaultValue={''} onChange={(value) => setPhoneNumber(value.target.value)} name="movil"/>
           {formError && formError.phoneNumber && <span className="error">Por favor inserta un celular! <br/>Estructura del telefono: 1234567890</span>}
         </Form.Item>
       </section>

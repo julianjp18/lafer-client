@@ -98,7 +98,7 @@ h1 {
 
 		.Brand {
 			overflow: hidden;
-			width: 80px;
+			width: 176px;
 			height: 45px;
 			@include largescreen {
 				width: auto;
@@ -156,10 +156,12 @@ h1 {
 		}
 
 		.Brand a img {
-			width: 80px;
+			width: 176px;
+			margin-top: -10px;
 			@include largescreen {
 				height: 83px;
 				width: auto;
+				margin-top: 0px;
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 @import "react-alice-carousel/lib/scss/alice-carousel.scss";
 @import "../utils/colors.scss";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
 .maxwidth__container {
   max-width: 1246px;
@@ -53,10 +54,11 @@
   h2 {
     color: #161E24;
     letter-spacing: 0.28px;
-    font-size: 16px;
+    font-size: 17px;
     text-align: center;
-    font-weight: 700;
+    font-weight:bold;
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
   }
   input {
     border: 0;
@@ -221,8 +223,9 @@
   justify-content: center;
   align-items: center;
   padding: 70px 30px 30px;
-  @media (min-width: 768px) {
-    padding: 43px 53px 112px 88px;
+  @media (max-width: 768px) {
+    //padding: 43px 53px 112px 88px;
+    padding: 70px 66px 30px;
   }
 
   article {

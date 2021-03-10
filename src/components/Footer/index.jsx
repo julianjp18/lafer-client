@@ -17,12 +17,17 @@ const Footer = () => {
           <p>
             NIT 900.176.872-6
           </p>
+          <br/>
+          <p>
+            Cali, Colombia
+          </p>
           <p>
             Calle 23 Norte # 5N 21
           </p>
           <p>
             Teléfono: <a href="tel:+5724858528">+57 2 4858528</a>
           </p>
+          <br/>
           <p>
             Email: <a href="mailto:soporte@siendoseguro.com">soporte@siendoseguro.com</a>
           </p>

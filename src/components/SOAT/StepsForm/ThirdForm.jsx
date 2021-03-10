@@ -8,6 +8,11 @@ function ThirdForm({
 }) {
   const { selectedSoat } = clientInfo;
 
+  const censorWord = function (str) {
+    return str[0] + "*".repeat(str.length - 2) + str.slice(-1);
+  }
+
+
   useEffect(() => {
     if(response && response.error){
       showModal(Math.floor(Math.random() * (900000 - 500000)) + 1);
@@ -92,7 +97,7 @@ function ThirdForm({
             </li>
             <li>
               <h6>Nombre propietario</h6>
-              <p>{clientInfo.name} {clientInfo.lastName}</p>
+              <p>{censorWord(clientInfo.name)} {censorWord(clientInfo.lastName)}</p>
             </li>
           </ul>
         </article>
@@ -100,16 +105,16 @@ function ThirdForm({
           <h2>{selectedSoat.producto}</h2>
           <article className="paycard__container--info">
             <section className="info__container">
-              {selectedSoat.discount_id === 1 && (
+              {selectedSoat.cotizacion_nro === 100 && (
                 <>
                   {selectedSoat.imp_total && (
-                    <p className="info__container--descuento">Costo: {selectedSoat.imp_total}</p>
+                    <p className="info__container--descuento">Costo: ${selectedSoat.imp_total.toLocaleString()}</p>
                   )}
                   <p>Bono: {selectedSoat.discount_text}</p>
                   <p><b>Costo: {selectedSoat.discount_total}</b></p>
                 </>
               )}
-              {selectedSoat.discount_id === 2 && (
+              {selectedSoat.cotizacion_nro === 2 && (
                 <>
                   <p>Bono: {selectedSoat.discount_text} millas</p>
                   <p><b>Costo: {selectedSoat.discount_total}</b></p>

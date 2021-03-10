@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import useMedia from 'use-media';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
 import Carousel from "./Carousel/Carousel";
@@ -13,6 +14,7 @@ import Terms from "./terms"
 
 function Landing({ mainInfo }) {
 
+  const isMobile = useMedia({ maxWidth: 767 });
 
   const history = useHistory();
   localStorage.removeItem("fetchedInfo");
@@ -48,22 +50,22 @@ function Landing({ mainInfo }) {
   }
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/Discounts`, {
-      "accept": "*/*",
-      "Access-Control-Allow-Origin": "*",
-    }).then((response) => {
-      setDiscount(response.data);
-    }).catch(e => {
-      //error.push(e);
-      setDiscount(null);
-    });
+    // axios.get(`${process.env.REACT_APP_API_URL}/Discounts`, {
+    //   "accept": "*/*",
+    //   "Access-Control-Allow-Origin": "*",
+    // }).then((response) => {
+    //   setDiscount(response.data);
+    // }).catch(e => {
+    //   //error.push(e);
+    //   setDiscount(null);
+    // });
   }, [])
 
   return (
     <>
       <section className="mainSection__container">
         <article className="soatForm__container">
-          <h2>Cotiza rápido y seguro aquí</h2>
+          <h2>Inicia rápido y seguro aquí</h2>
           <input type="plate" id="plate" name="plate" placeholder="Ingresa la placa" onChange={handleChangePlate} value={formValues.plate && formValues.plate.toUpperCase()}></input>
           {
           /* 
@@ -114,7 +116,9 @@ function Landing({ mainInfo }) {
             <h1>¿Quiénes <strong>somos?</strong></h1>
             <p>Somos intermediarios con más de 40 años de experiencia, líderes en mercadeo masivo de seguros y microseguros. Entregamos soluciones a la medida, excelente servicio al cliente y manejamos todos los riesgos para que tus intereses estén bien asegurados.</p>
           </article>
-          <img src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-3-desktop.png" alt="Image" />
+          {!isMobile && 
+            <img src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-3-desktop.png" alt="Image" />
+          }
         </section>
       </div>
     </>
