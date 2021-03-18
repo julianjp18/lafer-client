@@ -53,19 +53,19 @@ const StepsForm = ({
         />
       ),
     },
-    {
-      title: 'Tus datos',
-      content: (
-        <SecondForm
-          next={next}
-          prev={prev}
-          current={current}
-          clientInfo={clientInfo}
-          response={clientInfoState}
-          key={Math.random()}
-        />
-      ),
-    },
+    // {
+    //   title: 'Tus datos',
+    //   content: (
+    //     <SecondForm
+    //       next={next}
+    //       prev={prev}
+    //       current={current}
+    //       clientInfo={clientInfo}
+    //       response={clientInfoState}
+    //       key={Math.random()}
+    //     />
+    //   ),
+    // },
     {
       title: 'Compra tu SOAT',
       content: (

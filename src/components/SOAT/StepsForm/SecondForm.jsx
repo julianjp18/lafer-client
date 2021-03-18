@@ -13,7 +13,6 @@ function SecondForm({ next, prev, clientInfo, response }) {
   const [clientData, setClientData] = useState(response ? response : {});
 
   const nextSubmit = (id) => {
-    debugger;
     const soat = cotizacion && cotizacion.filter(c=>c.cotizacion_nro===id)[0]
     clientData.selectedSoat = soat
     clientInfo(clientData);

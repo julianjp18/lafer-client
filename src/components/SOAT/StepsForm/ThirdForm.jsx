@@ -7,15 +7,23 @@ function ThirdForm({
   response
 }) {
   const { selectedSoat } = clientInfo;
+  let audio = new Audio("/snap_of_finger.mp3");
 
   const censorWord = function (str) {
     return str[0] + "*".repeat(str.length - 2) + str.slice(-1);
   }
 
-
   useEffect(() => {
     if(response && response.error){
-      showModal(Math.floor(Math.random() * (900000 - 500000)) + 1);
+      try {
+        audio.play();
+      } catch (error) {
+        console.log("no se pudo reproducir audio");
+      }
+      setTimeout(function(){
+        showModal(Math.floor(Math.random() * (900000 - 500000)) + 1);
+      }, 900);
+      
     }
   }, [])
 
@@ -108,10 +116,10 @@ function ThirdForm({
               {selectedSoat.cotizacion_nro === 100 && (
                 <>
                   {selectedSoat.imp_total && (
-                    <p className="info__container--descuento">Costo: ${selectedSoat.imp_total.toLocaleString()}</p>
+                    <p className="info__container--descuento">Costo: ${selectedSoat.imp_total.toLocaleString() + " cops"}</p>
                   )}
-                  <p>Bono: {selectedSoat.discount_text}</p>
-                  <p><b>Costo: {selectedSoat.discount_total}</b></p>
+                  <p>Bono: {selectedSoat.discount_text + " cops"}</p>
+                  <p><b>Costo: {selectedSoat.discount_total + " cops"}</b></p>
                 </>
               )}
               {selectedSoat.cotizacion_nro === 2 && (

@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="line--gray" />
         <article className="footer__container--policy">
           <p>
-            Conoce nuestra <a onClick={() => setVisible(true)}>política de tratamientos de datos - Términos y condiciones</a>
+          <a onClick={() => setVisible(true)}><u>Conoce nuestra política de tratamientos de datos</u> - <u>Términos y condiciones</u></a>
           </p>
           <Modal
             title="Términos y condiciones"

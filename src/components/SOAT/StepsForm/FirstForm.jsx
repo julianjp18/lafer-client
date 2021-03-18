@@ -28,9 +28,10 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
   const [phoneNumber, setPhoneNumber] = useState();
   const [formError, setFormError] = useState({email:false, phoneNumber:false});
   const [quotation, setQuotation] = useState(response && response.brand);
+  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.cotizacion_nro===100) : null);
 
   const history = useHistory();
-
+  let audio = new Audio("/snap_of_finger.mp3");
   const censorWord = function (str) {
     return str[0] + "*".repeat(str.length - 2) + str.slice(-1);
   }
@@ -62,6 +63,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
         if(res && res.data && res.data.response){
           newClient.email = email;
           newClient.movil = phoneNumber;
+          newClient.selectedSoat = cotizacion[0];
           clientInfo(newClient);
           const vehicleData = { 
             typeVehicle,
@@ -74,7 +76,15 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
             phoneNumber,
           };
           vehicleInfo(vehicleData);
-          next();
+          try {
+            audio.play();
+          } catch (error) {
+            console.log("no se pudo reproducir audio");
+          }
+          setTimeout(function(){
+            next();
+          }, 900);
+          
         }
       }).catch(e => {
         //error.push(e);
@@ -88,18 +98,28 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
     let emailError = false;
     let phoneError = false;
     let hasError = false;
+    let invalidData = false;
 
-    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) { 
+    if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) { 
       emailError = true;
       hasError = true;
     }
 
-    if (!/[0-9]{10}$/.test(phoneNumber)) {  
+    if(!/[0-9]{10}$/.test(phoneNumber)) {  
       phoneError = true;
       hasError = true;
     }
 
-    setFormError({ ...formError, email: emailError,  phoneNumber: phoneError});
+    if(response.movil!==phoneNumber && !phoneError) {
+      invalidData = true;
+      hasError = true;
+    }
+    if(response.email!==email && !emailError) { 
+      invalidData = true;
+      hasError = true;
+    }
+
+    setFormError({ ...formError, email: emailError,  phoneNumber: phoneError, invalidData: invalidData});
     return hasError;
   }
 
@@ -147,7 +167,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
           <section className="soat__container">
             <article>
               <h3>{quotation.producto}</h3>
-              <p>Costo: $ {quotation && quotation.imp_total && quotation.imp_total.toLocaleString()}</p>
+              <p>Costo: $ {quotation && quotation.imp_total && quotation.imp_total.toLocaleString() + " cops"}</p>
             </article>
             <img src={`/images/secures_logos/${quotation.cod_aseguradora}.png`} alt="seguro" />
           </section>
@@ -168,6 +188,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
           <p>Celular</p>
           <Input defaultValue={''} onChange={(value) => setPhoneNumber(value.target.value)} name="movil"/>
           {formError && formError.phoneNumber && <span className="error">Por favor inserta un celular! <br/>Estructura del telefono: 1234567890</span>}
+          {formError && formError.invalidData && <span className="error">Email o Movil no coinciden con los obtenidos del RUNT</span>}
         </Form.Item>
       </section>
 
