@@ -28,7 +28,7 @@ function FirstForm({ next, vehicleInfo, response, clientInfo }) {
   const [phoneNumber, setPhoneNumber] = useState();
   const [formError, setFormError] = useState({email:false, phoneNumber:false});
   const [quotation, setQuotation] = useState(response && response.brand);
-  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.cotizacion_nro===100) : null);
+  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.discount_id===120) : null);
 
   const history = useHistory();
   let audio = new Audio("/snap_of_finger.mp3");

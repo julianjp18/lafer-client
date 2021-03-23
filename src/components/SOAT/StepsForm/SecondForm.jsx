@@ -9,7 +9,7 @@ function SecondForm({ next, prev, clientInfo, response }) {
     show: false,
     id: null
   });
-  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.cotizacion_nro===100) : null);
+  const [cotizacion, setCotizacion] = useState(response ? response.cotizaciones.filter(c=>c.discount_id===120) : null);
   const [clientData, setClientData] = useState(response ? response : {});
 
   const nextSubmit = (id) => {
