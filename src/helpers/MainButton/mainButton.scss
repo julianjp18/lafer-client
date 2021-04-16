@@ -1,0 +1,26 @@
+@import "../../components/utils/colors.scss";
+
+.main-btn-container {
+  min-width: 160px;
+  background-color: $naranja-siendo-seguro;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.container-verde {
+    background-color: $verde-siendo-seguro;
+  }
+  
+  &.from-bonus {
+    width: 160px;
+    padding: 8px 16px;
+  }
+}
+
+.cotizaSoatGratis {
+  color: $white;
+  text-align: center;
+  @include body-default;
+}

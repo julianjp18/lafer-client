@@ -1,0 +1,46 @@
+@import "../../../../utils/colors.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: initial;
+  margin: 50px 40px 0 40px;
+}
+.textInput {
+  display: flex;
+  flex-direction: column;
+
+}
+.correoElectronico {
+  color: $dark-slate-gray-3;
+  margin-bottom: 4px;
+  @include open-sans-12-regular;
+}
+.flexWrapperOne {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+.tipo {
+  color: $dark-slate-gray-3;
+  @include open-sans-12-regular;
+  &:not(:last-of-type) {
+    margin-right: 50px;
+  }
+}
+.formInput {
+  display: flex;
+  align-items: flex-start;
+}
+.group1 {
+  background-color: $white-smoke;
+  margin-right: 4px;
+  border-radius: 6px;
+  padding: 9.85px 11px 11.15px;
+  display: flex;
+  align-items: center;
+}
+.cc {
+  color: $black-1;
+  @include open-sans-14-regular;
+}

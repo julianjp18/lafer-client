@@ -1,6 +1,5 @@
 @import "react-alice-carousel/lib/scss/alice-carousel.scss";
 @import "../utils/colors.scss";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
 .maxwidth__container {
   max-width: 1246px;
@@ -54,11 +53,10 @@
   h2 {
     color: #161E24;
     letter-spacing: 0.28px;
-    font-size: 17px;
+    font-size: 16px;
     text-align: center;
-    font-weight:bold;
+    font-weight: 700;
     margin: 0;
-    font-family: 'Open Sans', sans-serif;
   }
   input {
     border: 0;
@@ -83,6 +81,9 @@
     }
   }
 
+  .show-error {
+    color: red;
+  }
   .soatForm__button {
     box-shadow: 0px 7px 13px #00000029;
     background: #F67411;
@@ -107,9 +108,12 @@
     line-height: 21px;
     font-family: 'Roboto', sans-serif;
     
-    a {
-      color: #979BA7;
-      text-decoration: underline;
+    .terms-and-conditions {
+      color: #161616;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -223,9 +227,10 @@
   justify-content: center;
   align-items: center;
   padding: 70px 30px 30px;
-  @media (max-width: 768px) {
-    //padding: 43px 53px 112px 88px;
-    padding: 70px 66px 30px;
+  @include body-default;
+
+  @media (min-width: 768px) {
+    padding: 43px 53px 112px 88px;
   }
 
   article {
@@ -268,11 +273,30 @@
   img {
     width: 90px;
     height: 280px;
+    display: none;
 
     @media (min-width: 768px) {
       display: block;
       width: 500px;
       height: 419px;
+    }
+  }
+}
+
+.ant-modal {
+  &.terms-modal {
+    .ant-modal-content {
+      .ant-modal-body {
+        background-color: $white;
+      }
+    }
+  }
+
+  &.alert-modal {
+    .ant-modal-content {
+      .ant-modal-body {
+        background-color: $naranja-siendo-seguro;
+      }
     }
   }
 }

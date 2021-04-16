@@ -41,6 +41,9 @@ import {
   GET_COUNTRY_BY_ID,
   GET_COUNTRY_BY_ID_SUCCESS,
   GET_COUNTRY_BY_ID_FAILURE,
+  SAVE_SECURE_SELECTED,
+  SAVE_SECURE_SELECTED_SUCCESS,
+  SAVE_SECURE_SELECTED_FAILURE,
 } from '../constants';
 
 const reducer = (state = {}, action) => {
@@ -60,7 +63,8 @@ const reducer = (state = {}, action) => {
     case GET_COUNTRY_BY_ID:
     case UPDATE_COUNTRY:
     case CREATE_COUNTRY:
-    /* END COUNTRIES */
+    case SAVE_SECURE_SELECTED:
+      /* END COUNTRIES */
       return { ...state, loading: true };
     case SECURE_CAR_FAILURE:
     case SIGN_IN_FAILURE:
@@ -76,11 +80,12 @@ const reducer = (state = {}, action) => {
     case UPDATE_COUNTRY_FAILURE:
     case DELETE_COUNTRY_FAILURE:
     case GET_COUNTRIES_FAILURE:
+    case SAVE_SECURE_SELECTED_FAILURE:
     case CREATE_COUNTRY_SUCCESS:
     case UPDATE_COUNTRY_SUCCESS:
     case DELETE_COUNTRY_SUCCESS:
     case GET_COUNTRY_BY_ID_FAILURE:
-    /* END COUNTRIES */
+      /* END COUNTRIES */
       return {
         ...state,
         response: action.response,
@@ -101,6 +106,7 @@ const reducer = (state = {}, action) => {
     case MAIN_INFO_SUCCESS:
       return {
         ...state,
+        vehicle_info_soat: action.response,
         response: action.response,
         loading: false,
       };
@@ -109,12 +115,18 @@ const reducer = (state = {}, action) => {
         ...state,
         secure_car: action.response,
       };
+    case SAVE_SECURE_SELECTED_SUCCESS:
+      return {
+        ...state,
+        secure_selected: action.response,
+      };
     case GET_CITIES_SUCCESS:
       return { ...state, cities_secure_car: action.response, loading: false }
     case CLIENT_INFO_SUCCESS:
       return {
         ...state,
         client_info_soat: action.client_info,
+        response: action.client_info,
         loading: false
       };
     case VEHICLE_INFO_SUCCESS:
@@ -131,11 +143,11 @@ const reducer = (state = {}, action) => {
       };
     /* COUNTRIES */
     case GET_COUNTRY_BY_ID_SUCCESS:
-        return {
-          ...state,
-          get_country: action.response,
-          loading: false,
-        };
+      return {
+        ...state,
+        get_country: action.response,
+        loading: false,
+      };
     case GET_COUNTRIES_SUCCESS:
       return {
         ...state,

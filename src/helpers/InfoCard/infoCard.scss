@@ -1,0 +1,165 @@
+@import "../../components/utils/colors.scss";
+
+.first-form-container {
+  padding-top: 30px;
+}
+
+.infocard {
+  border-radius: 16px;
+  padding: 0 0.2px 0 0;
+  margin: 0 30px 40px 30px;
+  display: flex;
+  align-items: flex-start;
+}
+.container {
+  background-color: $white;
+  border-radius: 16px 0 0 16px;
+  padding: 2.99px 16px 10.99px;
+  display: flex;
+  flex-direction: column;
+  align-items: initial;
+  justify-content: center;
+}
+.header {
+  margin-bottom: 10px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.informacionDelAutomovil {
+  color: $black;
+  margin-right: 16px;
+  margin-bottom: 0;
+  @include open-sans-14-regular;
+}
+.ggmenuRound {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+.infologo {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.siendoSeguroVersionVertical1 {
+  width: 30%;
+  margin-right: 16px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  p {
+    margin-bottom: 0;
+
+    &.nombrePropietario {
+      margin-bottom: 20px;
+    }
+  }
+}
+.row1 {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: flex-start;
+}
+.field1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &:not(:last-of-type) {
+    margin-right: 29px;
+  }
+}
+.placa {
+  height: 15.48px;
+  width: 29.02px;
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+.kuj213 {
+  height: 18.38px;
+  width: 57.07px;
+  color: $dark-slate-gray-3;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.marca {
+  height: 15.48px;
+  width: 33.85px;
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+.bmwM3 {
+  height: 18.38px;
+  width: 70.61px;
+  color: $dark-slate-gray-3;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.field3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &:not(:last-of-type) {
+    margin-right: 44px;
+  }
+}
+.modelo {
+  height: 15.48px;
+  width: 41.59px;
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+.num2019 {
+  height: 18.38px;
+  width: 31.92px;
+  color: $dark-slate-gray-3;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.cilindraje {
+  height: 15.48px;
+  width: 51.26px;
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+.num2000 {
+  height: 18.38px;
+  width: 34.82px;
+  color: $dark-slate-gray-3;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.nombrePropietario {
+  height: 15.48px;
+  width: 109.3px;
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+.caoAnsHesBaa {
+  height: 36.75px;
+  width: 156.69px;
+  color: $dark-slate-gray-3;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.estaInformacionSeExtraeDirectamente {
+  color: $dark-gray-2;
+  display: flex;
+  @include open-sans-12-regular;
+}
+
+.ant-modal {
+  .ant-modal-body {
+    background-color: $ui-info-dark;
+  }
+}

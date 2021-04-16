@@ -1,0 +1,63 @@
+@import "../../components/utils/colors.scss";
+
+.insucard {
+  padding: 0 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+.body {
+  background-color: $white;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.textos {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .electric-info {
+    color: $naranja-siendo-seguro;
+    margin-bottom: 0;
+    @include open-sans-10-regular;
+  }
+
+  .discount-info {
+    color: $light-sea-green;
+    margin-bottom: 0;
+    @include open-sans-12-regular;
+  }
+}
+.soatSegurosMundial {
+  color: $black;
+  margin-bottom: 5px;
+  @include open-sans-14-regular;
+}
+.soatSegurosMundialTwo {
+  color: $dark-slate-gray-2;
+  margin-bottom: 5px;
+  @include open-sans-12-regular;
+}
+.img-secure {
+  width: 30%;
+}
+.costo556000Cops {
+  color: $light-sea-green;
+  @include open-sans-16-regular;
+}
+
+.ant-modal {
+  &.soat-class-modal {
+    .ant-modal-content {
+      .ant-modal-body {
+        background-color: $verde-siendo-seguro;
+      }
+    }
+  }
+}

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -25,46 +23,37 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>SiendoSeguro.com</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script type="text/javascript">
-      var _ss = _ss || [];
-      _ss.push(['_setDomain', 'https://koi-3QNO5OV2IU.marketingautomation.services/net']);
-      _ss.push(['_setAccount', 'KOI-4D9QYZBXAG']);
-      _ss.push(['_trackPageView']);
-      window._pa = window._pa || {};
-      // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
-      // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
-      // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
-      (function() {
-          var ss = document.createElement('script');
-          ss.type = 'text/javascript'; ss.async = true;
-          ss.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'koi-3QNO5OV2IU.marketingautomation.services/client/ss.js?ver=2.4.0';
-          var scr = document.getElementsByTagName('script')[0];
-          scr.parentNode.insertBefore(ss, scr);
-      })();
-    </script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-N5NP927');
-    </script>
-    <!-- End Google Tag Manager -->
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5NP927"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-  <!-- End Google Tag Manager (noscript) -->
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>SiendoSeguro.com</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <script type="text/javascript">
+    var _ss = _ss || [];
+    _ss.push(['_setDomain', 'https://koi-3QNO5OV2IU.marketingautomation.services/net']);
+    _ss.push(['_setAccount', 'KOI-4D9QYZBXAG']);
+    _ss.push(['_trackPageView']);
+    window._pa = window._pa || {};
+    // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+    // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+    // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+    (function () {
+      var ss = document.createElement('script');
+      ss.type = 'text/javascript'; ss.async = true;
+      ss.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'koi-3QNO5OV2IU.marketingautomation.services/client/ss.js?ver=2.4.0';
+      var scr = document.getElementsByTagName('script')[0];
+      scr.parentNode.insertBefore(ss, scr);
+    })();
+  </script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -74,5 +63,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

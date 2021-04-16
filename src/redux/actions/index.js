@@ -13,6 +13,7 @@ import {
   GET_COUNTRIES,
   GET_COUNTRY_BY_ID,
   UPDATE_COUNTRY,
+  SAVE_SECURE_SELECTED,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -34,6 +35,12 @@ export const secureCar = (payload) => ({
   type: SECURE_CAR,
   payload,
 });
+
+export const saveSecureSelected = (payload) => ({
+  type: SAVE_SECURE_SELECTED,
+  payload,
+});
+
 
 export const clientInfo = (payload) => ({
     type: CLIENT_INFO,

@@ -1,6 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
+import { SAVE_SECURE_SELECTED, SAVE_SECURE_SELECTED_SUCCESS } from '../../constants';
 
 function* buySoat(formValues) {
   //123qweQ!
@@ -28,51 +29,14 @@ function* buySoat(formValues) {
   }
 
 }
+
 function* buySoatForm(formValues) {
-  const { client_info } = formValues.payload;
-  debugger;
-
-  const {
-    cotizacion_id,
-    selectedSoat
-  } = client_info;
-
-  const {
-    cotizacion_nro
-  } = selectedSoat;
-
-
-  const data = [];
-  const error = [];
-  yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Customers`, {
-    cotizacion_id,
-    cotizacion_nro
-  }, {
-    "accept": "*/*",
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  }).then(response => {
-    data.push(response);
-  }).catch(e => {
-    error.push(e);
-  });
-
-  if (error.length === 0) {
-    yield call(showNotification, { type: 'success', message: 'Adquiriste tu SOAT, continua a pagarlo' });
-    yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
-  } else {
-    //yield call(showNotification, { type: 'error', message: "Error al adquirir el SOAT, por favor intente nuevamente en unos minutos" });
-    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { error: error} });
-  }
-
-}
-function* buySoatForm_old(formValues) {
   const { vehicle_info, client_info, buy_soat } = formValues.payload;
   let d = new Date();
   let tomorrow = d.setDate(d.getDate() + 1);
   tomorrow = new Date(tomorrow).toISOString();
   let today = new Date().toISOString();
-  
+
   const {
     typeVehicle,
     line,
@@ -96,7 +60,7 @@ function* buySoatForm_old(formValues) {
   const data = [];
   const error = [];
   yield axios.post(`https://lafersegurosapi.azurewebsites.net/api/Customers`, {
-    id:identification,
+    id: identification,
     name,
     lastName,
     email,
@@ -132,12 +96,17 @@ function* buySoatForm_old(formValues) {
     yield put({ type: "BUY_SOAT_FORM_SUCCESS", response: { formValues }, });
   } else {
     //yield call(showNotification, { type: 'error', message: "Error al adquirir el SOAT, por favor intente nuevamente en unos minutos" });
-    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { error: error} });
+    yield put({ type: "BUY_SOAT_FORM_FAILURE", response: { error: error } });
   }
 
 }
 
+function* saveSecureSelected(formValues) {
+  yield put({ type: SAVE_SECURE_SELECTED_SUCCESS, response: { ...formValues.payload }, });
+};
+
 export function* soatWatcher() {
   yield takeLatest('BUY_SOAT', buySoat)
   yield takeLatest('BUY_SOAT_FORM', buySoatForm)
+  yield takeLatest(SAVE_SECURE_SELECTED, saveSecureSelected)
 }

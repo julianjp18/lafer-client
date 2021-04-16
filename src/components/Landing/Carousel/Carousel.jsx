@@ -16,12 +16,12 @@ export const Carousel = props => {
   //console.log('isMobile', isMobile)
   const items = [
     <div className="item" data-value="1">
-      <img src={`images/Siendo-Seguros-banners/Siendo-Seguros-banner-1-${isMobile ? 'mobile' : 'desktop'}.jpg`} alt="Banner" />
+      <img src={`images/Siendo-Seguros-banners/Siendo-Seguros-banner-1-${isMobile ? 'mobile' : 'desktop'}.png`} alt="Banner" />
     </div>
-    ,
-    <div className="item" data-value="2">
-      <img src={`images/Siendo-Seguros-banners/Siendo-Seguros-banner-2-${isMobile ? 'mobile' : 'desktop'}.jpg`} alt="Banner" />
-    </div>
+    // ,
+    // <div className="item" data-value="2">
+    //   <img src={`images/Siendo-Seguros-banners/Siendo-Seguros-banner-2-${isMobile ? 'mobile' : 'desktop'}.png`} alt="Banner" />
+    // </div>
   ];
   // https://github.com/maxmarinich/react-alice-carousel
   // https://maxmarinich.github.io/react-alice-carousel/
@@ -35,8 +35,8 @@ export const Carousel = props => {
         mouseTrackingEnabled
         autoPlayInterval={6000}
         animationDuration={1000}
-        autoPlay
-        infinite
+        // autoPlay
+        // infinite
       />
     </div>
   );

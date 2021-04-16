@@ -1,65 +1,97 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import useMedia from 'use-media';
 import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
+import { WarningOutlined } from '@ant-design/icons';
 import Carousel from "./Carousel/Carousel";
-import { Modal, Select } from 'antd';
+import { Col, Modal, Row, Select } from 'antd';
 import axios from 'axios';
 import './landing.scss';
 import 'antd/dist/antd.css';
-import IconAirplane from "./IconAirplane";
-import IconMoney from "./IconMoney";
 import Terms from "./terms"
+import NormalButton from "../../helpers/Button";
+import { MAIN_URL } from "../../apis/urls";
 
-function Landing({ mainInfo }) {
-
-  const isMobile = useMedia({ maxWidth: 767 });
-
+function Landing({ mainInfo, response, vehicle_info_soat }) {
   const history = useHistory();
-  localStorage.removeItem("fetchedInfo");
+
   let audio = new Audio("/snap_of_finger.mp3");
 
- const [formValues, setFormValues] = useState({plate:null});
- const [discount, setDiscount] = useState(null);
+  const [formValues, setFormValues] = useState({ plate: '' });
+  const [discount, setDiscount] = useState([]);
+  const [visible, setvisible] = useState(false);
+  const [visibleTerms, setvisibleTerms] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const onFinish = () => {
     //comento para que no se vean las millas
     //if(formValues && formValues.discount_id && formValues.plate){
-      try {
-        audio.play();
-      } catch (error) {
-        console.log("no se pudo reproducir audio");
-      }
-      setTimeout(function(){
-        mainInfo(formValues);
-        history.push("/steps-form");
-      }, 900);
+    try {
+      audio.play();
+    } catch (error) {
+      console.log("no se pudo reproducir audio");
+    }
 
+    mainInfo(formValues);
+    setShowErrorMessage(false);
     //}
   };
 
-  const [visible, setVisible] = useState(false);
-  const { Option } = Select;
+  useEffect(() => {
+    if (response) {
+      console.log('response', response);
+      if (response.statusError === 401) {
+        setvisible(true);
+      } else {
+        setvisible(false);
+      }
+    }
 
-  function handleChangeDiscount(value) {
-    setFormValues({...formValues, discount_id:value});
+  }, [response]);
+
+  useEffect(() => {
+    if (vehicle_info_soat) {
+      if (response.codeHttp) {
+        const { codeHttp } = response;
+        if (codeHttp === 200) {
+          history.push("/soat-vehicle-information");
+        }
+      } else {
+        setShowErrorMessage(true);
+      }
+    } else {
+      setShowErrorMessage(false);
+    }
+  }, [vehicle_info_soat]);
+
+  const showModal = () => {
+    setvisible(true);
+  };
+
+  const hideModal = () => {
+    setvisible(false);
+  };
+
+  const handleChangeDiscount = (value) => {
+    setFormValues({ ...formValues, discount_id: value });
   }
-  function handleChangePlate({target}) {
-    setFormValues({...formValues, plate:target.value});
+
+  const handleChangePlate = ({ target }) => {
+    setFormValues({ ...formValues, plate: target.value });
   }
 
   useEffect(() => {
-    // axios.get(`${process.env.REACT_APP_API_URL}/Discounts`, {
-    //   "accept": "*/*",
-    //   "Access-Control-Allow-Origin": "*",
-    // }).then((response) => {
-    //   setDiscount(response.data);
-    // }).catch(e => {
-    //   //error.push(e);
-    //   setDiscount(null);
-    // });
-  }, [])
+    localStorage.clear();
+    axios.get(`${MAIN_URL}api/Discounts`, {
+      "accept": "*/*",
+      "Access-Control-Allow-Origin": "*",
+    }).then((response) => {
+      setDiscount(response);
+    }).catch(e => {
+      //error.push(e);
+      setDiscount(null);
+    });
+  }, []);
 
   return (
     <>
@@ -90,21 +122,47 @@ function Landing({ mainInfo }) {
             })
             }
           </Select> */}
+          {showErrorMessage && (
+            <p className="show-error">
+              La placa ingresada no coincide con la base de datos del RUNT
+            </p>
+          )}
           <button className="soatForm__button" onClick={onFinish}>
             Cotiza SOAT gratis
           </button>
           <span className="soatForm__legales">
-            Al continuar aceptas nuestros <a onClick={() => setVisible(true)}>Términos y Condiciones & Política de Privacidad</a> para el tratamiento de tus datos.
+            Al continuar aceptas nuestros <a className="terms-and-conditions" onClick={() => setvisibleTerms(true)}>Términos y Condiciones & Política de Privacidad</a> para el tratamiento de tus datos.
             <Modal
               title="Términos y condiciones"
               centered
-              visible={visible}
-              onOk={() => setVisible(false)}
-              onCancel={() => setVisible(false)}
+              visible={visibleTerms}
+              onOk={() => setvisibleTerms(false)}
+              onCancel={() => setvisibleTerms(false)}
               width={820}
               okText="Volver"
+              className="terms-modal"
             >
-              {Terms} 
+              {Terms}
+            </Modal>
+            <Modal
+              visible={visible}
+              footer={null}
+              onOk={() => showModal()}
+              onCancel={hideModal}
+              closable={false}
+              className="alert-modal"
+            >
+              <div className="important-info-container">
+                <h2 className="important-info-title"><WarningOutlined /> Advertencia</h2>
+                <p className="important-info-description first-modal">
+                  {response && response.message ? response.message : ''}
+                </p>
+                <Row>
+                  <Col xs={24}>
+                    <NormalButton text='Aceptar' onClick={hideModal} />
+                  </Col>
+                </Row>
+              </div>
             </Modal>
           </span>
         </article>
@@ -116,9 +174,7 @@ function Landing({ mainInfo }) {
             <h1>¿Quiénes <strong>somos?</strong></h1>
             <p>Somos intermediarios con más de 40 años de experiencia, líderes en mercadeo masivo de seguros y microseguros. Entregamos soluciones a la medida, excelente servicio al cliente y manejamos todos los riesgos para que tus intereses estén bien asegurados.</p>
           </article>
-          {!isMobile && 
-            <img src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-3-desktop.png" alt="Image" />
-          }
+          <img className="main-image" src="images/Siendo-Seguros-banners/Siendo-Seguros-banner-3-desktop.png" alt="Image" />
         </section>
       </div>
     </>
@@ -129,6 +185,7 @@ const mapStateToProps = (globalState) => {
   const state = globalState.app;
   return ({
     response: state.response,
+    vehicle_info_soat: state.vehicle_info_soat,
   });
 };
 

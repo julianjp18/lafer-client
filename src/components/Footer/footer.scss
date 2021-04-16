@@ -1,125 +1,84 @@
 @import "../utils/colors.scss";
 
 .footer {
-  min-height: 227px;
-  background-color: #101010;
-  color: $color-white;
+  background-color: $black;
+  padding: 44px 37px 36.89px 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contacto {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 237px;
+}
+.id {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.laferSolucionesMasivasDeSeguros {
+  color: $white;
+  margin-bottom: 8px;
+  @include open-sans-12-regular;
+}
+.nit9001768726 {
+  color: $silver;
+  @include open-sans-12-regular;
+}
+.caliColombia {
+  color: $white;
+  @include open-sans-12-regular;
+  &:not(:last-of-type) {
+    margin-bottom: 8px;
+  }
+}
+.emailSoportesiendoseguroCom {
+  color: $white;
+  @include open-sans-12-regular;
+}
+.divider {
+  margin-bottom: 32px;
+}
+.conoceNuestraPoliticaDeTratamientoD {
+  height: 34px;
+  width: 236px;
+  display: flex;
+  margin-bottom: 32px;
+  color: $light-grey;
+  @include open-sans-12-semi-bold;
 
-  &__container {
-    max-width: 1246px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    padding: 75px 46px;
+  a {
+    color: $light-grey;
 
-    // @media (min-width: 768px) {
-    @media (min-width: 1024px) {
-      flex-direction: row;
-      text-align: left;
-      padding: 0 12px;
-    }
-
-    u {
+    &:hover {
       text-decoration: underline;
     }
-
-    article {
-      // max-width: 344px;
-      // width: 100%;
-      // padding: 0 0 60px;
-      margin: 0 auto;
-      // @media (min-width: 768px) {
-      @media (min-width: 1024px) {
-        padding: 23px 0;
-      }
-
-      h6, p {
-        font-family: 'Open Sans', sans-serif;
-        text-align: left;
-        color: $color-white;
-        font-size: 14px;
-        line-height: 26px;
-        font-weight: 600;
-        margin: 0;
-      }
-      p, a {
-        color: #BFBFBF;
-        font-weight: 400;
-        text-decoration: none;
-      }
-
-    }
-    &--cards {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-
-      .cards--mastercard {
-        height: 46px;
-        width: auto;
-      }
-      .cards--visa {
-        height: 21px;
-        width: auto;
-        padding: 0 3px 0 18px;
-      }
-      .cards--pse {
-        height: 80px;
-        width: auto;
-      }
-
-    }
-  
-    .line--gray {
-      border-top: 1px solid #BFBFBF;
-      width: 90%;
-      margin: 40px auto;
-      
-      // @media (min-width: 768px) {
-      @media (min-width: 1024px) {
-        border-right: 1px solid #BFBFBF;
-        width: auto;
-        margin: 40px 0;
-      }
-    }
-
-    &--info {
-      max-width: 283px;
-      width: 100%;
-      align-self: center;
-    }
-    &--policy {
-      max-width: 354px;
-      width: 100%;
-      align-self: center;
-    }
-    &--cards {
-      max-width: 240px;
-      width: 100%;
-      align-self: center;
-    }
-
-    &--social {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      max-width: 108px;
-      width: 100%;
-  
-      .social-item {
-        color: $color-white;
-        transition: all 0.35s ease;
-
-        img {
-          height: 80px;
-          width: 80px;
-        }
-      }
-    }
-
   }
+}
+.conoceNuestraPoliticaDeTratamientoDEmphasis0 {
+  color: $silver-2;
+  @include open-sans-12-regular;
+}
+.payments {
+  margin-bottom: 32px;
+  width: 268px;
+}
+.siguenosEn {
+  color: $silver-2;
+  margin-bottom: 24px;
+  @include open-sans-12-regular;
+}
 
+.social-img {
+  width: 20px;
 }

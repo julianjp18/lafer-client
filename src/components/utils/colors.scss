@@ -3,3 +3,124 @@ $color-white: #ffffff;
 $color-black: #252a32;
 $color-light: #f1f5f8;
 $color-blue: #148cb8;
+
+$black: rgba(22, 30, 36, 1);
+$black-1: rgba(0, 0, 0, 1);
+$black-2: rgba(1, 1, 1, 1);
+$black-3: rgba(27, 27, 27, 1);
+$dark-gray: rgba(165, 165, 165, 1);
+$dark-gray-2: rgba(151, 155, 167, 1);
+$dark-orange: rgba(246, 116, 17, 1);
+$dark-slate-gray: rgba(71, 75, 87, 1);
+$dark-slate-gray-2: rgba(77, 77, 77, 1);
+$dark-slate-gray-3: rgba(74, 79, 93, 1);
+$dim-gray: rgba(103, 103, 103, 1);
+$light-grey: rgba(211, 211, 211, 1);
+$light-sea-green: rgba(0, 153, 178, 1);
+$naranja-siendo-seguro: rgba(241, 116, 22, 1);
+$orange-red: rgba(229, 73, 17, 1);
+$red: rgba(253, 0, 0, 1);
+$silver: rgba(194, 192, 196, 1);
+$silver-2: rgba(191, 191, 191, 1);
+$silver-3: rgba(196, 196, 196, 1);
+$transparent-black: rgba(0, 0, 0, 0.25);
+$ui-error-dark: rgba(244, 63, 94, 1);
+$ui-info-dark: rgba(59, 130, 246, 1);
+$ui-success-dark: rgba(16, 185, 129, 1);
+$ui-warning-dark: rgba(245, 158, 11, 1);
+$verde-siendo-seguro: rgba(36, 154, 153, 1);
+$white: rgba(255, 255, 255, 1);
+$white-smoke: rgba(245, 244, 250, 1);
+$white-smoke-2: rgba(242, 242, 242, 1);
+
+// Typographies
+@mixin body-bold {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+@mixin body-default {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+@mixin body-extra-small-default {
+  font-family: "Open Sans";
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+}
+@mixin body-small-default {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+@mixin h5 {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+}
+@mixin h6 {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+}
+@mixin open-sans-10-regular {
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+}
+@mixin open-sans-10-semi-bold {
+  font-family: "Open Sans";
+  font-size: 10px;
+  font-weight: 600;
+  line-height: normal;
+}
+@mixin open-sans-12-regular {
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+}
+@mixin open-sans-12-semi-bold {
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+}
+@mixin open-sans-13-regular {
+  font-family: "Open Sans";
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+@mixin open-sans-14-regular {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+@mixin open-sans-16-regular {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+@mixin open-sans-42-bold {
+  font-family: "Open Sans";
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 40px;
+}
+@mixin segoe-ui-14-regular {
+  font-family: "Segoe UI";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
