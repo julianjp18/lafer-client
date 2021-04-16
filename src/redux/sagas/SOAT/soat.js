@@ -1,7 +1,15 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 import showNotification from '../../showNotification';
-import { SAVE_SECURE_SELECTED, SAVE_SECURE_SELECTED_SUCCESS } from '../../constants';
+import {
+  SAVE_SECURE_SELECTED,
+  SAVE_SECURE_SELECTED_SUCCESS,
+  SAVE_SECURE_SELECTED_FAILURE,
+  EMIT_LICENSE_PLATE,
+  EMIT_LICENSE_PLATE_SUCCESS,
+  EMIT_LICENSE_PLATE_FAILURE
+} from '../../constants';
+import { API_URL } from '../../../apis/urls';
 
 function* buySoat(formValues) {
   //123qweQ!
@@ -105,8 +113,61 @@ function* saveSecureSelected(formValues) {
   yield put({ type: SAVE_SECURE_SELECTED_SUCCESS, response: { ...formValues.payload }, });
 };
 
+function* saveEmitLicensePlate(formValues) {
+  const { TraceaId } = formValues.payload;
+  const error = [];
+  const responseData = [];
+
+  yield axios.post(`${API_URL}soat/emitLicencePlate`, {
+    idTraceability: TraceaId,
+  }, {
+    "accept": "*/*",
+    "Access-Control-Allow-Origin": "*",
+  }).then((response) => {
+
+    responseData.push(response);
+  }).catch(e => {
+    error.push(e);
+  });
+
+  if (error.length === 0 && responseData.length > 0) {
+    const response = responseData[0];
+    const { data, status } = response;
+    const dataFromResponse = data.data;
+
+    if (status === 200) {
+      if (response.data.MensajeError) {
+        yield put({
+          type: EMIT_LICENSE_PLATE_FAILURE, response: {
+            statusError: 401,
+            message: 'Ocurrió un error para emitir la licencia. Por favor inténtelo más tarde.'
+          },
+        });
+      } else {
+        if (data.codeHttp === 200 && dataFromResponse.procesadoExitoso) {
+          yield put({ type: EMIT_LICENSE_PLATE_SUCCESS, response: dataFromResponse });
+        } else {
+          yield put({
+            type: EMIT_LICENSE_PLATE_FAILURE, response: {
+              statusError: 401,
+              message: 'Ocurrió un error para emitir la licencia. Por favor inténtelo más tarde.'
+            },
+          });
+        }
+      }
+
+    } else {
+      yield put({ type: EMIT_LICENSE_PLATE_FAILURE, response: {}, });
+    }
+  } else {
+    yield put({ type: EMIT_LICENSE_PLATE_FAILURE, response: {}, });
+  }
+};
+
+
 export function* soatWatcher() {
   yield takeLatest('BUY_SOAT', buySoat)
   yield takeLatest('BUY_SOAT_FORM', buySoatForm)
   yield takeLatest(SAVE_SECURE_SELECTED, saveSecureSelected)
+  yield takeLatest(EMIT_LICENSE_PLATE, saveEmitLicensePlate)
 }

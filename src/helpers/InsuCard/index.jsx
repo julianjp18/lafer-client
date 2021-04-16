@@ -1,4 +1,5 @@
 import React from "react";
+import SegurosMundial from '../../assets/images/seguros-mundial.png';
 import "./insuCard.scss";
 
 const InsuCard = ({
@@ -45,7 +46,7 @@ const InsuCard = ({
         <img
           className="img-secure"
           alt=""
-          src="https://static.overlay-tech.com/assets/a149d91e-a102-437b-a2f7-218649f1813c.png"
+          src={SegurosMundial}
         />
       </div>
     </div>

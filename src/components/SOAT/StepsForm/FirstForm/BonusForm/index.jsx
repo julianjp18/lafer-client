@@ -41,7 +41,6 @@ const BonusForm = () => {
               validator(rule, value) {
                 const reg = /3(0[1-2]|1[\d]|3[\d]|2[0-1])[\d]{3}[\d]{4}/;
 
-                console.log('value.length', value.length);
                 if (reg.exec(value) && value.length === 10) return Promise.resolve();
                 return Promise.reject('Asegúrate de que el número ingresado comience con tres(3) y tenga 10 dígitos');
               },
@@ -95,6 +94,21 @@ const BonusForm = () => {
           </Input.Group>
         </Form.Item>
 
+      </div>
+      <div className="textInput">
+        <p className='correoElectronico'>Dirección</p>
+        <Form.Item
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: 'Por favor ingresa la dirección!',
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input size="large" placeholder="Ingresa tu dirección" />
+        </Form.Item>
       </div>
     </div>
   );

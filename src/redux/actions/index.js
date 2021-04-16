@@ -14,21 +14,22 @@ import {
   GET_COUNTRY_BY_ID,
   UPDATE_COUNTRY,
   SAVE_SECURE_SELECTED,
+  EMIT_LICENSE_PLATE,
 } from '../constants';
 
 export const signUp = (payload) => ({
-    type: SIGN_UP,
-    payload,
+  type: SIGN_UP,
+  payload,
 });
 
 export const signIn = (payload) => ({
-    type: SIGN_IN,
-    payload,
+  type: SIGN_IN,
+  payload,
 });
 
 export const buySoat = (payload) => ({
-    type: BUY_SOAT,
-    payload,
+  type: BUY_SOAT,
+  payload,
 });
 
 export const secureCar = (payload) => ({
@@ -41,15 +42,19 @@ export const saveSecureSelected = (payload) => ({
   payload,
 });
 
+export const saveEmitLicensePlate = (payload) => ({
+  type: EMIT_LICENSE_PLATE,
+  payload,
+});
 
 export const clientInfo = (payload) => ({
-    type: CLIENT_INFO,
-    payload,
+  type: CLIENT_INFO,
+  payload,
 });
 
 export const vehicleInfo = (payload) => ({
-    type: VEHICLE_INFO,
-    payload,
+  type: VEHICLE_INFO,
+  payload,
 });
 
 export const getCities = () => ({
@@ -57,13 +62,13 @@ export const getCities = () => ({
 });
 
 export const buySoatForm = (payload) => ({
-    type: BUY_SOAT_FORM,
-    payload,
+  type: BUY_SOAT_FORM,
+  payload,
 });
 
 export const mainInfo = (payload) => ({
-    type: MAIN_INFO,
-    payload,
+  type: MAIN_INFO,
+  payload,
 });
 
 export const getCountries = () => ({ type: GET_COUNTRIES });

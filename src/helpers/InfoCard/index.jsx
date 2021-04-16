@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Col, Row, Modal } from "antd";
 import NormalButton from "../Button";
+import classesDropdown from '../../assets/images/classes-dropdown.svg';
+import SiendoSeguroHand from '../../assets/images/siendo-seguro-hand.png';
 import "./infoCard.scss";
 
 const InfoCard = ({
@@ -33,7 +35,7 @@ const InfoCard = ({
               <img
                 className="homologaciones-image"
                 alt=""
-                src="https://static.overlay-tech.com/assets/20032b5e-688e-44eb-9f72-77d6e99ead3c.svg"
+                src={classesDropdown}
                 onClick={showModal}
               />
             )}
@@ -43,7 +45,7 @@ const InfoCard = ({
           <img
             alt=""
             className='siendoSeguroVersionVertical1'
-            src="https://static.overlay-tech.com/assets/515dfa0a-fd20-4611-9e34-9c8c080f5d61.png"
+            src={SiendoSeguroHand}
           />
           <div className='info'>
             <div className='row1'>

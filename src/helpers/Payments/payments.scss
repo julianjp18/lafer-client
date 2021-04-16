@@ -15,8 +15,16 @@
   }
 }
 
-
-.metodosDePago {
+.content-payments {
+  border-radius: 16px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+.tituloClaro {
   height: 19px;
   width: 236px;
   color: $dim-gray;
@@ -28,37 +36,7 @@
   align-items: center;
   justify-content: center;
 }
-.grupo293 {
-  margin-right: 8px;
-  padding: 4.19px 5.77px 4.13px 4.17px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.relativeWrapperOne {
-  margin-bottom: 1.33px;
-  position: relative;
-}
-.rectangulo488 {
-  width: 8.73px;
-  height: 15.7px;
-  background-color: $orange-red;
-  position: absolute;
-  right: -4.38px;
-  top: 2.13px;
-}
-.trazado576 {
-  position: relative;
-}
-.trazado577 {
-  position: absolute;
-  right: -16.17px;
-  top: 0;
-}
-.trazado575 {
-  margin-left: 1.65px;
-}
-.grupo443 {
+.masterCard1 {
   &:not(:last-of-type) {
     margin-right: 8px;
   }

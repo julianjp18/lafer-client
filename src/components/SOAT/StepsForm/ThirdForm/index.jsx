@@ -47,6 +47,14 @@ function ThirdForm({
     var inputBillValue = document.createElement('input');
     var inputBillDescription = document.createElement('input');
     var inputBillIdUser = document.createElement('input');
+    var inputMd5ValidationValue = document.createElement('input');
+    var inputNumberClient = document.createElement('input');
+    var inputAddressClient = document.createElement('input');
+    var inputIdClient = document.createElement('input');
+    var inputTypeIdClient = document.createElement('input');
+    var inputEmailClient = document.createElement('input');
+    var inputNameClient = document.createElement('input');
+    var inputLastNameClient = document.createElement('input');
 
     inputBillNumber.type = 'hidden';
     inputBillNumber.name = "factura";
@@ -68,13 +76,61 @@ function ThirdForm({
     inputBillIdUser.id = "usuario";
     inputBillIdUser.value = 'i96td5084822950k';
 
+    inputMd5ValidationValue.type = 'hidden';
+    inputMd5ValidationValue.name = "md5ValidacionValor";
+    inputMd5ValidationValue.id = "md5ValidacionValor";
+    inputMd5ValidationValue.value = client_info_soat.additionalData.md5ValidacionValor;
+
+    inputNumberClient.type = 'hidden';
+    inputNumberClient.name = "celularComprador";
+    inputNumberClient.id = "celularComprador";
+    inputNumberClient.value = client_info_soat.additionalData.phone;
+
+    inputAddressClient.type = 'hidden';
+    inputAddressClient.name = "direccionComprador";
+    inputAddressClient.id = "direccionComprador";
+    inputAddressClient.value = client_info_soat.additionalData.address;
+
+    inputIdClient.type = 'hidden';
+    inputIdClient.name = "documentoComprador";
+    inputIdClient.id = "documentoComprador";
+    inputIdClient.value = client_info_soat.identification;
+
+    inputTypeIdClient.type = 'hidden';
+    inputTypeIdClient.name = "tipoDocumento";
+    inputTypeIdClient.id = "tipoDocumento";
+    /*inputTypeIdClient.value = client_info_soat.identificationType;*/
+    inputTypeIdClient.value = "CC";
+
+    inputEmailClient.type = 'hidden';
+    inputEmailClient.name = "correoComprador";
+    inputEmailClient.id = "correoComprador";
+    inputEmailClient.value = client_info_soat.additionalData.email;
+
+    inputNameClient.type = 'hidden';
+    inputNameClient.name = "nombreComprador";
+    inputNameClient.id = "nombreComprador";
+    inputNameClient.value = client_info_soat.name;
+
+    inputLastNameClient.type = 'hidden';
+    inputLastNameClient.name = "apellidoComprador";
+    inputLastNameClient.id = "apellidoComprador";
+    inputLastNameClient.value = client_info_soat.lastName;
+
     form.appendChild(inputBillNumber);
     form.appendChild(inputBillValue);
     form.appendChild(inputBillDescription);
     form.appendChild(inputBillIdUser);
+    form.appendChild(inputMd5ValidationValue);
+    form.appendChild(inputNumberClient);
+    form.appendChild(inputAddressClient);
+    form.appendChild(inputIdClient);
+    form.appendChild(inputTypeIdClient);
+    form.appendChild(inputEmailClient);
+    form.appendChild(inputNameClient);
+    form.appendChild(inputLastNameClient);
     form.submit();
   };
-
 
   return vehicle_info_soat && client_info_soat && secure_selected ? (
     <div className="third-form-container">

@@ -44,6 +44,9 @@ import {
   SAVE_SECURE_SELECTED,
   SAVE_SECURE_SELECTED_SUCCESS,
   SAVE_SECURE_SELECTED_FAILURE,
+  EMIT_LICENSE_PLATE,
+  EMIT_LICENSE_PLATE_SUCCESS,
+  EMIT_LICENSE_PLATE_FAILURE,
 } from '../constants';
 
 const reducer = (state = {}, action) => {
@@ -64,6 +67,7 @@ const reducer = (state = {}, action) => {
     case UPDATE_COUNTRY:
     case CREATE_COUNTRY:
     case SAVE_SECURE_SELECTED:
+    case EMIT_LICENSE_PLATE:
       /* END COUNTRIES */
       return { ...state, loading: true };
     case SECURE_CAR_FAILURE:
@@ -85,6 +89,7 @@ const reducer = (state = {}, action) => {
     case UPDATE_COUNTRY_SUCCESS:
     case DELETE_COUNTRY_SUCCESS:
     case GET_COUNTRY_BY_ID_FAILURE:
+    case EMIT_LICENSE_PLATE_FAILURE:
       /* END COUNTRIES */
       return {
         ...state,
@@ -119,6 +124,11 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         secure_selected: action.response,
+      };
+    case EMIT_LICENSE_PLATE_SUCCESS:
+      return {
+        ...state,
+        emit_license_plate: action.response,
       };
     case GET_CITIES_SUCCESS:
       return { ...state, cities_secure_car: action.response, loading: false }

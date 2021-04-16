@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button";
 import InsuCard from "../InsuCard";
-
+import SegurosMundial from '../../assets/images/seguros-mundial.png';
 import "./coverageCard.scss";
 
 const CoverageCard = ({ backButton }) => {
@@ -18,7 +18,7 @@ const CoverageCard = ({ backButton }) => {
               <div className='group'>
                 <img
                   alt=""
-                  src="https://static.overlay-tech.com/assets/19c2f182-0fce-49cd-b277-173242606f40.svg"
+                  src={SegurosMundial}
                 />
               </div>
               <p

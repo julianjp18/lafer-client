@@ -6,7 +6,10 @@ import React, { useState } from 'react';
 import { Modal } from 'antd';
 import Terms from "../Landing/terms";
 import Payments from "../../helpers/Payments";
+import Facebook from '../../assets/images/facebook.svg';
+import Divider from '../../assets/images/divider.svg';
 import "./footer.scss";
+
 
 const Footer = () => {
   const [visible, setVisible] = useState(false);
@@ -43,7 +46,7 @@ const Footer = () => {
         <img
           alt=""
           className='divider'
-          src="https://static.overlay-tech.com/assets/094696be-47fb-4332-8d2e-6c9826a16a17.svg"
+          src={Divider}
         />
         <p
           className='conoceNuestraPoliticaDeTratamientoD'
@@ -70,20 +73,20 @@ const Footer = () => {
         <img
           alt=""
           className='divider'
-          src="https://static.overlay-tech.com/assets/3a126680-18ef-4e9e-b10c-6643f18c172f.svg"
+          src={Divider}
         />
         <Payments className='payments' />
         <img
           alt=""
           className='divider'
-          src="https://static.overlay-tech.com/assets/df6c9fed-cc6f-488b-8da9-1e355fe1852c.svg"
+          src={Divider}
         />
         <div className='footerContent'>
           <p className='siguenosEn'>Síguenos en:</p>
           <img
             className="social-img"
             alt=""
-            src="https://static.overlay-tech.com/assets/e35f036d-3a36-4cc2-84bf-1cf353198e8d.svg"
+            src={Facebook}
           />
         </div>
       </div>

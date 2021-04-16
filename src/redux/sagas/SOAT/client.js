@@ -12,7 +12,7 @@ import {
 import { API_URL } from '../../../apis/urls';
 
 function* clientInfo(action) {
-  const { email, phone, identification, plate, discount_id } = action.payload;
+  const { email, phone, identification, plate, discount_id, address } = action.payload;
   const error = [];
   const responseData = [];
 
@@ -30,6 +30,7 @@ function* clientInfo(action) {
   }).catch(e => {
     error.push(e);
   });
+
   if (error.length === 0 && responseData.length > 0) {
     const response = responseData[0];
     if (response.status === 200) {
@@ -43,16 +44,44 @@ function* clientInfo(action) {
           },
         });
       } else {
-        yield put({
-          type: CLIENT_INFO_SUCCESS,
-          client_info: {
-            ...response.data,
-            from_form: {
-              email,
-              phone,
-            },
-          }
+        const { data } = response;
+        const responseAdditionalData = [];
+
+        yield axios.post(`${API_URL}soat/setAdditionalData`, {
+          cotizacion_id: data.cotizaciones[0].cotizacion_nro,
+          traceaid: data.TraceaId,
+          email,
+          movil: phone,
+          address,
+          codClase: data.homologaciones[0].clase.codClase,
+        }, {
+          "accept": "*/*",
+          "Access-Control-Allow-Origin": "*",
+        }).then((response) => {
+
+          responseAdditionalData.push(response);
+        }).catch(e => {
+          error.push(e);
         });
+
+        if (responseAdditionalData[0].status === 200) {
+          yield put({
+            type: CLIENT_INFO_SUCCESS,
+            client_info: {
+              ...data,
+              additionalData: {
+                email,
+                phone,
+                address,
+                ...responseAdditionalData[0].data,
+              },
+            }
+          });
+        } else {
+          message.info('Error comunicación con el servidor. Por favor inténtelo más tarde');
+          //yield call(showNotification, { type: 'warning', message: 'Datos incorrectos, por favor inténtalo nuevamente' });
+          yield put({ type: CLIENT_INFO_FAILURE, response: {}, });
+        }
       }
 
     } else {

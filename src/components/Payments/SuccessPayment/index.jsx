@@ -1,4 +1,5 @@
 import React from 'react';
+import SiendoSeguroLarge from '../../../assets/images/siendo-seguro-large.png';
 import './successPayment.scss';
 
 const SuccessPayment = () => {
@@ -9,7 +10,7 @@ const SuccessPayment = () => {
         <img
           alt=""
           className='siendoSeguroVersionVertical1'
-          src="https://static.overlay-tech.com/assets/2dcfd02e-7772-460e-9049-8aad968b3bfb.png"
+          src={SiendoSeguroLarge}
         />
         <p className='elPagoDeTuSoatHaSidoExitoso'>
           ¡El pago de tu SOAT ha sido exitoso!
