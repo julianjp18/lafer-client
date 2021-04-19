@@ -42,46 +42,50 @@ const Footer = () => {
           <p className='emailSoportesiendoseguroCom'>
             Email: soporte&#64;siendoseguro.com
           </p>
+          <img
+            alt=""
+            className='divider'
+            src={Divider}
+          />
+        </div>
+        <div className="terms-conditions">
+          <p
+            className='conoceNuestraPoliticaDeTratamientoD'
+          >
+            <strong
+              className='conoceNuestraPoliticaDeTratamientoDEmphasis0'
+            >
+              Conoce nuestra política de{" "}
+            </strong>
+            <a onClick={() => setVisible(true)}>Tratamientos de datos - Términos y condiciones</a>
+            <Modal
+              title="Términos y condiciones"
+              centered
+              visible={visible}
+              onOk={() => setVisible(false)}
+              onCancel={() => setVisible(false)}
+              width={820}
+              okText="Volver"
+              className="terms-modal"
+            >
+              {Terms}
+            </Modal>
+          </p>
+          <img
+            alt=""
+            className='divider'
+            src={Divider}
+          />
+        </div>
+        <div className="payments-container">
+          <Payments className='payments' />
         </div>
         <img
           alt=""
           className='divider'
           src={Divider}
         />
-        <p
-          className='conoceNuestraPoliticaDeTratamientoD'
-        >
-          <strong
-            className='conoceNuestraPoliticaDeTratamientoDEmphasis0'
-          >
-            Conoce nuestra política de{" "}
-          </strong>
-          <a onClick={() => setVisible(true)}>Tratamientos de datos - Términos y condiciones</a>
-          <Modal
-            title="Términos y condiciones"
-            centered
-            visible={visible}
-            onOk={() => setVisible(false)}
-            onCancel={() => setVisible(false)}
-            width={820}
-            okText="Volver"
-            className="terms-modal"
-          >
-            {Terms}
-          </Modal>
-        </p>
-        <img
-          alt=""
-          className='divider'
-          src={Divider}
-        />
-        <Payments className='payments' />
-        <img
-          alt=""
-          className='divider'
-          src={Divider}
-        />
-        <div className='footerContent'>
+        <div className='footerContent-2'>
           <p className='siguenosEn'>Síguenos en:</p>
           <img
             className="social-img"

@@ -46,8 +46,10 @@ function FirstForm({ vehicle_info_soat, client_info_soat, clientInfo, response }
 
   useEffect(() => {
     if (client_info_soat) {
-      setvisible(false);
-      history.push("/soat-secure-information");
+      if (client_info_soat.TraceaId) {
+        setvisible(false);
+        history.push("/soat-secure-information");
+      }
     } else {
       setShowErrorMessage(false);
     }

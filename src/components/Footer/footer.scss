@@ -12,7 +12,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
+
+.footerContent-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .contacto {
   margin-bottom: 32px;
   display: flex;
@@ -47,7 +59,12 @@
   @include open-sans-12-regular;
 }
 .divider {
+  display: block;
   margin-bottom: 32px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 .conoceNuestraPoliticaDeTratamientoD {
   height: 34px;

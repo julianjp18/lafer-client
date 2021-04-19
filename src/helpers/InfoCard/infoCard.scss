@@ -45,7 +45,7 @@
   justify-content: center;
 }
 .siendoSeguroVersionVertical1 {
-  width: 30%;
+  width: 110px;
   margin-right: 16px;
 }
 .info {
@@ -155,6 +155,8 @@
 .estaInformacionSeExtraeDirectamente {
   color: $dark-gray-2;
   display: flex;
+  align-items: center;
+  justify-content: center;
   @include open-sans-12-regular;
 }
 

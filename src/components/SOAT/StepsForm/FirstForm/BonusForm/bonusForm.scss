@@ -27,6 +27,12 @@
   &:not(:last-of-type) {
     margin-right: 50px;
   }
+
+  @media (min-width: 768px) {
+    &:not(:last-of-type) {
+      margin-right: 14%;
+    }
+  }
 }
 .formInput {
   display: flex;

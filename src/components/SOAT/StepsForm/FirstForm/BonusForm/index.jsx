@@ -64,7 +64,7 @@ const BonusForm = () => {
               noStyle
               rules={[{ required: true, message: 'Seleccionar un tipo de documento es requerido' }]}
             >
-              <Select size="large" style={{ width: '70px', marginRight: '2px' }} placeholder="Selecciona">
+              <Select size="large" style={{ width: '15%', marginRight: '1%' }} placeholder="Selecciona">
                 <Option value="1">CC</Option>
                 <Option value="2">TI</Option>
                 <Option value="3">NIT</Option>
@@ -89,7 +89,7 @@ const BonusForm = () => {
                 }),
               ]}
             >
-              <Input size="large" style={{ width: '82%', }} placeholder="Ingresa tu número de documento" />
+              <Input size="large" style={{ width: '84%' }} placeholder="Ingresa tu número de documento" />
             </Form.Item>
           </Input.Group>
         </Form.Item>
