@@ -17,6 +17,7 @@ const CoverageCard = ({ backButton }) => {
             <div className='iconText'>
               <div className='group'>
                 <img
+                  className="img-secure-details"
                   alt=""
                   src={SegurosMundial}
                 />
