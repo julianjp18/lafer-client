@@ -114,12 +114,11 @@ function* saveSecureSelected(formValues) {
 };
 
 function* saveEmitLicensePlate(formValues) {
-  const { TraceaId } = formValues.payload;
   const error = [];
   const responseData = [];
 
   yield axios.post(`${API_URL}soat/emitLicencePlate`, {
-    idTraceability: TraceaId,
+    idTraceability: formValues.payload,
   }, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",

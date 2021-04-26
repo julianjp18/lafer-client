@@ -176,7 +176,7 @@ function ThirdForm({
         </div>
       </Modal>
       <div className="button-container">
-        <NormalButton text='Pagar' onClick={() => showInfoModal()} />
+        <NormalButton text='Pagar con tarjeta' onClick={() => showInfoModal()} />
       </div>
     </div>
   ) : (

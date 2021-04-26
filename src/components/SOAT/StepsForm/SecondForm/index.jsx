@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { Button, Modal, Spin } from 'antd';
-import { saveSecureSelected } from '../../../../redux/actions';
+import { saveSecureSelected, saveEmitLicensePlate } from '../../../../redux/actions';
 
 import "../stepsForm.scss";
 import InsuCard from "../../../../helpers/InsuCard";
@@ -12,7 +12,12 @@ import CoverageCard from "../../../../helpers/CoverageCard";
 import { currencyFormat } from "../../../../helpers";
 
 
-function SecondForm({ vehicle_info_soat, client_info_soat, saveSecureSelected }) {
+function SecondForm({
+  vehicle_info_soat,
+  client_info_soat,
+  saveSecureSelected,
+  saveEmitLicensePlate,
+}) {
   const history = useHistory();
   const [visible, setvisible] = useState(false);
 
@@ -40,6 +45,7 @@ function SecondForm({ vehicle_info_soat, client_info_soat, saveSecureSelected })
     }
 
     saveSecureSelected(cotizacion);
+    saveEmitLicensePlate(client_info_soat.TraceaId);
     history.push('/soat-payment-information');
   };
 
@@ -72,7 +78,7 @@ function SecondForm({ vehicle_info_soat, client_info_soat, saveSecureSelected })
             </Modal>
           </div>
           <div className="normal-button-container">
-            <NormalButton text='Cotiza SOAT gratis' onClick={() => SOATSelected(cotizacion)} />
+            <NormalButton text='Pagar' onClick={() => SOATSelected(cotizacion)} />
           </div>
         </div>
       ))}
@@ -94,6 +100,7 @@ const mapStateToProps = (globalState) => {
 
 const mapDispatchToProps = {
   saveSecureSelected,
+  saveEmitLicensePlate,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondForm);

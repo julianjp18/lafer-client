@@ -86,33 +86,39 @@ function FirstForm({ vehicle_info_soat, client_info_soat, clientInfo, response }
 
   return vehicle_info_soat ? (
     <div className="first-form-container" >
-      <InfoCard
-        plate={vehicleInfo.plate}
-        brandCar={vehicleInfo.marca}
-        modelCar={vehicleInfo.modelo}
-        ccCar={vehicleInfo.cilindraje}
-        name={vehicleInfo.propietarios}
-      />
-      <div className="extra-info-container">
-        <p className="extra-info-text">Este es el precio de tu SOAT sin el bono de descuento</p>
-      </div>
-      <InsuCard
-        secureName={'SOAT Seguros Mundial'}
-        price={currencyFormat(vehicleInfo.totalValue, 'COP')}
-      />
-      <div className="extra-info-container">
-        <p className="extra-info-text">Para calcular tu bono de descuento, requerimos los siguientes datos:</p>
-      </div>
-      <Form
-        name="get-user-discount-form"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <BonusForm />
-        <Form.Item>
-          <MainButton text='Quiero mi bono' isOrange fromBonus />
-        </Form.Item>
-      </Form>
+      <Row className="first-form-content">
+        <Col xs={24} md={12}>
+          <InfoCard
+            plate={vehicleInfo.plate}
+            brandCar={vehicleInfo.marca}
+            modelCar={vehicleInfo.modelo}
+            ccCar={vehicleInfo.cilindraje}
+            name={vehicleInfo.propietarios}
+          />
+          <div className="extra-info-container">
+            <p className="extra-info-text">Este es el precio de tu SOAT sin el bono de descuento</p>
+          </div>
+          <InsuCard
+            secureName={'SOAT Seguros Mundial'}
+            price={currencyFormat(vehicleInfo.totalValue, 'COP')}
+          />
+        </Col>
+        <Col xs={24} md={12}>
+          <div className="extra-info-container">
+            <p className="extra-info-text">Para calcular tu bono de descuento, requerimos los siguientes datos:</p>
+          </div>
+          <Form
+            name="get-user-discount-form"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <BonusForm />
+            <Form.Item>
+              <MainButton text='Obtener mi bono' isOrange fromBonus />
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
       <Modal
         visible={visible}
         footer={null}

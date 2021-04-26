@@ -1,0 +1,114 @@
+@import "../utils/colors.scss";
+
+.footerHorizontal {
+  background-color: $black-1;
+  padding: 62px 60.5px 62.01px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact {
+  margin-right: 39.58px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 293.13px;
+}
+.id {
+  margin-bottom: 29.68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.subtitle {
+  height: 20.21px;
+  width: 253.93px;
+  color: $white;
+  display: flex;
+  margin-bottom: 9.89px;
+  @include open-sans-14-regular;
+}
+.textoNit {
+  height: 20.21px;
+  width: 125.17px;
+  color: $silver;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.city {
+  height: 20.21px;
+  width: 98.77px;
+  color: $white;
+  display: flex;
+  margin-bottom: 9.89px;
+  @include open-sans-14-regular;
+}
+.addres {
+  height: 20.21px;
+  width: 155.81px;
+  color: $white;
+  display: flex;
+  margin-bottom: 9.89px;
+  @include open-sans-14-regular;
+}
+.textoTel {
+  height: 20.21px;
+  width: 178.63px;
+  color: $white;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.textoEmail {
+  height: 20.21px;
+  width: 244.8px;
+  color: $white;
+  display: flex;
+  @include open-sans-14-regular;
+}
+.divider1 {
+  width: 1px;
+  height: 290px;
+  background-color: $dim-gray-2;
+  margin-right: 39.58px;
+}
+.text2 {
+  height: 42.05px;
+  width: 291.9px;
+  margin-right: 39.58px;
+  color: $light-grey;
+  @include open-sans-15-semi-bold;
+
+  a {
+    color: $light-grey;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+.text2Emphasis0 {
+  color: $silver-2;
+  @include open-sans-15-regular;
+}
+.payments {
+  margin-right: 39.58px;
+  height: 110.08px;
+}
+.redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 22px;
+  }
+}
+.text4 {
+  height: 20.21px;
+  width: 88.01px;
+  display: flex;
+  margin-bottom: 29.68px;
+  color: $silver-2;
+  @include open-sans-15-regular;
+}

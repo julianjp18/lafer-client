@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import esEs from 'antd/es/locale/es_ES';
 import { Row, Col } from 'antd';
 import ROUTES, { RenderRoutes } from "../routing/routes";
@@ -8,14 +8,26 @@ import './app.scss';
 import Menu from './Menu';
 import ConfigProvider from "antd/es/config-provider";
 import Footer from "./Footer";
+import FooterDesktop from './FooterDesktop';
 
-function App() {
-  const [current, setcurrent] = useState('root');
+const App = () => {
+  const [isDesktop, setisDesktop] = useState(false);
+  const mediaQuery = window.matchMedia('(min-width: 1000px)');
 
-  const handleClick = e => {
-    setcurrent(e.key);
+  const handleTabletChange = (e) => {
+    // Check if the media query is true
+    if (e.matches) {
+      setisDesktop(true);
+    }
   };
+  
+  useEffect(() => {
+  }, []);
 
+  setInterval(() => {
+    mediaQuery.addListener(handleTabletChange);
+    handleTabletChange(mediaQuery);
+  }, 1000);
   return (
     <ConfigProvider locale={esEs}>
       <Row>
@@ -25,13 +37,13 @@ function App() {
             <RenderRoutes routes={ROUTES} />
           </div>
         </Col>
-      <Col xs={24}>
-          <Footer />
+        <Col xs={24}>
+          {isDesktop ? <FooterDesktop /> : <Footer /> }
         </Col>
       </Row>
     </ConfigProvider>
   );
-}
+};
 
 const mapStateToProps = (state) => ({ });
 
