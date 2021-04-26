@@ -59,7 +59,8 @@ function ThirdForm({
     inputBillNumber.type = 'hidden';
     inputBillNumber.name = "factura";
     inputBillNumber.id = "factura";
-    inputBillNumber.value = `${secure_selected.cotizacion_nro}`;
+    //inputBillNumber.value = `${secure_selected.cotizacion_nro}`;
+    inputBillNumber.value = client_info_soat.id;
 
     inputBillValue.type = 'hidden';
     inputBillValue.name = "valor";
