@@ -8,6 +8,9 @@ import {
   MAIN_INFO,
   MAIN_INFO_FAILURE,
   MAIN_INFO_SUCCESS,
+  ADDITIONAL_DATA,
+  ADDITIONAL_DATA_SUCCESS,
+  ADDITIONAL_DATA_FAILURE,
 } from '../../constants';
 import { API_URL } from '../../../apis/urls';
 
@@ -45,43 +48,18 @@ function* clientInfo(action) {
         });
       } else {
         const { data } = response;
-        const responseAdditionalData = [];
 
-        yield axios.post(`${API_URL}soat/setAdditionalData`, {
-          cotizacion_id: data.cotizaciones[0].cotizacion_nro,
-          traceaid: data.TraceaId,
-          email,
-          movil: phone,
-          address,
-          codClase: data.homologaciones[0].clase.codClase,
-        }, {
-          "accept": "*/*",
-          "Access-Control-Allow-Origin": "*",
-        }).then((response) => {
-
-          responseAdditionalData.push(response);
-        }).catch(e => {
-          error.push(e);
+        yield put({
+          type: CLIENT_INFO_SUCCESS,
+          client_info: {
+            ...data,
+            additionalData: {
+              email,
+              phone,
+              address,
+            },
+          }
         });
-
-        if (responseAdditionalData[0].status === 200) {
-          yield put({
-            type: CLIENT_INFO_SUCCESS,
-            client_info: {
-              ...data,
-              additionalData: {
-                email,
-                phone,
-                address,
-                ...responseAdditionalData[0].data,
-              },
-            }
-          });
-        } else {
-          message.info('Error comunicación con el servidor. Por favor inténtelo más tarde');
-          //yield call(showNotification, { type: 'warning', message: 'Datos incorrectos, por favor inténtalo nuevamente' });
-          yield put({ type: CLIENT_INFO_FAILURE, response: {}, });
-        }
       }
 
     } else {
@@ -151,8 +129,64 @@ function* mainInfo(action) {
     yield put({ type: MAIN_INFO_FAILURE, response: {}, });
   }
 }
+/*
+{
+    cotizacion_id: data.cotizaciones[0].cotizacion_nro,
+    traceaid: data.TraceaId,
+    email,
+    movil: phone,
+    address,
+    codClase: data.homologaciones[0].clase.codClase,
+  }
+*/
+function* additionalData(action) {
+  const {
+    cotizacion_nro,
+    TraceaId,
+    email,
+    phone,
+    address,
+    codClase,
+  } = action.payload;
+
+  const responseAdditionalData = [];
+  const error = [];
+  yield axios.post(`${API_URL}soat/setAdditionalData`, {
+    cotizacion_id: cotizacion_nro,
+    traceaid: TraceaId,
+    email,
+    movil: phone,
+    address,
+    codClase,
+  }, {
+    "accept": "*/*",
+    "Access-Control-Allow-Origin": "*",
+  }).then((response) => {
+
+    responseAdditionalData.push(response);
+  }).catch(e => {
+    error.push(e);
+  });
+
+  console.log('responseAdditionalData', responseAdditionalData);
+  if (responseAdditionalData[0].status === 200 &&
+    responseAdditionalData[0].data.Md5ValidacionValor
+  ) {
+    yield put({
+      type: ADDITIONAL_DATA_SUCCESS,
+      additional_data: {
+        ...responseAdditionalData[0].data,
+      }
+    });
+  } else {
+    message.info('Error comunicación con el servidor. Por favor inténtelo más tarde');
+    //yield call(showNotification, { type: 'warning', message: 'Datos incorrectos, por favor inténtalo nuevamente' });
+    yield put({ type: ADDITIONAL_DATA_FAILURE, response: {}, });
+  }
+}
 
 export function* clientWatcher() {
   yield takeLatest(CLIENT_INFO, clientInfo);
   yield takeLatest(MAIN_INFO, mainInfo);
+  yield takeLatest(ADDITIONAL_DATA, additionalData);
 }

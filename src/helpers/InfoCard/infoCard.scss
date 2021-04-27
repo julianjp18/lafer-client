@@ -163,5 +163,22 @@
 .ant-modal {
   .ant-modal-body {
     background-color: $ui-info-dark;
+
+    .important-info-container {
+
+      .classes-car-container {
+
+        .ant-checkbox-checked {
+          .ant-checkbox-inner {
+            background-color: $verde-siendo-seguro;
+            border-color: $verde-siendo-seguro;
+
+            &:hover {
+              border-color: $verde-siendo-seguro;
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -122,6 +122,10 @@
 }
 
 .first-form-container {
+  max-width: 1300px;
+  margin: auto;
+  padding-top: 15vh;
+
   .extra-info-container {
     .extra-info-text {
       margin-left: 33px;
@@ -152,7 +156,9 @@
 
 
 .second-form-content {
-  padding-top: 20px;
+  max-width: 1300px;
+  margin: auto;
+  padding-top: 15vh;
 
   .second-form-container {
     width: 90%;
@@ -172,8 +178,24 @@
 }
 
 .third-form-container {
-  padding-top: 20px;
+  max-width: 1300px;
+  margin: auto;
+  padding-top: 20vh;
   color: $white;
+  
+  .third-form-content {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    @media (min-width: 768px) {
+      background-color: $white;
+      border-radius: 10px;
+    }
+  }
+
 }
 
 .ant-modal {

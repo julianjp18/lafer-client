@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Col, Row, Modal } from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Row, Modal, Checkbox } from "antd";
 import NormalButton from "../Button";
 import classesDropdown from '../../assets/images/classes-dropdown.svg';
 import SiendoSeguroHand from '../../assets/images/siendo-seguro-hand.png';
@@ -13,8 +13,35 @@ const InfoCard = ({
   name = '',
   homologaciones = '',
   isFromThirdView,
+  setclassesCheckedValues,
 }) => {
   const [visible, setvisible] = useState(false);
+  const [optionsCheckbox, setoptionsCheckbox] = useState([]);
+
+  useEffect(() => {
+    if (isFromThirdView && homologaciones !== '') {
+      setoptionsCheckbox([]);
+      const newOptionsCheckbox = [];
+      homologaciones.forEach((homologacion) => {
+        newOptionsCheckbox.push({
+          label: homologacion.clase.txtDesc,
+          value: homologacion.clase.codClase,
+        });
+      });
+      setoptionsCheckbox(newOptionsCheckbox);
+    }
+  }, []);
+
+
+  const onChange = (checkedValues) => {
+
+    if (checkedValues.length > 0) {
+      setclassesCheckedValues(checkedValues);
+    } else {
+      setclassesCheckedValues([]);
+    }
+  };
+
   const hideModal = () => {
     setvisible(false);
   };
@@ -101,11 +128,14 @@ const InfoCard = ({
               Verifica que sea la clase correcta:
             </p>
             <div className="classes-car-container">
-              {homologaciones.length > 0 && homologaciones.map((homologacion) => (
-                <p className="important-info-extra-description" key={homologacion.clase.codClase}>
-                  <i>{`- ${homologacion.clase.txtDesc}`}</i>
-                </p>
-              ))}
+              {homologaciones.length > 0 && (
+                <Checkbox.Group
+                  className="important-info-extra-description"
+                  options={optionsCheckbox}
+                  defaultValue={[homologaciones[0].clase.codClase]}
+                  onChange={onChange}
+                />
+              )}
             </div>
             <Row>
               <Col xs={24}>

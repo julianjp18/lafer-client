@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
-import { Button, Modal, Spin } from 'antd';
+import { Button, Modal, Row, Col, Spin } from 'antd';
 import { saveSecureSelected, saveEmitLicensePlate } from '../../../../redux/actions';
 
 import "../stepsForm.scss";
@@ -51,37 +51,47 @@ function SecondForm({
 
   return vehicle_info_soat && client_info_soat ? (
     <div className="second-form-content">
-      {client_info_soat.cotizaciones.map((cotizacion) => (
-        <div key={`${cotizacion.aseguradora}-${cotizacion.discount_total}`} className="second-form-container">
-          <InsuCard
-            secureName={cotizacion.aseguradora}
-            productName={cotizacion.producto}
-            price={currencyFormat(cotizacion.imp_total, 'COP')}
-            isElectric={client_info_soat.esElectrico}
-            isBonus
-            isFromSecondForm
-            discount={cotizacion.discount_text}
-            priceBonus={currencyFormat(Number.parseInt(cotizacion.discount_total), 'COP')}
-          />
+      <Row>
+        {client_info_soat.cotizaciones.length === 1 && (
+          <Col xs={24} md={8}></Col>
+        )}
+        {client_info_soat.cotizaciones.map((cotizacion) => (
+          <Col xs={24} md={8}>
+            <div key={`${cotizacion.aseguradora}-${cotizacion.discount_total}`} className="second-form-container">
+              <InsuCard
+                secureName={cotizacion.aseguradora}
+                productName={cotizacion.producto}
+                price={currencyFormat(cotizacion.imp_total, 'COP')}
+                isElectric={client_info_soat.esElectrico}
+                isBonus
+                isFromSecondForm
+                discount={cotizacion.discount_text}
+                priceBonus={currencyFormat(Number.parseInt(cotizacion.discount_total), 'COP')}
+              />
 
-          <Payments isSecondView />
-          <div className="see-coverage-container">
-            <Button type="link" onClick={showModal}>Ver coberturas</Button>
-            <Modal
-              visible={visible}
-              footer={null}
-              onCancel={hideModal}
-              closable={false}
-              className="coverage-modal"
-            >
-              <CoverageCard backButton={hideModal} />
-            </Modal>
-          </div>
-          <div className="normal-button-container">
-            <NormalButton text='Pagar' onClick={() => SOATSelected(cotizacion)} />
-          </div>
-        </div>
-      ))}
+              <Payments isSecondView />
+              <div className="see-coverage-container">
+                <Button type="link" onClick={showModal}>Ver coberturas</Button>
+                <Modal
+                  visible={visible}
+                  footer={null}
+                  onCancel={hideModal}
+                  closable={false}
+                  className="coverage-modal"
+                >
+                  <CoverageCard backButton={hideModal} />
+                </Modal>
+              </div>
+              <div className="normal-button-container">
+                <NormalButton text='Pagar' onClick={() => SOATSelected(cotizacion)} />
+              </div>
+            </div>
+          </Col>
+        ))}
+        {client_info_soat.cotizaciones.length === 1 && (
+          <Col xs={24} md={8}></Col>
+        )}
+      </Row>
     </div>
   ) : (
     <div className="spin-container not--dates">

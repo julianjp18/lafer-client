@@ -15,6 +15,7 @@ import {
   UPDATE_COUNTRY,
   SAVE_SECURE_SELECTED,
   EMIT_LICENSE_PLATE,
+  ADDITIONAL_DATA,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -49,6 +50,11 @@ export const saveEmitLicensePlate = (payload) => ({
 
 export const clientInfo = (payload) => ({
   type: CLIENT_INFO,
+  payload,
+});
+
+export const additionalData = (payload) => ({
+  type: ADDITIONAL_DATA,
   payload,
 });
 
