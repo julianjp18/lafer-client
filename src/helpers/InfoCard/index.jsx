@@ -132,7 +132,6 @@ const InfoCard = ({
                 <Checkbox.Group
                   className="important-info-extra-description"
                   options={optionsCheckbox}
-                  defaultValue={[homologaciones[0].clase.codClase]}
                   onChange={onChange}
                 />
               )}

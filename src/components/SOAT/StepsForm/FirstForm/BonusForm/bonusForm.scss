@@ -12,7 +12,7 @@
 
 }
 .correoElectronico {
-  color: $dark-slate-gray-3;
+  color: $white;
   margin-bottom: 4px;
   @include open-sans-12-regular;
 }
@@ -22,7 +22,7 @@
   align-items: center;
 }
 .tipo {
-  color: $dark-slate-gray-3;
+  color: $white;
   @include open-sans-12-regular;
   &:not(:last-of-type) {
     margin-right: 50px;

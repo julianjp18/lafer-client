@@ -8,8 +8,23 @@ body {
 
 .routes-container {
   min-height: 80vh;
+  
+  background-image: url(../assets//images/Siendo-Seguro-desktop.webp);
   background-color: #f3f3f3;
-  padding-bottom: 15px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
 
-  $p: &;
+
+.ant-input {
+  border-radius: 6px;
+}
+
+.ant-input-group.ant-input-group-compact > *:last-child {
+  border-radius: 6px;
+}
+
+.ant-input-group.ant-input-group-compact > .ant-select:first-child > .ant-select-selector {
+  border-radius: 6px;
 }

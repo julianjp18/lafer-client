@@ -125,6 +125,8 @@
   max-width: 1300px;
   margin: auto;
   padding-top: 15vh;
+  padding-bottom: 1vh;
+  color: $white;
 
   .extra-info-container {
     .extra-info-text {
@@ -159,6 +161,7 @@
   max-width: 1300px;
   margin: auto;
   padding-top: 15vh;
+  padding-bottom: 15vh;
 
   .second-form-container {
     width: 90%;
@@ -181,6 +184,7 @@
   max-width: 1300px;
   margin: auto;
   padding-top: 20vh;
+  padding-bottom: 15vh;
   color: $white;
   
   .third-form-content {
