@@ -189,6 +189,10 @@ function ThirdForm({
     }
   };
 
+  const goBack = () => {
+    history.push('/soat-secure-information');
+  };
+
   return vehicle_info_soat && client_info_soat && secure_selected ? (
     <div className="third-form-container">
       <Row className="third-form-content">

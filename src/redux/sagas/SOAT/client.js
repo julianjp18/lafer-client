@@ -100,6 +100,7 @@ function* mainInfo(action) {
         yield put({
           type: MAIN_INFO_FAILURE, response: {
             statusError: 401,
+            extraInfo: 'blacklist',
             message: 'No se puede emitir SOAT a este vehículo.'
           },
         });
@@ -110,6 +111,7 @@ function* mainInfo(action) {
           yield put({
             type: MAIN_INFO_FAILURE, response: {
               statusError: 401,
+              extraInfo: 'blacklist',
               message: 'No se puede emitir SOAT a este vehículo.'
             },
           });

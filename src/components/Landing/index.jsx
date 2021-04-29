@@ -39,10 +39,10 @@ function Landing({ mainInfo, response, vehicle_info_soat }) {
 
   useEffect(() => {
     if (response) {
-      console.log('response', response);
       if (response.statusError === 401) {
         setvisible(true);
       } else {
+        setFormValues({ ...formValues, plate: '' });
         setvisible(false);
       }
     }
@@ -149,7 +149,6 @@ function Landing({ mainInfo, response, vehicle_info_soat }) {
               footer={null}
               onOk={() => showModal()}
               onCancel={hideModal}
-              closable={false}
               className="alert-modal"
             >
               <div className="important-info-container">
@@ -157,11 +156,17 @@ function Landing({ mainInfo, response, vehicle_info_soat }) {
                 <p className="important-info-description first-modal">
                   {response && response.message ? response.message : ''}
                 </p>
-                <Row>
-                  <Col xs={24}>
-                    <NormalButton text='Aceptar' onClick={hideModal} />
-                  </Col>
-                </Row>
+                {response && response.extraInfo && (
+                  <div className="important-extra-info-container">
+                    <p>Tu seguro no puede ser expedido en este momento. Por favor comunícate con un asesor en el siguiente número:</p>
+                    <p>327 4712 - 327 4713</p>
+                    <p>En los siguientes horarios</p>
+                    <p>Lunes a jueves: <br />
+                      8:00 a.m. a 5:00 p.m.
+                    </p>
+                    <p className="last-text">Viernes: 8:00 a.m. a 4:15 p.m.</p>
+                  </div>
+                )}
               </div>
             </Modal>
           </span>

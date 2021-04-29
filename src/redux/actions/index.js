@@ -16,6 +16,8 @@ import {
   SAVE_SECURE_SELECTED,
   EMIT_LICENSE_PLATE,
   ADDITIONAL_DATA,
+  GO_HOME,
+  GO_FIRST_FORM,
 } from '../constants';
 
 export const signUp = (payload) => ({
@@ -50,6 +52,16 @@ export const saveEmitLicensePlate = (payload) => ({
 
 export const clientInfo = (payload) => ({
   type: CLIENT_INFO,
+  payload,
+});
+
+export const goHome = (payload) => ({
+  type: GO_HOME,
+  payload,
+});
+
+export const goFirstForm = (payload) => ({
+  type: GO_FIRST_FORM,
   payload,
 });
 

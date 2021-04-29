@@ -50,6 +50,13 @@ import {
   ADDITIONAL_DATA,
   ADDITIONAL_DATA_FAILURE,
   ADDITIONAL_DATA_SUCCESS,
+  GO_HOME,
+  GO_HOME_SUCCESS,
+  GO_HOME_FAILURE,
+  GO_FIRST_FORM,
+  GO_SECOND_FORM,
+  GO_FIRST_FORM_SUCCESS,
+  GO_SECOND_FORM_SUCCESS,
 } from '../constants';
 
 const reducer = (state = {}, action) => {
@@ -72,8 +79,12 @@ const reducer = (state = {}, action) => {
     case SAVE_SECURE_SELECTED:
     case EMIT_LICENSE_PLATE:
     case ADDITIONAL_DATA:
+    case GO_HOME:
+    case GO_FIRST_FORM:
+    case GO_SECOND_FORM:
       /* END COUNTRIES */
       return { ...state, loading: true };
+    case GO_HOME_FAILURE:
     case SECURE_CAR_FAILURE:
     case SIGN_IN_FAILURE:
     case SIGN_UP_FAILURE:
@@ -175,6 +186,18 @@ const reducer = (state = {}, action) => {
         loading: false,
       };
     /* END COUNTRIES */
+    case GO_FIRST_FORM_SUCCESS:
+      return {
+        ...state,
+        client_info_soat: {},
+      };
+    case GO_SECOND_FORM_SUCCESS:
+      return {
+        ...state,
+        secure_selected: {},
+      };
+    case GO_HOME_SUCCESS:
+      return {};
     case BUY_SOAT_FORM_SUCCESS:
     default:
       return state;

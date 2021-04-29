@@ -1,20 +1,28 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import SiendoSeguroNav from '../../assets/images/siendo-seguro-nav.svg';
 import ROUTES from "../../routing/routes";
 import './menu.scss';
 
-function Menu({ }) {
+function Menu({ goHome }) {
   const [isToggle, setisToggle] = useState(false);
+  const history = useHistory();
 
   const burgerOnClick = () => {
     setisToggle(!isToggle);
   };
+
+  const onClickImage = () => {
+    history.push('/');
+    goHome();
+  };
+
   return (
     <div className='navbar'>
       <img
         alt=""
         src={SiendoSeguroNav}
+        onClick={onClickImage}
       />
     </div>
   )

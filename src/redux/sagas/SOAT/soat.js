@@ -4,10 +4,15 @@ import showNotification from '../../showNotification';
 import {
   SAVE_SECURE_SELECTED,
   SAVE_SECURE_SELECTED_SUCCESS,
-  SAVE_SECURE_SELECTED_FAILURE,
   EMIT_LICENSE_PLATE,
   EMIT_LICENSE_PLATE_SUCCESS,
-  EMIT_LICENSE_PLATE_FAILURE
+  EMIT_LICENSE_PLATE_FAILURE,
+  GO_HOME,
+  GO_HOME_SUCCESS,
+  GO_SECOND_FORM,
+  GO_SECOND_FORM_SUCCESS,
+  GO_FIRST_FORM,
+  GO_FIRST_FORM_SUCCESS,
 } from '../../constants';
 import { API_URL } from '../../../apis/urls';
 
@@ -163,10 +168,23 @@ function* saveEmitLicensePlate(formValues) {
   }
 };
 
+function* goHome() {
+  yield put({ type: GO_HOME_SUCCESS, response: {}, });
+}
+
+function* goFirstForm() {
+  yield put({ type: GO_FIRST_FORM_SUCCESS, response: {}, });
+}
+
+function* goSecondForm() {
+  yield put({ type: GO_SECOND_FORM_SUCCESS, response: {}, });
+}
 
 export function* soatWatcher() {
   yield takeLatest('BUY_SOAT', buySoat)
   yield takeLatest('BUY_SOAT_FORM', buySoatForm)
   yield takeLatest(SAVE_SECURE_SELECTED, saveSecureSelected)
   yield takeLatest(EMIT_LICENSE_PLATE, saveEmitLicensePlate)
+  yield takeLatest(GO_HOME, goHome)
+  yield takeLatest(GO_FIRST_FORM, goFirstForm)
 }

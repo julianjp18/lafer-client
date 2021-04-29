@@ -188,6 +188,10 @@
       padding-bottom: 20px;
     }
   }
+
+  .back-col {
+    margin-top: 5vh;
+  }
 }
 
 .third-form-container {
@@ -214,10 +218,27 @@
 
 .ant-modal {
 
-  .ant-modal-body {
-    background-color: $naranja-siendo-seguro;
+  .ant-modal-content {
+    .ant-modal-close {
+      .ant-modal-close-x {
+        .anticon.anticon-close.ant-modal-close-icon {
+          color: $white;
+        }
+      }
+    }
+
+    .ant-modal-body {
+      background-color: $naranja-siendo-seguro;
+    }
   }
 
+  &.alert-modal {
+    .ant-modal-content {
+      .ant-modal-body {
+        padding: 0;
+      }    
+    }
+  }
   &.coverage-modal {
     .ant-modal-content {
       .ant-modal-body {
@@ -228,16 +249,44 @@
 }
 
 .important-info-container {
+  
   .important-info-title {
-    font-weight: bold;
     color: $white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 24px 0 24px;
+
+    @media (min-width: 768px) {
+      font-size: 30px;
+    }
   }
 
   .important-info-description {
     color: $white;
+    font-size: 20px;
+    padding: 10px 24px 0 24px;
 
     .first-modal {
       text-align: center;
+    }
+    
+    @media (min-width: 768px) {
+      font-size: 30px;
+    }
+  }
+
+  .important-extra-info-container {
+    background-color: $verde-siendo-seguro;
+    color: $white;
+    font-size: 20px;
+    padding: 24px;
+    padding-top: 5vh;
+
+    .last-text {
+      padding-bottom: 10vh;
+    }
+    @media (min-width: 768px) {
+      font-size: 30px;
     }
   }
 

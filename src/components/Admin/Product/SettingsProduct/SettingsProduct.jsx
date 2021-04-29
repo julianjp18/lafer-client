@@ -72,7 +72,6 @@ const SettingsProduct = ({
   }, []);
 
   const onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setselectedRows({ selectedRowKeys });
   };
 
@@ -99,7 +98,7 @@ const SettingsProduct = ({
 const mapStateToProps = (globalState) => {
 };
 
-const mapDispatchToProps = { 
+const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsProduct);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { Button, Modal, Row, Col, Spin } from 'antd';
-import { saveSecureSelected, saveEmitLicensePlate } from '../../../../redux/actions';
+import { saveSecureSelected, goFirstForm } from '../../../../redux/actions';
 
 import "../stepsForm.scss";
 import InsuCard from "../../../../helpers/InsuCard";
@@ -11,12 +11,11 @@ import NormalButton from "../../../../helpers/Button";
 import CoverageCard from "../../../../helpers/CoverageCard";
 import { currencyFormat } from "../../../../helpers";
 
-
 function SecondForm({
   vehicle_info_soat,
   client_info_soat,
   saveSecureSelected,
-  saveEmitLicensePlate,
+  goFirstForm,
 }) {
   const history = useHistory();
   const [visible, setvisible] = useState(false);
@@ -47,6 +46,11 @@ function SecondForm({
     saveSecureSelected(cotizacion);
 
     history.push('/soat-payment-information');
+  };
+
+  const goBack = () => {
+    goFirstForm();
+    history.push('/soat-vehicle-information');
   };
 
   return vehicle_info_soat && client_info_soat ? (
@@ -91,6 +95,9 @@ function SecondForm({
         {client_info_soat.cotizaciones.length === 1 && (
           <Col xs={24} md={8}></Col>
         )}
+        <Col className="back-col" xs={24}>
+          <NormalButton text='Volver' isOrange onClick={goBack} />
+        </Col>
       </Row>
     </div>
   ) : (
@@ -110,7 +117,7 @@ const mapStateToProps = (globalState) => {
 
 const mapDispatchToProps = {
   saveSecureSelected,
-  saveEmitLicensePlate,
+  goFirstForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SecondForm);

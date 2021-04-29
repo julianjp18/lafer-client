@@ -9,8 +9,9 @@ import Menu from './Menu';
 import ConfigProvider from "antd/es/config-provider";
 import Footer from "./Footer";
 import FooterDesktop from './FooterDesktop';
+import { goHome } from "../redux/actions";
 
-const App = () => {
+const App = ({ goHome }) => {
   const [isDesktop, setisDesktop] = useState(false);
   const mediaQuery = window.matchMedia('(min-width: 1000px)');
 
@@ -20,7 +21,7 @@ const App = () => {
       setisDesktop(true);
     }
   };
-  
+
   useEffect(() => {
   }, []);
 
@@ -32,22 +33,24 @@ const App = () => {
     <ConfigProvider locale={esEs}>
       <Row>
         <Col xs={24}>
-          <Menu />
+          <Menu goHome={goHome} />
           <div className="routes-container">
             <RenderRoutes routes={ROUTES} />
           </div>
         </Col>
         <Col xs={24}>
-          {isDesktop ? <FooterDesktop /> : <Footer /> }
+          {isDesktop ? <FooterDesktop /> : <Footer />}
         </Col>
       </Row>
     </ConfigProvider>
   );
 };
 
-const mapStateToProps = (state) => ({ });
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = { };
+const mapDispatchToProps = {
+  goHome,
+};
 
 export default connect(
   mapStateToProps,
