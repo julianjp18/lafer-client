@@ -71,7 +71,7 @@ const InfoCard = ({
         <div className='infologo'>
           <img
             alt=""
-            className='siendoSeguroVersionVertical1'
+            className='siendoSeguroVersionVertical2'
             src={SiendoSeguroHand}
           />
           <div className='info'>

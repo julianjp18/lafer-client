@@ -172,6 +172,16 @@
     .see-coverage-container {
       text-align: center;
       margin: 10px 0;
+      
+      .ant-btn {
+        color: $verde-siendo-seguro;
+
+        span {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   
     .normal-button-container {

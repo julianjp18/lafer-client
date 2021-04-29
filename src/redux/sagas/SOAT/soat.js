@@ -118,7 +118,7 @@ function* saveEmitLicensePlate(formValues) {
   const responseData = [];
 
   yield axios.post(`${API_URL}soat/emitLicencePlate`, {
-    idTraceability: formValues.payload,
+    idTraceability: Number.parseInt(formValues.payload),
   }, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",

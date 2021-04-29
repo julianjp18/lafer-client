@@ -312,8 +312,8 @@
       font-weight: 600;
       letter-spacing: 0.97px;
       @media (min-width: 768px) {
-        font-size: 56px;
-        line-height: 60px;
+        font-size: 84px;
+        line-height: 80px;
       }
       
       strong {
@@ -324,14 +324,15 @@
     }
     p {
       margin: 0;
-      line-height: 19px;
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 21px;
       text-align: left;
       padding: 12px 0 0;
       @media (min-width: 768px) {
-        font-size: 16px;
-        line-height: 21px;
+        font-size: 32px;
+        line-height: 43px;
       }
+
     }
   }
 
@@ -353,6 +354,10 @@
     .ant-modal-content {
       .ant-modal-body {
         background-color: $white;
+
+        @media (min-width: 768px) {
+          padding: 30px 60px;
+        }
       }
     }
   }

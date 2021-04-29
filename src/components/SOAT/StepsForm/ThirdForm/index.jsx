@@ -47,7 +47,12 @@ function ThirdForm({
   };
 
   const showInfoModal = () => {
-    setvisible(true);
+    if (classesCheckedValues.length === 0 || classesCheckedValues.length > 1) {
+      message.warning('Por favor selecciona solamente un tipo de clase para tu vehiculo.');
+      setvisible(false);
+    } else {
+      setvisible(true);
+    }
   };
 
   const showModal = () => {
@@ -79,6 +84,7 @@ function ThirdForm({
         var inputEmailClient = document.createElement('input');
         var inputNameClient = document.createElement('input');
         var inputLastNameClient = document.createElement('input');
+        var inputPhoneClient = document.createElement('input');
 
         inputBillNumber.type = 'hidden';
         inputBillNumber.name = "factura";
@@ -104,6 +110,11 @@ function ThirdForm({
         inputNumberClient.name = "celularComprador";
         inputNumberClient.id = "celularComprador";
         inputNumberClient.value = client_info_soat.additionalData.phone;
+
+        inputPhoneClient.type = 'hidden';
+        inputPhoneClient.name = "telefonoComprador";
+        inputPhoneClient.id = "telefonoComprador";
+        inputPhoneClient.value = client_info_soat.additionalData.phone;
 
         inputAddressClient.type = 'hidden';
         inputAddressClient.name = "direccionComprador";
@@ -172,6 +183,7 @@ function ThirdForm({
         form.appendChild(inputEmailClient);
         form.appendChild(inputNameClient);
         form.appendChild(inputLastNameClient);
+        form.appendChild(inputPhoneClient);
         form.submit();
       }, 3000);
     }

@@ -45,7 +45,7 @@ function SecondForm({
     }
 
     saveSecureSelected(cotizacion);
-    saveEmitLicensePlate(client_info_soat.TraceaId);
+
     history.push('/soat-payment-information');
   };
 
@@ -56,8 +56,8 @@ function SecondForm({
           <Col xs={24} md={8}></Col>
         )}
         {client_info_soat.cotizaciones.map((cotizacion) => (
-          <Col xs={24} md={8}>
-            <div key={`${cotizacion.aseguradora}-${cotizacion.discount_total}`} className="second-form-container">
+          <Col key={`${cotizacion.aseguradora}-${cotizacion.discount_total}`} xs={24} md={8}>
+            <div className="second-form-container">
               <InsuCard
                 secureName={cotizacion.aseguradora}
                 productName={cotizacion.producto}

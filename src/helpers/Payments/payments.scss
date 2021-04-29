@@ -10,7 +10,7 @@
   background-color: transparent;
 
   &.second-view {
-    background-color: $light-grey;
+    background-color: $verde-siendo-seguro;
     margin: 0 20px;
   }
 }
@@ -30,6 +30,11 @@
   color: $dim-gray;
   display: flex;
   @include open-sans-12-semi-bold;
+
+  &.second-view {
+    margin: 0 20px;
+    color: $white;
+  }
 }
 .logos {
   display: flex;

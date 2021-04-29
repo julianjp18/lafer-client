@@ -8,7 +8,7 @@ const Payments = ({ isSecondView }) => {
   return (
     <div className={`container-payments ${isSecondView ? 'second-view' : ''}`}>
       <div className='content-payments'>
-        <p className='tituloClaro'>Métodos de pago</p>
+        <p className={`tituloClaro ${isSecondView ? 'second-view' : ''}`}>Métodos de pago</p>
         <div className='logos'>
           <img
             alt=""
