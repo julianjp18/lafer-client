@@ -1,77 +1,34 @@
 @import "../../utils/colors.scss";
 
-.success-payment-container {
-  max-width: 1600px;
-  margin: auto;
-  padding: 20px;
-}
-
 .confirmacion {
-  width: 80%;
-  margin: auto;
-  margin-top: 15vh;
-  margin-bottom: 10vh;
   background-color: $white;
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 4px 4px 0 $transparent-black;
-
-  @media (min-width: 768px) {
-    padding: 120px 15px;
-    margin-top: 7vh;
-    margin-bottom: 7vh;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .siendoSeguroVersionVertical1 {
-  width: 170px;
-  margin: auto;
-
-  @media (min-width: 768px) {
-    width: 210px;
-    max-width: 70%;
-  }
+  margin-bottom: 22px;
 }
-.text-col {
-  margin: auto;
-  .elPagoDeTuSoatHaSidoExitoso {
-    color: $black-2;
-    text-align: center;
-    margin-bottom: 22px;
-    @include h6;
-
-    @media (min-width: 768px) {
-      text-align: start;
-      font-family: "Open Sans";
-      font-size: 34px;
-      font-weight: 400;
-      line-height: 40px;
-    }
-  }
-  .laAseguradoraEnviaraATuCorreoElect {
-    color: $dim-gray;
-    text-align: center;
-    margin-bottom: 22px;
-    @include body-small-default;
-
-    @media (min-width: 768px) {
-      text-align: start;
-      font-family: "Open Sans";
-      font-size: 21px;
-      font-weight: 400;
-      line-height: 35px;
-    }
-  }
-  .recuerdaRevisarTuCarpetaDeSpamON {
-    color: $dim-gray;
-    text-align: center;
-    @include body-extra-small-default;
-
-    @media (min-width: 768px) {
-      text-align: start;
-      font-family: "Open Sans";
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 25px;
-    }
-  }
+.elPagoDeTuSoatHaSidoExitoso {
+  color: $black-2;
+  text-align: center;
+  margin-bottom: 22px;
+  @include h6;
+}
+.laAseguradoraEnviaraATuCorreoElect {
+  max-width: 300px;
+  color: $dim-gray;
+  text-align: center;
+  margin-bottom: 22px;
+  @include body-small-default;
+}
+.recuerdaRevisarTuCarpetaDeSpamON {
+  width: 300px;
+  color: $dim-gray;
+  text-align: center;
+  @include body-extra-small-default;
 }
