@@ -244,7 +244,7 @@ function ThirdForm({
         </Col>
         <Col xs={24} md={8}>
           <div className="button-container">
-            <NormalButton text='Pagar con tarjeta' onClick={() => showInfoModal()} />
+            <NormalButton text='Pagar con tarjeta' isOrange onClick={() => showInfoModal()} />
           </div>
         </Col>
       </Row>

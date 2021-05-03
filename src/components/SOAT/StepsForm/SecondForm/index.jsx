@@ -87,7 +87,7 @@ function SecondForm({
                 </Modal>
               </div>
               <div className="normal-button-container">
-                <NormalButton text='Pagar' onClick={() => SOATSelected(cotizacion)} />
+                <NormalButton text='Pagar' isOrange onClick={() => SOATSelected(cotizacion)} />
               </div>
             </div>
           </Col>
