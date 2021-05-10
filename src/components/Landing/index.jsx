@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { mainInfo } from '../../redux/actions';
 import { WarningOutlined } from '@ant-design/icons';
 import Carousel from "./Carousel/Carousel";
-import { Col, Modal, Row, Select } from 'antd';
+import { Modal } from 'antd';
 import axios from 'axios';
 import './landing.scss';
 import 'antd/dist/antd.css';

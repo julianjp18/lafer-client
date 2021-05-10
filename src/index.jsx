@@ -1,9 +1,9 @@
 import React from 'react';
 import createSagaMiddleware from 'redux-saga';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { ConnectedRouter, connectRouter, routerMiddleware } from 'connected-react-router';
+import { ConnectedRouter, connectRouter } from 'connected-react-router';
 import { logger } from 'redux-logger';
 import reducer from './redux/reducers';
 import App from './components/App';
@@ -13,9 +13,6 @@ import { Router } from "react-router-dom";
 import history from './routing/history';
 
 const sagaMiddleware = createSagaMiddleware();
-
-const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const allReducers = combineReducers({
   app: reducer,

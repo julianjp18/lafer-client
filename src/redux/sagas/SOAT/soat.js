@@ -9,8 +9,6 @@ import {
   EMIT_LICENSE_PLATE_FAILURE,
   GO_HOME,
   GO_HOME_SUCCESS,
-  GO_SECOND_FORM,
-  GO_SECOND_FORM_SUCCESS,
   GO_FIRST_FORM,
   GO_FIRST_FORM_SUCCESS,
 } from '../../constants';
@@ -27,6 +25,7 @@ function* buySoat(formValues) {
     "accept": "*/*",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    "X-Frame-Options": "DENY",
   }).then(response => {
     data.push(response);
   }).catch(e => {
@@ -98,6 +97,7 @@ function* buySoatForm(formValues) {
     "accept": "*/*",
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    "X-Frame-Options": "DENY",
   }).then(response => {
     data.push(response);
   }).catch(e => {
@@ -127,6 +127,7 @@ function* saveEmitLicensePlate(formValues) {
   }, {
     "accept": "*/*",
     "Access-Control-Allow-Origin": "*",
+    "X-Frame-Options": "DENY",
   }).then((response) => {
 
     responseData.push(response);
@@ -174,10 +175,6 @@ function* goHome() {
 
 function* goFirstForm() {
   yield put({ type: GO_FIRST_FORM_SUCCESS, response: {}, });
-}
-
-function* goSecondForm() {
-  yield put({ type: GO_SECOND_FORM_SUCCESS, response: {}, });
 }
 
 export function* soatWatcher() {

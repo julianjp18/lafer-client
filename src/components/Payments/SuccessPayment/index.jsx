@@ -15,7 +15,7 @@ const SuccessPayment = ({ saveEmitLicensePlate }) => {
 
   useEffect(() => {
     if (query.get("TraceaId")) saveEmitLicensePlate(query.get("TraceaId"));
-  }, []);
+  }, [query]);
 
   return (
     <div className="success-payment-container">

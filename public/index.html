@@ -49,6 +49,21 @@
     })();
   </script>
   -->
+  <!-- https://javascript.info/clickjacking#x-frame-options -->
+  <!-- anticlickjack docs https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html#Best-for-now_Legacy_Browser_Frame_Breaking_Script -->
+  <style id="antiClickjack">
+    body {
+      display: none !important;
+    }
+  </style>
+  <script type="text/javascript">
+    if (self === top) {
+      var antiClickjack = document.getElementById("antiClickjack");
+      antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+      top.location = self.location;
+    }
+  </script>
 </head>
 
 <!-- oncontextmenu="return false" -->

@@ -70,7 +70,6 @@ const reducer = (state = {}, action) => {
     case SECURE_CAR:
     case GET_CITIES:
     case MAIN_INFO:
-    /* COUNTRIES */
     case GET_COUNTRIES:
     case DELETE_COUNTRY:
     case GET_COUNTRY_BY_ID:
@@ -82,7 +81,6 @@ const reducer = (state = {}, action) => {
     case GO_HOME:
     case GO_FIRST_FORM:
     case GO_SECOND_FORM:
-      /* END COUNTRIES */
       return { ...state, loading: true };
     case GO_HOME_FAILURE:
     case SECURE_CAR_FAILURE:
@@ -94,7 +92,6 @@ const reducer = (state = {}, action) => {
     case BUY_SOAT_FORM_FAILURE:
     case GET_CITIES_FAILURE:
     case MAIN_INFO_FAILURE:
-    /* COUNTRIES */
     case CREATE_COUNTRY_FAILURE:
     case UPDATE_COUNTRY_FAILURE:
     case DELETE_COUNTRY_FAILURE:

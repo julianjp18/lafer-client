@@ -5,6 +5,7 @@ const HEADERS = {
   "accept": "application/json",
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
+  "X-Frame-Options": "DENY",
 };
 
 export default axios.create({

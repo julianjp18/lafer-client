@@ -168,9 +168,10 @@ h1 {
 				display: none;
 			}
 		}
-
+		// eslint-disable-next-line
 		.Brand a img {
 			width: 80px;
+			// eslint-disable-next-line
 			@include largescreen {
 				height: 83px;
 				width: auto;
